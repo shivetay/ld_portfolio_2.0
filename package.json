@@ -5,6 +5,13 @@
   "repository": "https://github.com/shivetay/ld_portfolio_2.0.git",
   "author": "Łukasz Dawidowicz <lddev@outlook.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "yarn --cwd client start",
+    "dev": "concurrently \" yarn server\" \" yarn client\"",
+    "build": "cd client && yarn install && yarn build"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.1",
