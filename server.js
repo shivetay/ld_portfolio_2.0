@@ -3,6 +3,10 @@ const connectDB = require('./config/db');
 const cors = require('cors');
 const morgan = require('morgan');
 
+/* Routes imports */
+
+const authRoutes = require('./routes/auth.routes');
+
 /* App */
 
 const app = express();
@@ -19,6 +23,7 @@ app.use(
 );
 
 /* routes */
+app.use('/api', authRoutes);
 
 app.use((req, res) => {
   res.status(404).send({ message: '404 not found...' });
