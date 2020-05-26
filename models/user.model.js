@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
-const config = require('config');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema(
   {
@@ -28,39 +27,27 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    tokens: {
-      type: Array,
-      token: [],
-    },
-    // salt: String,
+    tokens: [
+      {
+        token: {
+          type: String,
+          requierd: true,
+        },
+      },
+    ],
+    salt: String,
   },
   { timestamps: true }
 );
 
-/* Virtual fields */
-UserSchema.virtual('password')
-  .set(function (password) {
-    this._password = password;
-    this.salt = config.get('passwordSALT');
-    this.hash_password = this.encryptPassword(password);
-  })
-  .get(function () {
-    return this._password;
-  });
+/* hash password before saving */
+UserSchema.pre('save', async function (next) {
+  const user = this;
+  if (user.isModified('hash_password')) {
+    user.hash_password = await bcrypt.hash(user.hash_password, 8);
+  }
 
-UserSchema.methods = {
-  encryptPassword: function (password) {
-    if (!password) return '';
-    try {
-      // detials of use in express documentation
-      return crypto
-        .createHmac('sha1', this.salt)
-        .update(password)
-        .digest('hex');
-    } catch (err) {
-      return '';
-    }
-  },
-};
+  next();
+});
 
 module.exports = User = mongoose.model('user', UserSchema);
