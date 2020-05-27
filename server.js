@@ -6,6 +6,7 @@ const morgan = require('morgan');
 /* Routes imports */
 
 const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
 
 /* App */
 
@@ -24,6 +25,7 @@ app.use(
 
 /* routes */
 app.use('/api', authRoutes);
+app.use('/api', userRoutes);
 
 app.use((req, res) => {
   res.status(404).send({ message: '404 not found...' });

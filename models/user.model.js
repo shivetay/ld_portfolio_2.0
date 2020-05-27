@@ -55,7 +55,11 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.methods.getAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, config.get('jwtSecret')); //jwt expcts string toString will convert objId to string
+  const token = jwt.sign(
+    { _id: user._id.toString() },
+    config.get('jwtSecret'),
+    { expiresIn: 360000 } //change to production
+  ); //jwt expcts string toString will convert objId to string
 
   user.tokens = user.tokens.concat({ token });
 
