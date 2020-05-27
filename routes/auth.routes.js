@@ -3,7 +3,11 @@ const router = express.Router();
 
 /* import controllers */
 
-const { registerUser, loginUser } = require('../controllers/auth.controller');
+const {
+  registerUser,
+  loginUser,
+  logoutUser,
+} = require('../controllers/auth.controller');
 const { authCheck } = require('../middleware/auth');
 
 /* ------------- Routes ------------ */
@@ -22,5 +26,13 @@ private
 */
 
 router.post('/login', loginUser);
+
+/* 
+POST api/logout
+logout user 
+private 
+*/
+
+router.post('/logout', authCheck, logoutUser);
 
 module.exports = router;

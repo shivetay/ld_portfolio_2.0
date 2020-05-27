@@ -59,3 +59,18 @@ exports.loginUser = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+/* User logout */
+
+exports.logoutUser = async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens.filter((token) => {
+      return token.token !== req.token;
+    });
+    await req.user.save();
+    res.status(200).send('User logout');
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+};
