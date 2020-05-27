@@ -69,4 +69,23 @@ UserSchema.methods.getAuthToken = async function () {
   return token;
 };
 
+UserSchema.methods.toJSON = function () {
+  const user = this;
+  const userPrivetData = user.toObject();
+
+  delete userPrivetData.password;
+  delete userPrivetData.tokens;
+  delete userPrivetData.role;
+
+  return userPrivetData;
+};
+
+/* 
+UserSchema.statics 
+creates method for User
+
+UserSchema.methods 
+creates methods for user
+*/
+
 module.exports = User = mongoose.model('user', UserSchema);
