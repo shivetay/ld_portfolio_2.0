@@ -13,6 +13,5 @@ private
 */
 
 router.get('/users/me', authCheck, myProfile);
-// router.get('/users/me', myProfile);
 
 module.exports = router;
