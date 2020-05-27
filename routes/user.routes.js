@@ -6,6 +6,7 @@ const { authCheck } = require('../middleware/auth');
 const { myProfile } = require('../controllers/user.controller');
 
 /* ------------- Routes ------------ */
+
 /* 
 get api/users/me
 display my profile 
