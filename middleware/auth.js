@@ -16,6 +16,8 @@ exports.authCheck = async (req, res, next) => {
       return res.status(401).json({ msg: 'No token, authorization denied' });
     }
 
+    /*
+    decoded contains _id as a payload in token. Id is from getAuthToken */
     const decoded = jwt.verify(token, config.get('jwtSecret'));
     const user = await User.findOne({
       _id: decoded._id,
