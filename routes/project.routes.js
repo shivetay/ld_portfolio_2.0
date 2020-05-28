@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { authCheck, isAdmin } = require('../middleware/auth');
 const { findById } = require('../controllers/user.controller');
-const { create } = require('../controllers/project.controller');
+const { create, getAll } = require('../controllers/project.controller');
 
 /* import controllers */
 
@@ -17,11 +17,11 @@ display all projects
 public 
 */
 
-router.get('/projects');
+router.get('/projects', getAll);
 
 /* 
-get api/projects
-display all projects 
+post api/projects/create/:userId
+create project 
 public 
 */
 
