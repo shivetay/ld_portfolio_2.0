@@ -9,9 +9,8 @@ exports.myProfile = async (req, res) => {
 
 exports.findById = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId);
+    let user = await User.findById(req.params.userId);
     if (!user) return res.status(400).json({ msg: 'User not found' });
-    res.send(user._id);
     next();
   } catch (err) {
     console.error(err.message);

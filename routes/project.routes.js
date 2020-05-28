@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { authCheck } = require('../middleware/auth');
+const { authCheck, isAdmin } = require('../middleware/auth');
 const { findById } = require('../controllers/user.controller');
+const { create } = require('../controllers/project.controller');
 
 /* import controllers */
 
@@ -24,8 +25,8 @@ display all projects
 public 
 */
 
-router.post('/projects/create/:userId', authCheck, (req, res) => {
-  res.status(200).send(req.body);
+router.post('/projects/create/:userId', authCheck, isAdmin, (req, res) => {
+  res.status(200).send(req.user);
 });
 
 module.exports = router;
