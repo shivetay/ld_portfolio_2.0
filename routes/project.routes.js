@@ -25,9 +25,7 @@ display all projects
 public 
 */
 
-router.post('/projects/create/:userId', authCheck, isAdmin, (req, res) => {
-  res.status(200).send(req.user);
-});
+router.post('/projects/create/:userId', authCheck, isAdmin, create);
 
 module.exports = router;
 
