@@ -3,7 +3,11 @@ const router = express.Router();
 
 const { authCheck, isAdmin } = require('../middleware/auth');
 const { findById } = require('../controllers/user.controller');
-const { create, getAll } = require('../controllers/project.controller');
+const {
+  create,
+  getAll,
+  addProjectToUser,
+} = require('../controllers/project.controller');
 
 /* import controllers */
 
@@ -25,7 +29,13 @@ create project
 public 
 */
 
-router.post('/projects/create/:userId', authCheck, isAdmin, create);
+router.post(
+  '/projects/create/:userId',
+  authCheck,
+  isAdmin,
+  addProjectToUser,
+  create
+);
 
 module.exports = router;
 

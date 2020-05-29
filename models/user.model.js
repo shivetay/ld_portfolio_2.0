@@ -39,17 +39,19 @@ const UserSchema = new mongoose.Schema(
         },
       },
     ],
-    projects: [
-      {
-        project: {
-          type: String,
-        },
-      },
-    ],
+
     salt: String,
   },
   { timestamps: true }
 );
+
+/* Virtual fields */
+// tasks
+UserSchema.virtual('projects', {
+  ref: 'project',
+  localField: '_id',
+  foreignField: 'creator',
+});
 
 /* hash password before saving */
 UserSchema.pre('save', async function (next) {
