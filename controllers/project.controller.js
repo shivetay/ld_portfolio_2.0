@@ -14,6 +14,20 @@ exports.read = async (req, res) => {
   }
 };
 
+/* get one project */
+
+exports.getProject = async (req, res) => {
+  try {
+    return res.json(req.project);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(400).json({ msg: 'Porject not found' });
+    }
+    res.status(500).send('Server Error');
+  }
+};
+
 /* create projects */
 exports.create = async (req, res) => {
   const { title, description, photo, tags, git, demo } = req.body;
@@ -56,7 +70,6 @@ exports.addProjectToUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.userId);
     await user.populate('projects').execPopulate();
-    console.log('id', user.projects);
     next();
   } catch (err) {
     res.status(500).send('Server Error');
@@ -66,9 +79,11 @@ exports.addProjectToUser = async (req, res, next) => {
 /* find project by id */
 
 exports.findProjectById = async (req, res, next) => {
+  const _id = req.params.projectId;
   try {
-    let project = await Project.findById(req.params.projectId);
+    let project = await Project.findById(_id);
     if (!project) return res.status(400).json({ msg: 'Porject not found' });
+    req.project = project;
     next();
   } catch (err) {
     console.error(err.message);

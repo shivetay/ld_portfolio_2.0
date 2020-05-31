@@ -7,6 +7,7 @@ const {
   create,
   read,
   update,
+  getProject,
   addProjectToUser,
   findProjectById,
 } = require('../controllers/project.controller');
@@ -15,8 +16,7 @@ const {
 
 /* ------------- Routes ------------ */
 
-router.param('userId', findById);
-router.param('projectId', findProjectById);
+// router.param('userId', findById);
 
 /* 
 get api/projects
@@ -25,6 +25,14 @@ public
 */
 
 router.get('/projects', read);
+
+/* 
+get api/projects/:projectId
+display one project
+public 
+*/
+
+router.get('/projects/:projectId', findProjectById, getProject);
 
 /* 
 post api/projects/create/:userId
@@ -36,6 +44,7 @@ router.post(
   '/projects/create/:userId',
   authCheck,
   isAdmin,
+  findById,
   addProjectToUser,
   create
 );
@@ -50,6 +59,8 @@ router.patch(
   'api/projects/update/:projectId/:userId',
   authCheck,
   isAdmin,
+  // getProject,
+  findById,
   findProjectById,
   addProjectToUser,
   update
