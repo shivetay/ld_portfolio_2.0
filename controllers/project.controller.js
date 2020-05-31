@@ -3,7 +3,9 @@ const User = require('../models/user.model');
 
 /* Create project with creator */
 
-exports.getAll = async (req, res) => {
+/* get all projects */
+
+exports.read = async (req, res) => {
   try {
     const project = await Project.find();
     return res.json(project);
@@ -12,6 +14,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
+/* create projects */
 exports.create = async (req, res) => {
   const { title, description, photo, tags, git, demo } = req.body;
 
@@ -30,6 +33,24 @@ exports.create = async (req, res) => {
   }
 };
 
+/* update projects */
+
+exports.update = async (req, res) => {
+  const _id = req.params.projectId;
+  try {
+    const project = await Project.findByIdAndUpdate(_id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!project) {
+      return res.status(404).json({ msg: 'Project not found' });
+    }
+    res.send(project);
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
+};
+
 /* push project to proper user */
 exports.addProjectToUser = async (req, res, next) => {
   try {
@@ -38,6 +59,22 @@ exports.addProjectToUser = async (req, res, next) => {
     console.log('id', user.projects);
     next();
   } catch (err) {
+    res.status(500).send('Server Error');
+  }
+};
+
+/* find project by id */
+
+exports.findProjectById = async (req, res, next) => {
+  try {
+    let project = await Project.findById(req.params.projectId);
+    if (!project) return res.status(400).json({ msg: 'Porject not found' });
+    next();
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(400).json({ msg: 'Porject not found' });
+    }
     res.status(500).send('Server Error');
   }
 };
