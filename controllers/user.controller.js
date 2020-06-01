@@ -25,6 +25,9 @@ exports.findById = async (req, res, next) => {
 exports.read = async (req, res) => {
   try {
     let user = await User.findById(req.userProf._id);
+    if (!user) return res.status(400).json({ msg: 'User not found' });
     res.json(user);
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
 };

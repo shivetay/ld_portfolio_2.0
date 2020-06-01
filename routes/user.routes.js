@@ -16,6 +16,14 @@ private
 
 router.get('/users/me', authCheck, myProfile);
 
+/* 
+patch api/users/:userId
+get user by id
+private 
+*/
+
+router.get('/users/:userId', authCheck, read);
+
 //TODO:
 /* 
 patch api/users/:userId
@@ -23,7 +31,13 @@ update my profile
 private 
 */
 
-router.put('/users/:userId');
+// router.put('/users/:userId');
+
+/* 
+patch api/users/:userId
+update my profile 
+private 
+*/
 
 router.get('/users/:userId', read);
 
