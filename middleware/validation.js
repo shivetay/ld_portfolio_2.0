@@ -32,3 +32,8 @@ exports.projectValidation = (req, res, next) => {
   }
   next();
 };
+
+//TODO:
+/*
+add validation to routes and check for missing parts
+ */
