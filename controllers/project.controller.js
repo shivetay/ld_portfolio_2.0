@@ -72,6 +72,7 @@ exports.create = async (req, res) => {
 //   }
 // };
 
+//FIXME:
 exports.update = async (req, res) => {
   const { title, description } = req.body;
   const newData = { title, description };
@@ -96,6 +97,15 @@ exports.update = async (req, res) => {
     // }
     console.log('proj', project);
     // return res.json(project);
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
+};
+
+//TODO:
+/* delete project */
+exports.delete = async (req, res) => {
+  try {
   } catch (err) {
     res.status(500).send('Server Error');
   }
