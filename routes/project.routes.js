@@ -16,7 +16,8 @@ const {
 
 /* ------------- Routes ------------ */
 
-// router.param('userId', findById);
+router.param('userId', findById);
+// router.param('projectId', findProjectById);
 
 /* 
 get api/projects
@@ -44,7 +45,6 @@ router.post(
   '/projects/create/:userId',
   authCheck,
   isAdmin,
-  findById,
   addProjectToUser,
   create
 );
@@ -55,14 +55,11 @@ update project
 private 
 */
 
-router.patch(
-  'api/projects/update/:projectId/:userId',
+router.put(
+  '/projects/update/:projectId/:userId',
   authCheck,
   isAdmin,
-  // getProject,
-  findById,
   findProjectById,
-  addProjectToUser,
   update
 );
 
@@ -70,6 +67,7 @@ module.exports = router;
 
 /*
 get all projects
+get procjets by user id
 create projects
 edit projects
 delete projects

@@ -3,7 +3,8 @@ const router = express.Router();
 
 /* import controllers */
 const { authCheck } = require('../middleware/auth');
-const { myProfile, findById } = require('../controllers/user.controller');
+const { read, myProfile, findById } = require('../controllers/user.controller');
+// const { addProjectToUser } = require('../controllers/project.controller');
 
 /* ------------- Routes ------------ */
 router.param('userId', findById);
@@ -22,6 +23,8 @@ update my profile
 private 
 */
 
-router.patch('/users/:userId');
+router.put('/users/:userId');
+
+router.get('/users/:userId', read);
 
 module.exports = router;
