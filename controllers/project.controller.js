@@ -1,4 +1,4 @@
-const Project = require('../models/Project.model');
+const Project = require('../models/project.model');
 const User = require('../models/user.model');
 
 /* Create project with creator */
@@ -32,16 +32,24 @@ exports.getProject = async (req, res) => {
 exports.create = async (req, res) => {
   const { title, description, photo, tags, git, demo } = req.body;
 
+  //get links object
+  const projectFields = {};
+  projectFields.creator = req.user._id;
+  if (title) projectFields.title = title;
+  if (title) projectFields.description = description;
+  if (photo) projectFields.photo = photo;
+  if (tags) {
+    projectFields.tags = tags.split(',').map((tag) => tag.trim());
+  }
+
+  //get links object
+  projectFields.links = {};
+  if (git) projectFields.links.git = git;
+  if (demo) projectFields.links.demo = demo;
+
   try {
-    const payload = {
-      title,
-      description,
-      tags,
-      creator: req.userProf._id,
-    };
-    const project = new Project(payload);
+    let project = new Project(projectFields);
     await project.save();
-    console.log(project.createor);
     return res.json(project);
   } catch (err) {
     res.status(500).send('Server Error');
@@ -50,53 +58,34 @@ exports.create = async (req, res) => {
 
 /* update projects */
 
-// exports.update = async (req, res) => {
-//   try {
-//     let project = await Project.findByIdAndUpdate(req.project._id, req.body, {
-//       new: true,
-//       runValidators: true,
-//     });
-//     console.log('project', project);
-//     if (!project) {
-//       return res.status(404).json({ msg: 'No project found' });
-//     }
-//     console.log('creator', project.creator._id);
-//     console.log('user', req.user._id);
-//     if (req.user._id !== req.project.creator._id) {
-//       return res.status(401).json({ msg: 'Unauthorize' });
-//     }
-//     console.log('proj', project);
-//     return res.json(project);
-//   } catch (err) {
-//     res.status(500).send('Server Error');
-//   }
-// };
-
 //FIXME:
 exports.update = async (req, res) => {
-  const { title, description } = req.body;
-  const newData = { title, description };
-  console.log('body', req.body);
-  console.log('new', newData);
-  console.log('proj', req.params.projectId);
-  console.log('user id - token', req.user._id);
+  const { title, description, photo, tags, git, demo } = req.body;
+
+  //get links object
+  const projectFields = {};
+  if (title) projectFields.title = title;
+  if (title) projectFields.description = description;
+  if (photo) projectFields.photo = photo;
+  if (tags) {
+    projectFields.tags = tags.split(',').map((tag) => tag.trim());
+  }
+
+  //get links object
+  projectFields.links = {};
+  if (git) projectFields.links.git = git;
+  if (demo) projectFields.links.demo = demo;
   try {
-    let project = await Project.findById(req.params.projectId);
-    console.log('creator proj', project);
-    console.log('creator id', req.user._id);
-    // if (!project) {
-    //   return res.status(404).json({ msg: 'No project found' });
-    // }
-    if (project.creator._id !== req.user._id) {
-      return res.status(401).json({ msg: 'wrong creator' });
+    let project = await Project.findById(req.project._id);
+    if (!project) {
+      return res.status(404).json({ msg: 'No project found' });
     }
-    console.log('creator', project.creator._id);
-    console.log('user', req.user._id);
-    // if (req.user._id !== req.project.creator._id) {
-    //   return res.status(401).json({ msg: 'Unauthorize' });
-    // }
-    console.log('proj', project);
-    // return res.json(project);
+    if (project.creator._id.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ msg: 'Unauthorize' });
+    }
+    await project.save(projectFields);
+
+    return res.json(project);
   } catch (err) {
     res.status(500).send('Server Error');
   }
@@ -116,7 +105,6 @@ exports.addProjectToUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.userProf._id);
     await user.populate('projects').execPopulate();
-    console.log('user projects', user.projects);
     next();
   } catch (err) {
     res.status(500).send('Server Error');
