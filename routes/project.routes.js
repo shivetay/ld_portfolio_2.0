@@ -56,7 +56,7 @@ private
 */
 
 router.put(
-  '/projects/update/:projectId/:userId',
+  '/projects/update/:projectId',
   authCheck,
   isAdmin,
   findProjectById,

@@ -79,7 +79,7 @@ exports.update = async (req, res) => {
   console.log('body', req.body);
   console.log('new', newData);
   console.log('proj', req.params.projectId);
-  console.log('user id', req.user._id);
+  console.log('user id - token', req.user._id);
   try {
     let project = await Project.findById(req.params.projectId);
     console.log('creator proj', project);
