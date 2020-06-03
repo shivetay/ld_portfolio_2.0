@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      trim: true,
     },
     date: {
       type: Date,
@@ -38,10 +39,19 @@ const UserSchema = new mongoose.Schema(
         },
       },
     ],
+
     salt: String,
   },
   { timestamps: true }
 );
+
+/* Virtual fields */
+// tasks
+UserSchema.virtual('projects', {
+  ref: 'project',
+  localField: '_id',
+  foreignField: 'creator',
+});
 
 /* hash password before saving */
 UserSchema.pre('save', async function (next) {

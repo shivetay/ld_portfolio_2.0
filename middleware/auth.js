@@ -34,3 +34,20 @@ exports.authCheck = async (req, res, next) => {
     res.status(401).json({ msg: 'Please authenticate' });
   }
 };
+
+exports.isAdmin = async (req, res, next) => {
+  try {
+    if (req.user.role !== config.get('roleSecret')) {
+      return res.status(403).json({
+        errors: [
+          {
+            msg: 'No Admin rights. Access Denied!!',
+          },
+        ],
+      });
+    }
+    next();
+  } catch (err) {
+    res.status(403).json({ msg: 'Forbidden access' });
+  }
+};

@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 exports.registerUser = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    let user = await User.find({ email, name });
+    let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ errors: [{ msg: 'User already exists' }] });
     }
@@ -19,7 +19,6 @@ exports.registerUser = async (req, res) => {
     const token = await user.getAuthToken();
     return res.json({ token, user });
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server error');
   }
 };
@@ -55,7 +54,6 @@ exports.loginUser = async (req, res) => {
 
     return res.json({ token, user });
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server error');
   }
 };
@@ -70,7 +68,6 @@ exports.logoutUser = async (req, res) => {
     await req.user.save();
     res.status(200).send('User logout');
   } catch (err) {
-    console.error(err.message);
     res.status(500).send('Server error');
   }
 };
