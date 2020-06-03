@@ -58,7 +58,6 @@ exports.create = async (req, res) => {
 
 /* update projects */
 
-//FIXME:
 exports.update = async (req, res) => {
   const { title, description, photo, tags, git, demo } = req.body;
 
@@ -91,10 +90,17 @@ exports.update = async (req, res) => {
   }
 };
 
-//TODO:
 /* delete project */
-exports.delete = async (req, res) => {
+exports.remove = async (req, res) => {
   try {
+    let project = await Project.findById(req.project._id);
+
+    if (project.creator._id.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ msg: 'Unauthorize' });
+    }
+
+    await project.remove();
+    return res.status(200).json({ msg: 'Project was removed' });
   } catch (err) {
     res.status(500).send('Server Error');
   }
@@ -128,3 +134,9 @@ exports.findProjectById = async (req, res, next) => {
     res.status(500).send('Server Error');
   }
 };
+
+//TODO:
+/* 
+check for proper project update after frontend part
+add file upoload for photo
+*/

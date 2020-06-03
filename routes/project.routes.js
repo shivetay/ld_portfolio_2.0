@@ -10,6 +10,7 @@ const {
   getProject,
   addProjectToUser,
   findProjectById,
+  remove,
 } = require('../controllers/project.controller');
 
 /* import controllers */
@@ -50,7 +51,7 @@ router.post(
 );
 
 /* 
-post api/projects/update/:projectId/:userId
+post api/projects/update/:projectId/
 update project 
 private 
 */
@@ -63,12 +64,26 @@ router.patch(
   update
 );
 
+/* 
+post /projects/delete/:projectId/
+delete project 
+private 
+*/
+
+router.delete(
+  '/projects/delete/:projectId',
+  authCheck,
+  isAdmin,
+  findProjectById,
+  remove
+);
+
 module.exports = router;
 
 /*
 get all projects
 get procjets by user id
 create projects
-edit projects
+edit projects - check if all is working after front end is added
 delete projects
 */
