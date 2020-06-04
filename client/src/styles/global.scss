@@ -1,0 +1,32 @@
+@import './settings.scss';
+@import './mixins.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: $color-bacground;
+}
+
+html {
+  /* 1rem = 10px; 16px - base font size  10px/16px = 62.5% */
+  font-size: 62.5%;
+  color: $color-font-main;
+  @include respond(desktop-small) {
+    font-size: 50%; // 1rem = 8px
+  }
+  @include respond(tab-port) {
+    font-size: 44%; // 1rem = 7px
+  }
+  @include respond(phone) {
+    font-size: 37%; // 1rem = 6px
+  }
+}
