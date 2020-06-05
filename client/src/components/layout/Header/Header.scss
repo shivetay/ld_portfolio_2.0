@@ -1,0 +1,90 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  // border-bottom: 1px solid $color-white;
+  &__Logo {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+    &-h3 {
+      text-transform: lowercase;
+      @include respond(tab-port) {
+        font-size: $font-medium;
+      }
+      @include respond(phone) {
+        font-size: $font-medium;
+      }
+      @include respond(xsmall) {
+        font-size: $font-medium;
+      }
+    }
+    &-paragraph {
+      align-self: flex-end;
+      color: $color-font-contrast;
+
+      @include respond(tab-port) {
+        font-size: $font-small;
+      }
+      @include respond(phone) {
+        align-self: flex-start;
+        font-size: $font-small;
+      }
+      @include respond(xsmall) {
+        align-self: flex-start;
+        font-size: $font-small;
+      }
+    }
+  }
+  &::after {
+    content: '';
+    top: 8rem;
+    left: 4rem;
+    position: absolute;
+    display: block;
+    width: 18rem;
+    height: 2px;
+    background-color: $color-contrast-second;
+  }
+  &__Nav {
+    font-size: $font-normal;
+    margin-right: 2rem;
+    @include respond(tab-port) {
+      margin-right: 0.5rem;
+    }
+
+    @include respond(phone) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: 0.5rem;
+    }
+    @include respond(xsmall) {
+      margin-right: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    &-link {
+      margin: 0 3rem;
+      transition: all 0.3s;
+      @include respond(tab-port) {
+        margin: 0 1rem;
+      }
+
+      @include respond(phone) {
+        margin: 0 1rem;
+        flex: 100%;
+      }
+      @include respond(xsmall) {
+        margin: 0 1rem;
+        flex: 100%;
+      }
+    }
+    &-link:hover {
+      color: $hover-link;
+    }
+  }
+}

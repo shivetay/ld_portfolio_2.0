@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
