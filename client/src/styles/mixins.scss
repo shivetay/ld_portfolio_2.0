@@ -1,0 +1,55 @@
+@import './settings.scss';
+
+/* media queries */
+/* brakepoints arg
+- xsmall < 500px
+- phone 599px
+- mix-phone-tab: max 767px min 599px
+- tab-port: for tablet portrait 767px
+- tab-land: for tablet landscape 900px
+- desktop-small: for 1000px
+- desktop 1200px
+*/
+@mixin respond($brakepoint) {
+  @if $brakepoint == phone {
+    @media (max-width: $bp-phone) {
+      @content;
+    }
+  }
+
+  @if $brakepoint == tab-land {
+    @media (max-width: $bp-tablet-landscape) {
+      @content;
+    }
+  }
+  @if $brakepoint == tab-port {
+    @media (max-width: $bp-tablet-portrait) {
+      @content;
+    }
+  }
+  @if $brakepoint == desktop {
+    @media (max-width: $bp-desktop) {
+      @content;
+    }
+  }
+  @if $brakepoint == desktop-small {
+    @media (max-width: $bp-deskot-small) {
+      @content;
+    }
+  }
+  @if $brakepoint == desktop-big {
+    @media (min-width: $bp-desktop) {
+      @content;
+    }
+  }
+  @if $brakepoint == mix-phone-tab {
+    @media (max-width: $bp-tablet-portrait) and (min-width: $bp-phone) {
+      @content;
+    }
+  }
+  @if $brakepoint == xsmall {
+    @media (max-width: $bp-xsmall) {
+      @content;
+    }
+  }
+}
