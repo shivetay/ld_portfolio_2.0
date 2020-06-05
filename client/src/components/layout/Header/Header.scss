@@ -43,10 +43,10 @@
   &::after {
     content: '';
     top: 8rem;
-    left: 4rem;
+    left: 8rem;
     position: absolute;
     display: block;
-    width: 18rem;
+    width: 12rem;
     height: 2px;
     background-color: $color-contrast-second;
   }
