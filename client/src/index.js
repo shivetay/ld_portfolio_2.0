@@ -6,6 +6,7 @@ import App from './App';
 /* import styles */
 import './styles/normalize.scss';
 import './styles/global.scss';
+import './styles/components.scss';
 
 import * as serviceWorker from './serviceWorker';
 

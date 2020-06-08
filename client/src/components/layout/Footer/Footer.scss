@@ -1,0 +1,40 @@
+@import '../../../styles/settings.scss';
+
+.Footer {
+  position: fixed;
+  bottom: 0;
+  margin: 2rem 1rem;
+  &__Links {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    a {
+      width: 0;
+      padding: 0.5rem 0;
+      transition: all 0.3s;
+    }
+
+    a:hover {
+      color: $hover-link;
+    }
+    &::after {
+      content: '';
+      bottom: -4rem;
+      left: 0.6rem;
+      position: absolute;
+      display: block;
+      width: 2px;
+      height: 4rem;
+      background-color: $color-contrast-second;
+    }
+  }
+  &__Text {
+    position: relative;
+    bottom: -8px;
+    right: -3rem;
+    padding: 0.5rem;
+    font-size: $font-medium;
+    text-transform: lowercase;
+    color: $color-font-contrast;
+  }
+}
