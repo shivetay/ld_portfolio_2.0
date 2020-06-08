@@ -2,6 +2,8 @@ import React from 'react';
 
 import photo from '../../../Images/ld_photo.JPG';
 
+import Navigation from '../Navigation/Navigation';
+
 import './Home.scss';
 
 const Home = () => {
@@ -14,23 +16,42 @@ const Home = () => {
             alt='photo_lukasz_dawidowicz'
             className='Home__Content-img'
           />
-          <span>
+          <p>
+            Hi, I am Łukasz and I am an{' '}
             <span className='Home__Content-span'>
-              I have 5 years experience in IT.{' '}
+              aspiring Front end Developer.{' '}
             </span>{' '}
-            Add content{' '}
-            <strong>
-              JavaScript, HTML, CSS, React, Node.js, Express and MongoDB
-            </strong>
-            Add content
-          </span>
-          <br />
-          <span>
+            I like to work with{' '}
             <span className='Home__Content-span'>
-              During my 13 years of work experience,{' '}
+              HTML, CSS, JavaScript, React, Node.js, Express and MongoDB.{' '}
             </span>{' '}
-            Ad content -> menu here
-          </span>
+            As an ambitious person I do not take anything for granted. I am
+            fully aware of my strengths and limitations and with full
+            commitment.
+            {/* and hard work I can easily fit into any team work style. I am not
+            afraid to take responsibilities for my actions. As a team player I
+            am always trying to provide any help that I can for my team mates,
+            as We are working in one team for common goal. */}
+          </p>
+          <nav className='Home__Content-nav'>
+            Feel free to check My{' '}
+            <span className='Home__Content-span'>
+              <Navigation
+                path='projects'
+                name='projects'
+                className='Home__Nav Home__Nav-link'
+              />
+            </span>{' '}
+            and{' '}
+            <span className='Home__Content-span'>
+              <Navigation
+                path='contact'
+                name='contact'
+                className='Home__Nav Home__Nav-link'
+              />
+            </span>{' '}
+            me.
+          </nav>
         </div>
       </div>
     </section>
