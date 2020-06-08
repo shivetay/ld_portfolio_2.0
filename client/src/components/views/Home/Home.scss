@@ -2,18 +2,17 @@
 @import '../../../styles/mixins.scss';
 
 .Home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   &__Container {
+    height: 80vh;
     width: 60rem;
-    margin: 5rem auto;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @include respond(phone) {
-      position: initial;
     }
     @include respond(xsmall) {
-      position: initial;
     }
   }
 
@@ -23,25 +22,19 @@
     line-height: 1.4;
 
     @include respond(desktop) {
-      top: 60%;
     }
     @include respond(desktop-small) {
-      top: 60%;
     }
     @include respond(tab-port) {
-      top: 70%;
     }
     @include respond(phone) {
-      top: 50%;
       font-size: $font-small;
     }
     @include respond(xsmall) {
-      top: 50%;
       font-size: $font-small;
     }
     &-img {
       height: 20rem;
-      margin: 6rem 0;
       padding: 1rem;
 
       @include respond(phone) {
@@ -55,6 +48,33 @@
       font-size: $font-large;
       color: $color-font-contrast;
       font-weight: 700;
+    }
+    &-nav {
+      align-self: flex-end;
+    }
+  }
+  &__Nav {
+    font-size: $font-normal;
+
+    @include respond(tab-port) {
+    }
+
+    @include respond(phone) {
+    }
+    @include respond(xsmall) {
+    }
+    &-link {
+      transition: all 0.3s;
+      @include respond(tab-port) {
+      }
+
+      @include respond(phone) {
+      }
+      @include respond(xsmall) {
+      }
+    }
+    &-link:hover {
+      color: $hover-link;
     }
   }
 }
