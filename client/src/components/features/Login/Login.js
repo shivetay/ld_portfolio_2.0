@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import { API_URL } from '../../../config';
+
+import { authenticateUser, isAuthUser } from '../../../utils/utils';
 import Layout from '../../layout/MainLayout/Layout';
 
 class Login extends Component {
@@ -22,7 +25,7 @@ class Login extends Component {
     };
     axios
       .post(`${API_URL}/login`, user, config)
-      .then((res) => console.log(res.data));
+      .then((res) => authenticateUser(res.data));
     this.setState({
       formData: { email: '', password: '' },
       userRedirect: true,
@@ -69,11 +72,25 @@ class Login extends Component {
       <button className='btn btn-primary'>Submit</button>
     </form>
   );
+
+  redirectUser = () => {
+    const { userRedirect } = this.state;
+    const { user } = isAuthUser();
+
+    if (userRedirect === true) {
+      if (user && user.role === 2308) {
+        return <Redirect to='/admin/dashboard' />;
+      } else {
+        return <Redirect to='/user/dashboard' />;
+      }
+    }
+  };
   render() {
     const { email, password } = this.state.formData;
     return (
       <Layout title='Login Form' description='Login to your account'>
         {this.formRender(email, password)}
+        {this.redirectUser()}
       </Layout>
     );
   }
