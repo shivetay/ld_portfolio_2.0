@@ -70,7 +70,7 @@ class Login extends Component {
           onChange={this.onChange}
           className='form-control'></input>
       </div>
-      <Button type={submit}>Submit</Button>
+      <Button type='submit'>Login</Button>
     </form>
   );
 

@@ -1,26 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './Button.css';
+import './Button.scss';
 
 const Button = ({ href, to, exact, className, children, type }) => {
   if (href) {
     return (
-      <a className={} href={href}>
+      <a className='' href={href}>
         {children}
       </a>
     );
   }
   if (to) {
     return (
-      <Link to={to} exact={exact} className={}>
+      <Link to={to} exact={exact} className=''>
         {children}
       </Link>
     );
   }
   return (
     <button
-      className={}
+      className=''
       type={type}
       // onClick={props.onClick}
       // disabled={props.disabled}
