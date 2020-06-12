@@ -5,13 +5,11 @@ import { isAuthUser } from '../../../utils/utils';
 const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={({ props }) =>
-      isAuthUser() && isAuthUser().payload.user.role === 1 ? (
+    render={(props) =>
+      isAuthUser() ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{ pathname: '/signin', state: { from: props.location } }}
-        />
+        <Redirect to={{ pathname: '/login' }} />
       )
     }
   />

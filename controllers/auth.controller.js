@@ -30,6 +30,7 @@ exports.loginUser = async (req, res) => {
   try {
     let user = await User.findOne({ email });
     const token = await user.getAuthToken();
+    console.log('toke', token);
     if (!user) {
       return res.status(401).json({
         errors: [

@@ -17,14 +17,14 @@ class Login extends Component {
   };
 
   signIn = (user) => {
-    console.log('user', user);
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
+    const body = JSON.stringify(user);
     axios
-      .post(`${API_URL}/login`, user, config)
+      .post(`${API_URL}/login`, body, config)
       .then((res) => authenticateUser(res.data));
     this.setState({
       formData: { email: '', password: '' },
@@ -76,12 +76,11 @@ class Login extends Component {
   redirectUser = () => {
     const { userRedirect } = this.state;
     const { user } = isAuthUser();
-
     if (userRedirect === true) {
-      if (user && user.role === 2308) {
+      if (user.role === 2308) {
         return <Redirect to='/admin/dashboard' />;
       } else {
-        return <Redirect to='/user/dashboard' />;
+        return <Redirect to='/users/me' />;
       }
     }
   };

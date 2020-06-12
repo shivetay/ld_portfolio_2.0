@@ -7,6 +7,8 @@ import Home from './components/views/Home/Home';
 import Login from './components/features/Login/Login';
 import AdminRoute from './components/features/PrivateRoutes/AdminRoute';
 import AdminDashboard from './components/views/AdminDashboard/AdminDashboard';
+import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
+import UserDashboard from './components/views/UserDashboard/UserDashboard';
 
 const App = () => {
   return (
@@ -23,6 +25,7 @@ const App = () => {
               path='/admin/dashboard'
               component={AdminDashboard}
             />
+            <PrivateRoute exact path='/users/me' component={UserDashboard} />
           </Switch>
         </MainLayout>
       </BrowserRouter>
