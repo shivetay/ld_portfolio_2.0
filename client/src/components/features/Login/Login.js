@@ -6,6 +6,7 @@ import { API_URL } from '../../../config';
 
 import { authenticateUser, isAuthUser } from '../../../utils/utils';
 import Layout from '../../layout/MainLayout/Layout';
+import Button from '../../common/Buttons/Button';
 
 class Login extends Component {
   state = {
@@ -69,7 +70,7 @@ class Login extends Component {
           onChange={this.onChange}
           className='form-control'></input>
       </div>
-      <button className='btn btn-primary'>Submit</button>
+      <Button type='submit'>Login</Button>
     </form>
   );
 
