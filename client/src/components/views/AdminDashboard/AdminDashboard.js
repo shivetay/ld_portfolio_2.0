@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { isAuthUser } from '../../../utils/utils';
 
 import Layout from '../../layout/MainLayout/Layout';
+import Button from '../../common/Buttons/Button';
 
 const AdminDashboard = () => {
   const {
@@ -16,9 +17,9 @@ const AdminDashboard = () => {
         <h4 className=''>Admin Links</h4>
         <ul className=''>
           <li className='list-group-item'>
-            <Link to={`/projects/create/${_id}`} className=''>
+            <Button to={`/projects/create/${_id}`} className=''>
               Create Project
-            </Link>
+            </Button>
           </li>
         </ul>
       </div>
