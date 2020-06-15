@@ -39,6 +39,6 @@ update my profile
 private 
 */
 
-router.get('/users/:userId', read);
+// router.get('/users/:userId', read);
 
 module.exports = router;
