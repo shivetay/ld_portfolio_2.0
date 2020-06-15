@@ -23,9 +23,10 @@ class Login extends Component {
         'Content-Type': 'application/json',
       },
     };
-    const body = JSON.stringify(user);
+
+    console.log('user axios', user.role);
     axios
-      .post(`${API_URL}/login`, body, config)
+      .post(`${API_URL}/login`, user, config)
       .then((res) => authenticateUser(res.data));
     this.setState({
       formData: { email: '', password: '' },
@@ -78,6 +79,8 @@ class Login extends Component {
     const { userRedirect } = this.state;
     const { user } = isAuthUser();
     if (userRedirect === true) {
+      console.log('user role', user.role);
+      console.log('auth fuc', isAuthUser());
       if (user.role === 2308) {
         return <Redirect to='/admin/dashboard' />;
       } else {
@@ -85,6 +88,7 @@ class Login extends Component {
       }
     }
   };
+
   render() {
     const { email, password } = this.state.formData;
     return (

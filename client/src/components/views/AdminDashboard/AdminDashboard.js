@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { isAuthUser } from '../../../utils/utils';
 
@@ -8,7 +7,7 @@ import Button from '../../common/Buttons/Button';
 
 const AdminDashboard = () => {
   const {
-    user: { _id, name, email, role },
+    user: { _id, name },
   } = isAuthUser();
 
   const adminLinks = () => {
@@ -40,3 +39,6 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+//TODO:
+/* chnage to clas component */

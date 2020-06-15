@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Button.scss';
 
-const Button = ({ href, to, exact, className, children, type }) => {
+const Button = ({ href, to, exact, className, children, type, onClick }) => {
   if (href) {
     return (
       <a className='' href={href}>
@@ -22,7 +22,7 @@ const Button = ({ href, to, exact, className, children, type }) => {
     <button
       className=''
       type={type}
-      // onClick={props.onClick}
+      // onClick={onClick}
       // disabled={props.disabled}
     >
       {children}

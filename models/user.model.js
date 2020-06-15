@@ -68,7 +68,7 @@ UserSchema.methods.getAuthToken = async function () {
 
   /* this will create token with user._id */
   const token = jwt.sign(
-    { _id: user._id.toString(), role: user.role },
+    { _id: user._id.toString(), role: user.role.toString() },
     config.get('jwtSecret'),
     { expiresIn: 360000 } //change to production
   ); //jwt expcts string toString will convert objId to string
@@ -85,7 +85,7 @@ UserSchema.methods.toJSON = function () {
 
   delete userPrivetData.password;
   delete userPrivetData.tokens;
-  delete userPrivetData.role;
+  // delete userPrivetData.role;
 
   return userPrivetData;
 };
