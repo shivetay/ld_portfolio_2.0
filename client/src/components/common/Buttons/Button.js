@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// import { isAuthUser, signOut } from '../../../utils/utils';
+
 import './Button.scss';
 
 const Button = ({ href, to, exact, className, children, type, onClick }) => {
@@ -13,7 +15,7 @@ const Button = ({ href, to, exact, className, children, type, onClick }) => {
   }
   if (to) {
     return (
-      <Link to={to} exact={exact} className=''>
+      <Link to={to} exact={exact} className='' onClick={onClick}>
         {children}
       </Link>
     );

@@ -15,6 +15,7 @@ class Login extends Component {
       password: '',
     },
     userRedirect: false,
+    logIn: false,
   };
 
   signIn = (user) => {
@@ -23,11 +24,12 @@ class Login extends Component {
         'Content-Type': 'application/json',
       },
     };
-
-    console.log('user axios', user.role);
     axios
       .post(`${API_URL}/login`, user, config)
-      .then((res) => authenticateUser(res.data));
+      .then(
+        (res) => authenticateUser(res.data),
+        console.log('user axios', user)
+      );
     this.setState({
       formData: { email: '', password: '' },
       userRedirect: true,
@@ -71,20 +73,23 @@ class Login extends Component {
           onChange={this.onChange}
           className='form-control'></input>
       </div>
-      <Button type='submit'>Login</Button>
+      <Button>Login</Button>
     </form>
   );
 
   redirectUser = () => {
     const { userRedirect } = this.state;
-    const { user } = isAuthUser();
+    const {
+      user: { role },
+    } = isAuthUser();
     if (userRedirect === true) {
-      console.log('user role', user.role);
-      console.log('auth fuc', isAuthUser());
-      if (user.role === 2308) {
-        return <Redirect to='/admin/dashboard' />;
+      console.log('user role', role);
+      if (role === 2308) {
+        console.log('admin');
+        // return <Redirect to='/admin/dashboard' />;
       } else {
-        return <Redirect to='/users/me' />;
+        console.log('user');
+        // return <Redirect to='/users/me' />;
       }
     }
   };
