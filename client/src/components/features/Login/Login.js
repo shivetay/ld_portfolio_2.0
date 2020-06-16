@@ -86,10 +86,10 @@ class Login extends Component {
       console.log('user role', role);
       if (role === 2308) {
         console.log('admin');
-        // return <Redirect to='/admin/dashboard' />;
+        return <Redirect to='/admin/dashboard' />;
       } else {
         console.log('user');
-        // return <Redirect to='/users/me' />;
+        return <Redirect to='/users/me' />;
       }
     }
   };
