@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -18,6 +18,14 @@ class Login extends Component {
     logIn: false,
   };
 
+  componentDidMount() {
+    const logIn = localStorage.getItem('jwt') === true;
+    this.setState({ logIn });
+    if (logIn === true) {
+      this.redirectUser();
+    }
+  }
+
   signIn = (user) => {
     const config = {
       headers: {
@@ -26,13 +34,11 @@ class Login extends Component {
     };
     axios
       .post(`${API_URL}/login`, user, config)
-      .then(
-        (res) => authenticateUser(res.data),
-        console.log('user axios', user)
-      );
+      .then((res) => authenticateUser(res.data));
     this.setState({
       formData: { email: '', password: '' },
       userRedirect: true,
+      logIn: true,
     });
   };
 
@@ -50,41 +56,46 @@ class Login extends Component {
     const { password, email } = this.state.formData;
     e.preventDefault();
     this.signIn({ email, password });
+    this.setState({
+      userRedirect: true,
+    });
   };
 
-  formRender = (email, password) => (
-    <form onSubmit={this.onSubmit}>
-      <div className='form-group'>
-        <label className='text-muted'>Email</label>
-        <input
-          type='email'
-          name='email'
-          value={email}
-          onChange={this.onChange}
-          className='form-control'></input>
-      </div>
-      <div className='form-group'>
-        <label className='text-muted'>Password</label>
-        <input
-          type='password'
-          name='password'
-          minLength='6'
-          value={password}
-          onChange={this.onChange}
-          className='form-control'></input>
-      </div>
-      <Button>Login</Button>
-    </form>
-  );
+  formRender = (email, password) => {
+    return (
+      <Fragment>
+        <form onSubmit={this.onSubmit}>
+          <div className='form-group'>
+            <label className='text-muted'>Email</label>
+            <input
+              type='email'
+              name='email'
+              value={email}
+              onChange={this.onChange}
+              className='form-control'></input>
+          </div>
+          <div className='form-group'>
+            <label className='text-muted'>Password</label>
+            <input
+              type='password'
+              name='password'
+              minLength='6'
+              value={password}
+              onChange={this.onChange}
+              className='form-control'></input>
+          </div>
+          <Button>Login</Button>
+        </form>
+      </Fragment>
+    );
+  };
 
   redirectUser = () => {
-    const { userRedirect } = this.state;
-    const {
-      user: { role },
-    } = isAuthUser();
+    const { userRedirect, logIn } = this.state;
+    const { user } = isAuthUser();
     if (userRedirect === true) {
-      console.log('user role', role);
-      if (role === 2308) {
+      console.log('user role', typeof user.role);
+      if (logIn === true || user.role === 2308) {
         console.log('admin');
         return <Redirect to='/admin/dashboard' />;
       } else {
@@ -98,6 +109,9 @@ class Login extends Component {
     const { email, password } = this.state.formData;
     return (
       <Layout title='Login Form' description='Login to your account'>
+        {/* {!localStorage.getItem('jwt')
+          ? this.formRender(email, password)
+          : this.redirectUser()} */}
         {this.formRender(email, password)}
         {this.redirectUser()}
       </Layout>

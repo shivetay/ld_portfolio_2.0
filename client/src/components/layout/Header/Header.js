@@ -33,7 +33,7 @@ const Header = () => {
         </NavLink>
       </div>
       {/* {logButtons()} */}
-      <Button to='/' onClick={signOut}>
+      <Button to={'/'} onClick={signOut}>
         Logout
       </Button>
       <Button to={`/login`}>Login</Button>;
