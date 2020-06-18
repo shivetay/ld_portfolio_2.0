@@ -18,28 +18,31 @@ class Login extends Component {
     logIn: false,
   };
 
-  componentDidMount() {
-    const logIn = localStorage.getItem('jwt') === true;
-    this.setState({ logIn });
-    if (logIn === true) {
-      this.redirectUser();
-    }
-  }
+  // componentDidMount() {
+  //   const logIn = localStorage.getItem('jwt') === true;
+  //   this.setState({ logIn });
+  //   if (logIn === true) {
+  //     this.redirectUser();
+  //   }
+  // }
 
-  signIn = (user) => {
+  signIn = async (user) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
-    axios
-      .post(`${API_URL}/login`, user, config)
-      .then((res) => authenticateUser(res.data));
-    this.setState({
-      formData: { email: '', password: '' },
-      userRedirect: true,
-      logIn: true,
-    });
+    try {
+      await axios
+        .post(`${API_URL}/login`, user, config)
+        .then((res) => authenticateUser(res.data));
+      this.setState({
+        formData: { email: '', password: '' },
+        userRedirect: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   onChange = (e) => {
@@ -58,6 +61,7 @@ class Login extends Component {
     this.signIn({ email, password });
     this.setState({
       userRedirect: true,
+      logIn: true,
     });
   };
 
@@ -94,14 +98,12 @@ class Login extends Component {
     const { userRedirect, logIn } = this.state;
     const { user } = isAuthUser();
     if (userRedirect === true) {
-      console.log('user role', typeof user.role);
-      if (logIn === true || user.role === 2308) {
-        console.log('admin');
+      if (logIn === true && user.role === 2308) {
         return <Redirect to='/admin/dashboard' />;
       } else {
-        console.log('user');
         return <Redirect to='/users/me' />;
       }
+      // return <Redirect to='/users/me' />;
     }
   };
 
@@ -109,11 +111,11 @@ class Login extends Component {
     const { email, password } = this.state.formData;
     return (
       <Layout title='Login Form' description='Login to your account'>
-        {/* {!localStorage.getItem('jwt')
+        {!localStorage.getItem('jwt')
           ? this.formRender(email, password)
-          : this.redirectUser()} */}
-        {this.formRender(email, password)}
-        {this.redirectUser()}
+          : this.redirectUser()}
+        {/* {this.formRender(email, password)}
+        {this.redirectUser()} */}
       </Layout>
     );
   }
