@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// import { isAuthUser, signOut } from '../../../utils/utils';
+
 import './Button.scss';
 
-const Button = ({ href, to, exact, className, children, type }) => {
+const Button = ({ href, to, exact, className, children, type, onClick }) => {
   if (href) {
     return (
       <a className='' href={href}>
@@ -13,7 +15,7 @@ const Button = ({ href, to, exact, className, children, type }) => {
   }
   if (to) {
     return (
-      <Link to={to} exact={exact} className=''>
+      <Link to={to} exact={exact} className='' onClick={onClick}>
         {children}
       </Link>
     );
@@ -22,7 +24,7 @@ const Button = ({ href, to, exact, className, children, type }) => {
     <button
       className=''
       type={type}
-      // onClick={props.onClick}
+      // onClick={onClick}
       // disabled={props.disabled}
     >
       {children}

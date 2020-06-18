@@ -85,7 +85,7 @@ UserSchema.methods.toJSON = function () {
 
   delete userPrivetData.password;
   delete userPrivetData.tokens;
-  delete userPrivetData.role;
+  // delete userPrivetData.role;
 
   return userPrivetData;
 };

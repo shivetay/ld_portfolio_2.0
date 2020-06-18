@@ -6,10 +6,12 @@ const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      isAuthUser() ? (
+      isAuthUser().user.role === 2308 ? (
         <Component {...props} />
       ) : (
-        <Redirect to={{ pathname: '/login' }} />
+        <Redirect
+          to={{ pathname: '/users/me', state: { from: props.location } }}
+        />
       )
     }
   />

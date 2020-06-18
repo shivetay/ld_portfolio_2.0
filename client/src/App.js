@@ -25,6 +25,11 @@ const App = () => {
               path='/admin/dashboard'
               component={AdminDashboard}
             />
+            {/* <AdminRoute
+              exact
+              path='/projects/create/:userId'
+              component={CreateProject}
+            /> */}
             <PrivateRoute exact path='/users/me' component={UserDashboard} />
           </Switch>
         </MainLayout>

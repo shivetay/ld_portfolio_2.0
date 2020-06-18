@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -15,22 +15,34 @@ class Login extends Component {
       password: '',
     },
     userRedirect: false,
+    logIn: false,
   };
 
-  signIn = (user) => {
+  // componentDidMount() {
+  //   const logIn = localStorage.getItem('jwt') === true;
+  //   this.setState({ logIn });
+  //   if (logIn === true) {
+  //     this.redirectUser();
+  //   }
+  // }
+
+  signIn = async (user) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
-    const body = JSON.stringify(user);
-    axios
-      .post(`${API_URL}/login`, body, config)
-      .then((res) => authenticateUser(res.data));
-    this.setState({
-      formData: { email: '', password: '' },
-      userRedirect: true,
-    });
+    try {
+      await axios
+        .post(`${API_URL}/login`, user, config)
+        .then((res) => authenticateUser(res.data));
+      this.setState({
+        formData: { email: '', password: '' },
+        userRedirect: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   onChange = (e) => {
@@ -47,50 +59,64 @@ class Login extends Component {
     const { password, email } = this.state.formData;
     e.preventDefault();
     this.signIn({ email, password });
+    this.setState({
+      userRedirect: true,
+      logIn: true,
+    });
   };
 
-  formRender = (email, password) => (
-    <form onSubmit={this.onSubmit}>
-      <div className='form-group'>
-        <label className='text-muted'>Email</label>
-        <input
-          type='email'
-          name='email'
-          value={email}
-          onChange={this.onChange}
-          className='form-control'></input>
-      </div>
-      <div className='form-group'>
-        <label className='text-muted'>Password</label>
-        <input
-          type='password'
-          name='password'
-          minLength='6'
-          value={password}
-          onChange={this.onChange}
-          className='form-control'></input>
-      </div>
-      <Button type='submit'>Login</Button>
-    </form>
-  );
+  formRender = (email, password) => {
+    return (
+      <Fragment>
+        <form onSubmit={this.onSubmit}>
+          <div className='form-group'>
+            <label className='text-muted'>Email</label>
+            <input
+              type='email'
+              name='email'
+              value={email}
+              onChange={this.onChange}
+              className='form-control'></input>
+          </div>
+          <div className='form-group'>
+            <label className='text-muted'>Password</label>
+            <input
+              type='password'
+              name='password'
+              minLength='6'
+              value={password}
+              onChange={this.onChange}
+              className='form-control'></input>
+          </div>
+          <Button>Login</Button>
+        </form>
+      </Fragment>
+    );
+  };
 
   redirectUser = () => {
-    const { userRedirect } = this.state;
+    const { userRedirect, logIn } = this.state;
     const { user } = isAuthUser();
     if (userRedirect === true) {
-      if (user.role === 2308) {
-        return <Redirect to='/admin/dashboard' />;
+      if (logIn === true && localStorage.getItem('jwt')) {
+        if (user.role === 2308) {
+          return <Redirect to='/admin/dashboard' />;
+        } else {
+          return <Redirect to='/users/me' />;
+        }
       } else {
-        return <Redirect to='/users/me' />;
+        return <Redirect to='/' />;
       }
     }
   };
+
   render() {
     const { email, password } = this.state.formData;
     return (
       <Layout title='Login Form' description='Login to your account'>
-        {this.formRender(email, password)}
-        {this.redirectUser()}
+        {!localStorage.getItem('jwt')
+          ? this.formRender(email, password)
+          : this.redirectUser()}
       </Layout>
     );
   }
