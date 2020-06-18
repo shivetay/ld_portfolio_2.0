@@ -98,12 +98,15 @@ class Login extends Component {
     const { userRedirect, logIn } = this.state;
     const { user } = isAuthUser();
     if (userRedirect === true) {
-      if (logIn === true && user.role === 2308) {
-        return <Redirect to='/admin/dashboard' />;
+      if (logIn === true && localStorage.getItem('jwt')) {
+        if (user.role === 2308) {
+          return <Redirect to='/admin/dashboard' />;
+        } else {
+          return <Redirect to='/users/me' />;
+        }
       } else {
-        return <Redirect to='/users/me' />;
+        return <Redirect to='/' />;
       }
-      // return <Redirect to='/users/me' />;
     }
   };
 
@@ -114,8 +117,6 @@ class Login extends Component {
         {!localStorage.getItem('jwt')
           ? this.formRender(email, password)
           : this.redirectUser()}
-        {/* {this.formRender(email, password)}
-        {this.redirectUser()} */}
       </Layout>
     );
   }

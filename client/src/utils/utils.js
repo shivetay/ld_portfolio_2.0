@@ -1,11 +1,11 @@
 import { API_URL } from '../config';
 
-export const signOut = (e) => {
+export const signOut = async (e) => {
   console.log('klik');
   e.preventDefault();
   if (typeof window !== 'undefined') {
     localStorage.removeItem('jwt');
-    return fetch(`${API_URL}/logout`, { method: 'GET' }).then((res) => {
+    return await fetch(`${API_URL}/logout`, { method: 'GET' }).then((res) => {
       console.log('signout', res);
       return res.json();
     });

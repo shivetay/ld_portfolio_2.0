@@ -8,22 +8,35 @@ import './Header.scss';
 
 const Header = () => {
   const logButtons = () => {
-    const { user } = isAuthUser();
-    // console.log('user header', user.role);
-    // user.role !== 2308 || user.role === 'undefined';
+    const authData = isAuthUser();
+    if (authData === false) {
+      return <Button to={`/login`}>Login</Button>;
+    } else {
+      const { user } = authData;
+      if (user.role === 2308 && localStorage.getItem('jwt')) {
+        return (
+          <Fragment>
+            <Button to={`/admin/dashboard`}>Dashboard admin</Button>
+            <Button to={`/users/me`}>Dashboard me</Button>
+            <Button to={`/`} onClick={signOut}>
+              Logout
+            </Button>
+          </Fragment>
+        );
+      } else {
+        return (
+          <Fragment>
+            <Button to={`/users/me`}>Dashboard me</Button>
+            <Button to={`/`} onClick={signOut}>
+              Logout
+            </Button>
+          </Fragment>
+        );
+      }
+    }
 
-    return (
-      <Fragment>
-        <Button to={'/'} onClick={signOut}>
-          Logout
-        </Button>
-        <Button to={`/admin/dashboard`}>Dashboard admin</Button>
-        <Button to={`/users/me`}>Dashboard me</Button>;
-      </Fragment>
-    );
+    // if (user.role === 2308 && localStorage.getItem('jwt'))
   };
-  // if (user.role === 2308)
-  // return <Button to={`/login`}>Login</Button>;
 
   return (
     <div className='Header'>
@@ -38,10 +51,6 @@ const Header = () => {
       ) : (
         logButtons()
       )}
-      {/* <Button to={'/'} onClick={signOut}>
-        Logout
-      </Button>
-      <Button to={`/login`}>Login</Button>; */}
     </div>
   );
 };
