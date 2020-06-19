@@ -1,10 +1,15 @@
 import React from 'react';
 
-const ProjectList = () => {
+const ProjectList = ({ projects }) => {
   return (
-    <div>
-      <h1>Project list</h1>
-    </div>
+    <section>
+      <ul>
+        {projects.map((project) => {
+          console.log('id', project._id);
+          return <h1 key={project._id}>{project.title}</h1>;
+        })}
+      </ul>
+    </section>
   );
 };
 
