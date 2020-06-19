@@ -18,14 +18,6 @@ class Login extends Component {
     logIn: false,
   };
 
-  // componentDidMount() {
-  //   const logIn = localStorage.getItem('jwt') === true;
-  //   this.setState({ logIn });
-  //   if (logIn === true) {
-  //     this.redirectUser();
-  //   }
-  // }
-
   signIn = async (user) => {
     const config = {
       headers: {
