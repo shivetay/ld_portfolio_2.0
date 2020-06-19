@@ -9,6 +9,7 @@ import AdminRoute from './components/features/PrivateRoutes/AdminRoute';
 import AdminDashboard from './components/views/AdminDashboard/AdminDashboard';
 import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
 import UserDashboard from './components/views/UserDashboard/UserDashboard';
+import Projects from './components/views/Projects/Projects';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
               component={CreateProject}
             /> */}
             <PrivateRoute exact path='/users/me' component={UserDashboard} />
+            <Route exact path='/projects' component={Projects} />
           </Switch>
         </MainLayout>
       </BrowserRouter>
