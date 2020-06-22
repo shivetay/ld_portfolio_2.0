@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { API_URL } from '../../../config';
 
+import './Projects.scss';
+
 import ProjectList from './ProjectList';
 
 class Projects extends Component {
@@ -28,8 +30,10 @@ class Projects extends Component {
   render() {
     const { data } = this.state;
     return (
-      <section>
-        <ProjectList projects={data} />
+      <section className='Projects'>
+        <div className='Project__Container'>
+          <ProjectList projects={data} />
+        </div>
       </section>
     );
   }
