@@ -8,9 +8,11 @@ import './Button.scss';
 const Button = ({ href, to, exact, className, children, type, onClick }) => {
   if (href) {
     return (
-      <a className='' href={href}>
-        {children}
-      </a>
+      <button>
+        <a className='' href={href}>
+          {children}
+        </a>
+      </button>
     );
   }
   if (to) {

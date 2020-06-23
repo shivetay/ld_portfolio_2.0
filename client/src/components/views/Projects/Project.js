@@ -44,18 +44,11 @@ class Project extends Component {
             <span className='Projects-tech'>{tags}</span>
             <p className='Projects-descr'>{description}</p>
             <div className='Project-button'>
-              <button className='btn'>
-                <a className='btn-aTag' href={links}>
-                  Demo
-                </a>
-              </button>
-              <button className='btn'>
-                <a className='btn-aTag' href={links}>
-                  Code
-                </a>
-              </button>
+              <Button href={links}>Demo</Button>
+              <Button href={links}>Code</Button>
             </div>
           </div>
+          <Button to={`/projects`}>Back</Button>
         </div>
       );
     }
