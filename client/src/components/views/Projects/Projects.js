@@ -13,7 +13,7 @@ class Projects extends Component {
     data: [],
     loading: false,
   };
-  componentWillMount() {
+  componentDidMount() {
     this.getProjects();
   }
 

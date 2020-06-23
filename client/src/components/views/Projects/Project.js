@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
 import { API_URL } from '../../../config';
 
 import Button from '../../common/Buttons/Button';
+import Spinner from '../../common/Spinner/Spinner';
 
 class Project extends Component {
   state = {
@@ -23,36 +24,44 @@ class Project extends Component {
         .then((res) => this.setState({ project: res.data, loading: false }));
     } catch (err) {}
   };
-  render() {
-    const { loading } = this.state;
+
+  renderProject = () => {
     const {
+      loading,
       project: { id, key, title, photo, tags, description, links },
     } = this.state;
-    return (
-      <div>
-        <div className='Projects__Project' key={key}>
-          {/* <Button to={`/projects/${project._id}`}>
+    if (loading === true) {
+      return <Spinner />;
+    } else {
+      return (
+        <div>
+          <div className='Projects__Project' key={key}>
+            {/* <Button to={`/projects/${project._id}`}>
             <h3 className='Projects-name'>{title}</h3>
           </Button> */}
-          <h3 className='Projects-name'>{title}</h3>
-          <img className='Projects-photo' src={photo} alt='project_img' />
-          <span className='Projects-tech'>{tags}</span>
-          <p className='Projects-descr'>{description}</p>
-          <div className='Project-button'>
-            <button className='btn'>
-              <a className='btn-aTag' href={links}>
-                Demo
-              </a>
-            </button>
-            <button className='btn'>
-              <a className='btn-aTag' href={links}>
-                Code
-              </a>
-            </button>
+            <h3 className='Projects-name'>{title}</h3>
+            <img className='Projects-photo' src={photo} alt='project_img' />
+            <span className='Projects-tech'>{tags}</span>
+            <p className='Projects-descr'>{description}</p>
+            <div className='Project-button'>
+              <button className='btn'>
+                <a className='btn-aTag' href={links}>
+                  Demo
+                </a>
+              </button>
+              <button className='btn'>
+                <a className='btn-aTag' href={links}>
+                  Code
+                </a>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+  };
+  render() {
+    return <Fragment>{this.renderProject()}</Fragment>;
   }
 }
 
