@@ -9,6 +9,8 @@ import AdminRoute from './components/features/PrivateRoutes/AdminRoute';
 import AdminDashboard from './components/views/AdminDashboard/AdminDashboard';
 import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
 import UserDashboard from './components/views/UserDashboard/UserDashboard';
+import Projects from './components/views/Projects/Projects';
+import Project from './components/views/Projects/Project';
 
 const App = () => {
   return (
@@ -19,7 +21,7 @@ const App = () => {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/login' component={Login} />
-            <Route exact path='/logout' component={Login} />
+            <Route exact path='/logout' component={Home} />
             <AdminRoute
               exact
               path='/admin/dashboard'
@@ -31,6 +33,8 @@ const App = () => {
               component={CreateProject}
             /> */}
             <PrivateRoute exact path='/users/me' component={UserDashboard} />
+            <Route exact path='/projects' component={Projects} />
+            <Route exact path='/projects/:projectId' component={Project} />
           </Switch>
         </MainLayout>
       </BrowserRouter>
