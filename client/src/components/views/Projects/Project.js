@@ -12,26 +12,29 @@ class Project extends Component {
   };
 
   componentDidMount() {
-    // const { id } = this.props;
-    // const projectId = this.props.match.params.id;
     this.ftechId();
   }
 
-  ftechId = (id) => {
-    axios
-      .get(`${API_URL}/projects/${id}`)
-      .then((res) => this.setState({ project: res.data, loading: true }));
+  ftechId = async () => {
+    this.setState({ loading: true });
+    try {
+      await axios
+        .get(`${API_URL}/projects/${this.props.match.params.projectId}`)
+        .then((res) => this.setState({ project: res.data, loading: false }));
+    } catch (err) {}
   };
   render() {
     const { loading } = this.state;
-    const { id, key, title, photo, tags, description, links } = this.props;
+    const {
+      project: { id, key, title, photo, tags, description, links },
+    } = this.state;
     return (
       <div>
         <div className='Projects__Project' key={key}>
-          <Button to={`/projects/${id}`}>
+          {/* <Button to={`/projects/${project._id}`}>
             <h3 className='Projects-name'>{title}</h3>
-          </Button>
-
+          </Button> */}
+          <h3 className='Projects-name'>{title}</h3>
           <img className='Projects-photo' src={photo} alt='project_img' />
           <span className='Projects-tech'>{tags}</span>
           <p className='Projects-descr'>{description}</p>
