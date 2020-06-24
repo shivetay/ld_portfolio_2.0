@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
+import { API_URL } from '../../../config';
+import { authenticateUser, isAuthUser } from '../../../utils/utils';
 
 class ProjectCreate extends Component {
   state = {
@@ -19,6 +23,49 @@ class ProjectCreate extends Component {
     displayType: false,
   };
 
+  toggleType = () => {
+    const { toggleType } = this.state;
+    if (!toggleType) {
+      this.setState({ toggleType: true });
+    } else {
+      this.setState({ toggleType: false });
+    }
+  };
+
+  createProject = async (formData) => {
+    const { token } = isAuthUser();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${token}`,
+      },
+    };
+    try {
+      await axios
+        .post(
+          `${API_URL}/projects/create/${this.props.match.params.userId}`,
+          formData,
+          config
+        )
+        .then((res) => console.log(res.data));
+    } catch (err) {}
+  };
+
+  onChange = (e) => {
+    // setting formData in the state properly
+    const { formData } = this.state;
+    let newFormData = { ...formData };
+    newFormData[e.target.name] = e.target.value;
+    this.setState({
+      formData: newFormData,
+    });
+  };
+  onSubmit = (e) => {
+    const { formData } = this.state;
+    e.preventDefault();
+    this.createProject(formData);
+  };
+
   render() {
     const {
       displayType,
@@ -37,6 +84,7 @@ class ProjectCreate extends Component {
         js,
       },
     } = this.state;
+
     return (
       <section className=''>
         <h1 className=''>Create Project</h1>
@@ -63,7 +111,7 @@ class ProjectCreate extends Component {
             <input
               type='text'
               placeholder='Title'
-              name='comtitlepany'
+              name='title'
               value={title}
               onChange={this.onChange}
             />
@@ -107,7 +155,7 @@ class ProjectCreate extends Component {
             </button>
             <span>Optional</span>
           </div>
-          {displayType && (
+          {/* {displayType && (
             <div>
               <div className=''>
                 <i className=''></i>
@@ -164,7 +212,7 @@ class ProjectCreate extends Component {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
           <input type='submit' className='btn btn-primary my-1' />
           <a className='btn btn-light my-1' href='/projects'>
