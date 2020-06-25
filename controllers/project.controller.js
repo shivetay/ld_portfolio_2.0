@@ -30,7 +30,7 @@ exports.getProject = async (req, res) => {
 
 /* create projects */
 exports.create = async (req, res) => {
-  const { title, description, photo, tags, git, demo } = req.body;
+  const { title, description, photo, tags, git, demo, projectType } = req.body;
 
   //get links object
   const projectFields = {};
@@ -38,6 +38,7 @@ exports.create = async (req, res) => {
   if (title) projectFields.title = title;
   if (title) projectFields.description = description;
   if (photo) projectFields.photo = photo;
+  if (projectType) projectFields.projectType = projectType;
   if (tags) {
     projectFields.tags = tags.split(',').map((tag) => tag.trim());
   }
@@ -59,13 +60,14 @@ exports.create = async (req, res) => {
 /* update projects */
 
 exports.update = async (req, res) => {
-  const { title, description, photo, tags, git, demo } = req.body;
+  const { title, description, photo, tags, git, demo, projectType } = req.body;
 
   //get links object
   const projectFields = {};
   if (title) projectFields.title = title;
   if (title) projectFields.description = description;
   if (photo) projectFields.photo = photo;
+  if (projectType) projectFields.projectType = projectType;
   if (tags) {
     projectFields.tags = tags.split(',').map((tag) => tag.trim());
   }

@@ -28,7 +28,7 @@ class Project extends Component {
   renderProject = () => {
     const {
       loading,
-      project: { id, key, title, photo, tags, description, links },
+      project: { id, key, title, photo, tags, description, links, projectType },
     } = this.state;
     if (loading === true) {
       return <Spinner />;
@@ -36,12 +36,10 @@ class Project extends Component {
       return (
         <div>
           <div className='Projects__Project' key={key}>
-            {/* <Button to={`/projects/${project._id}`}>
-            <h3 className='Projects-name'>{title}</h3>
-          </Button> */}
             <h3 className='Projects-name'>{title}</h3>
             <img className='Projects-photo' src={photo} alt='project_img' />
             <span className='Projects-tech'>{tags}</span>
+            <span className='Projects-tech'>{projectType}</span>
             <p className='Projects-descr'>{description}</p>
             <div className='Project-button'>
               <Button href={links}>Demo</Button>

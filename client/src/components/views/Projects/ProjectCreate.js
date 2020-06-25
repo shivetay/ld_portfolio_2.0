@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { API_URL } from '../../../config';
-import { authenticateUser, isAuthUser } from '../../../utils/utils';
+import { isAuthUser } from '../../../utils/utils';
 
 class ProjectCreate extends Component {
   state = {
@@ -21,6 +21,7 @@ class ProjectCreate extends Component {
       html: '',
     },
     displayType: false,
+    loading: false,
   };
 
   toggleType = () => {
@@ -33,6 +34,7 @@ class ProjectCreate extends Component {
   };
 
   createProject = async (formData) => {
+    this.setState({ loading: true });
     const { token } = isAuthUser();
     const config = {
       headers: {
@@ -47,7 +49,8 @@ class ProjectCreate extends Component {
           formData,
           config
         )
-        .then((res) => console.log(res.data));
+        .then((res) => res.data);
+      this.setState({ loading: false });
     } catch (err) {}
   };
 

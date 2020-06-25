@@ -27,7 +27,7 @@ const ProjectSchema = new mongoose.Schema(
       type: [String],
     },
     projectType: {
-      type: [String],
+      type: String,
     },
     links: {
       git: {
