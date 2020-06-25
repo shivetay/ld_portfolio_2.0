@@ -4,6 +4,8 @@ import axios from 'axios';
 import { API_URL } from '../../../config';
 import { isAuthUser } from '../../../utils/utils';
 
+import FileUpload from '../../common/FileUpload/FileUpload';
+
 class ProjectCreate extends Component {
   state = {
     formData: {
@@ -14,11 +16,6 @@ class ProjectCreate extends Component {
       tags: '',
       projectType: '',
       links: '',
-      front: '',
-      back: '',
-      mern: '',
-      js: '',
-      html: '',
     },
     displayType: false,
     loading: false,
@@ -80,11 +77,6 @@ class ProjectCreate extends Component {
         tags,
         projectType,
         links,
-        mern,
-        front,
-        back,
-        html,
-        js,
       },
     } = this.state;
 
@@ -153,6 +145,7 @@ class ProjectCreate extends Component {
             </small>
           </div>
           <div className='my-2'>
+            <FileUpload />
             <button onClick={this.toggleType} type='button' className=''>
               Add Project Type
             </button>
