@@ -62,8 +62,16 @@ class ProjectCreate extends Component {
   };
   onSubmit = (e) => {
     const { formData } = this.state;
+    const sendData = new FormData();
+
+    sendData.append('title', formData.title.value);
+    sendData.append('description', formData.description.value);
+    sendData.append('photo', formData.photo.value);
+    sendData.append('tags', formData.tags.value);
+    sendData.append('projectType', formData.projectType.value);
+    sendData.append('shortDescription', formData.shortDescription.value);
     e.preventDefault();
-    this.createProject(formData);
+    this.createProject(sendData);
   };
 
   render() {
@@ -73,6 +81,7 @@ class ProjectCreate extends Component {
         creator,
         title,
         description,
+        shortDescription,
         photo,
         tags,
         projectType,
@@ -125,13 +134,23 @@ class ProjectCreate extends Component {
           <div className='form-group'>
             <input
               type='text'
+              placeholder='Short description'
+              name='shortDescription'
+              value={shortDescription}
+              onChange={this.onChange}
+            />
+            <small className='form-text'>Add project short description</small>
+          </div>
+          {/* <div className='form-group'>
+            <input
+              type='text'
               placeholder='Photo'
               name='photo'
               value={photo}
               onChange={this.onChange}
             />
             <small className='form-text'>Add project preview.</small>
-          </div>
+          </div> */}
           <div className='form-group'>
             <input
               type='text'
@@ -145,70 +164,12 @@ class ProjectCreate extends Component {
             </small>
           </div>
           <div className='my-2'>
-            <FileUpload />
+            <FileUpload name='photo' value={photo} />
             <button onClick={this.toggleType} type='button' className=''>
               Add Project Type
             </button>
             <span>Optional</span>
           </div>
-          {/* {displayType && (
-            <div>
-              <div className=''>
-                <i className=''></i>
-                <input
-                  type='text'
-                  placeholder='Front-end'
-                  name='front'
-                  value={front}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className=''>
-                <i className=''></i>
-                <input
-                  type='text'
-                  placeholder='Back-end'
-                  name='back'
-                  value={back}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className=''>
-                <i className=''></i>
-                <input
-                  type='text'
-                  placeholder='MERN'
-                  name='mern'
-                  value={mern}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className=''>
-                <i className=''></i>
-                <input
-                  type='text'
-                  placeholder='Vanila Js'
-                  name='js'
-                  value={js}
-                  onChange={this.onChange}
-                />
-              </div>
-
-              <div className=''>
-                <i className=''></i>
-                <input
-                  type='text'
-                  placeholder='HTML/CSS'
-                  name='html'
-                  value={html}
-                  onChange={this.onChange}
-                />
-              </div>
-            </div>
-          )} */}
 
           <input type='submit' className='btn btn-primary my-1' />
           <a className='btn btn-light my-1' href='/projects'>
