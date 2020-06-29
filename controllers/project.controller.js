@@ -1,5 +1,8 @@
+const formidable = require('formidable');
+
 const Project = require('../models/project.model');
 const User = require('../models/user.model');
+const { fields } = require('../middleware/fileUpload');
 
 /* Create project with creator */
 
@@ -24,6 +27,67 @@ exports.getProject = async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Porject not found' });
     }
+    res.status(500).send('Server Error');
+  }
+};
+exports.create2 = async (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Image could not be uploaded' }] });
+    }
+
+    const { title, description, photo, tags, git, demo, projectType } = fields;
+
+    console.log('fields', fields);
+
+    //get links object
+    const projectFields = {};
+    projectFields.creator = req.user._id;
+    if (title) projectFields.title = title;
+    if (title) projectFields.description = description;
+    if (photo) projectFields.photo = photo;
+    if (projectType) projectFields.projectType = projectType;
+    if (tags) {
+      projectFields.tags = tags.split(',').map((tag) => tag.trim());
+    }
+
+    //get links object
+    projectFields.links = {};
+    if (git) projectFields.links.git = git;
+    if (demo) projectFields.links.demo = demo;
+
+    fields = projectFields;
+
+    // let project = new Project(projectFields);
+    // console.log(project);
+
+    console.log('projectFields', fields);
+
+    //1kb = 1000
+    //1mb = 1000000kb
+    //name 'photo' mus match client side. use photo
+    if (files.photo) {
+      if (files.photo.size > 1000000) {
+        return res.status(400).json({
+          errors: [{ msg: 'Image could not be uploaded. File to big.' }],
+        });
+      }
+      //this relates to data in schema product
+      project.photo.data = fs.readFileSync(files.photo.path);
+      project.photo.contentType = files.photo.type;
+    }
+  });
+
+  try {
+    let project = new Project(fields);
+    console.log(project);
+    await project.save();
+    return res.json(project);
+  } catch (err) {
     res.status(500).send('Server Error');
   }
 };
