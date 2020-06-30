@@ -4,14 +4,13 @@ import axios from 'axios';
 import { API_URL } from '../../../config';
 import { isAuthUser } from '../../../utils/utils';
 
-import FileUpload from '../../common/FileUpload/FileUpload';
-
 class ProjectCreate extends Component {
   state = {
     formData: {
       creator: '',
       title: '',
       description: '',
+      shortDescription: '',
       photo: '',
       tags: '',
       projectType: '',
@@ -35,11 +34,12 @@ class ProjectCreate extends Component {
     const { token } = isAuthUser();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         Authorization: `${token}`,
       },
     };
     try {
+      console.log('axios data', formData);
       await axios
         .post(
           `${API_URL}/projects/create/${this.props.match.params.userId}`,
@@ -64,21 +64,23 @@ class ProjectCreate extends Component {
     const { formData } = this.state;
     const sendData = new FormData();
 
-    sendData.append('title', formData.title.value);
-    sendData.append('description', formData.description.value);
-    sendData.append('photo', formData.photo.value);
-    sendData.append('tags', formData.tags.value);
-    sendData.append('projectType', formData.projectType.value);
-    sendData.append('shortDescription', formData.shortDescription.value);
+    console.log('senddata', formData.title);
+    console.log('senddata', formData.photo);
+
+    sendData.append('title', formData.title);
+    sendData.append('description', formData.description);
+    sendData.append('photo', formData.photo);
+    sendData.append('tags', formData.tags);
+    sendData.append('projectType', formData.projectType);
+    sendData.append('shortDescription', formData.shortDescription);
     e.preventDefault();
     this.createProject(sendData);
+    console.log('send data', sendData);
   };
 
   render() {
     const {
-      displayType,
       formData: {
-        creator,
         title,
         description,
         shortDescription,
@@ -96,7 +98,10 @@ class ProjectCreate extends Component {
           <i className='fas fa-user'></i> Add project information
         </p>
         <small>* = required field</small>
-        <form className='form' onSubmit={(e) => this.onSubmit(e)}>
+        <form
+          encType='multipart/form-data'
+          className='form'
+          onSubmit={(e) => this.onSubmit(e)}>
           <div className=''>
             <select
               name='projectType'
@@ -141,16 +146,17 @@ class ProjectCreate extends Component {
             />
             <small className='form-text'>Add project short description</small>
           </div>
-          {/* <div className='form-group'>
+          <div className='form-group'>
             <input
-              type='text'
+              type='file'
+              accept='.jpg, .png, .jpeg'
               placeholder='Photo'
               name='photo'
               value={photo}
               onChange={this.onChange}
             />
             <small className='form-text'>Add project preview.</small>
-          </div> */}
+          </div>
           <div className='form-group'>
             <input
               type='text'
@@ -164,7 +170,6 @@ class ProjectCreate extends Component {
             </small>
           </div>
           <div className='my-2'>
-            <FileUpload name='photo' value={photo} />
             <button onClick={this.toggleType} type='button' className=''>
               Add Project Type
             </button>

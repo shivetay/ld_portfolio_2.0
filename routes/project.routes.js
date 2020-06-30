@@ -63,7 +63,7 @@ router.patch(
   authCheck,
   isAdmin,
   findProjectById,
-  fileUpload.any(),
+  fileUpload.single('photo'),
   update
 );
 
