@@ -5,6 +5,7 @@ import { API_URL } from '../../../config';
 
 import Button from '../../common/Buttons/Button';
 import Spinner from '../../common/Spinner/Spinner';
+import ShowImage from '../../common/ShowImage/ShowImage';
 
 class Project extends Component {
   state = {
@@ -28,7 +29,7 @@ class Project extends Component {
   renderProject = () => {
     const {
       loading,
-      project: { id, key, title, photo, tags, description, links, projectType },
+      project: { _id, key, title, tags, description, links, projectType },
     } = this.state;
     if (loading === true) {
       return <Spinner />;
@@ -37,7 +38,7 @@ class Project extends Component {
         <div>
           <div className='Projects__Project' key={key}>
             <h3 className='Projects-name'>{title}</h3>
-            <img className='Projects-photo' src={photo} alt='project_img' />
+            <ShowImage item={_id} url='project' />
             <span className='Projects-tech'>{tags}</span>
             <span className='Projects-tech'>{projectType}</span>
             <p className='Projects-descr'>{description}</p>

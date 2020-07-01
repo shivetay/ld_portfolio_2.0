@@ -1,7 +1,5 @@
-// const formidable = require('formidable');
-// const fs = require('fs');
-
-const path = require('path');
+const formidable = require('formidable');
+const fs = require('fs');
 
 const Project = require('../models/project.model');
 const User = require('../models/user.model');
@@ -32,106 +30,73 @@ exports.getProject = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
+
+/* create projects */
+exports.create = (req, res) => {
+  let form = new formidable.IncomingForm();
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      return res
+        .status(400)
+        .json({ errors: [{ msg: 'Image could not be uploaded' }] });
+    }
+
+    const { git, demo } = fields;
+
+    fields.creator = req.user._id;
+
+    fields.links = {};
+    if (git) fields.links.git = git;
+    if (demo) fields.links.demo = demo;
+
+    let project = new Project(fields);
+
+    //1kb = 1000
+    //1mb = 1000000kb
+    //name 'photo' mus match client side. use photo
+    if (files.photo) {
+      if (files.photo.size > 1000000) {
+        return res.status(400).json({
+          errors: [{ msg: 'Image could not be uploaded. File to big.' }],
+        });
+      }
+      //this relates to data in schema product
+      project.photo.data = fs.readFileSync(files.photo.path);
+      project.photo.contentType = files.photo.type;
+    }
+    project.save();
+    return res.json(project);
+  });
+};
+
 // exports.create2 = async (req, res) => {
+//   const { title, description, photo, tags, git, demo, projectType } = req.body;
+
+//   //get links object
+//   const projectFields = {};
+//   projectFields.creator = req.user._id;
+//   if (title) projectFields.title = title;
+//   if (title) projectFields.description = description;
+//   if (photo) projectFields.photo = photo;
+//   if (projectType) projectFields.projectType = projectType;
+//   if (tags) {
+//     projectFields.tags = tags.split(',').map((tag) => tag.trim());
+//   }
+
+//   //get links object
+//   projectFields.links = {};
+//   if (git) projectFields.links.git = git;
+//   if (demo) projectFields.links.demo = demo;
+
 //   try {
-//     let form = new formidable.IncomingForm();
-//     form.keepExtensions = true;
-//     form.parse(req, (err, fields, files) => {
-//       if (err) {
-//         return res
-//           .status(400)
-//           .json({ errors: [{ msg: 'Image could not be uploaded' }] });
-//       }
-
-//       const {
-//         title,
-//         description,
-//         photo,
-//         tags,
-//         git,
-//         demo,
-//         projectType,
-//       } = fields;
-
-//       console.log('fields', fields);
-
-//       //get links object
-//       const projectFields = {};
-//       projectFields.creator = req.user._id;
-//       if (title) projectFields.title = title;
-//       if (title) projectFields.description = description;
-//       if (photo) projectFields.photo = photo;
-//       if (projectType) projectFields.projectType = projectType;
-//       if (tags) {
-//         projectFields.tags = tags.split(',').map((tag) => tag.trim());
-//       }
-
-//       //get links object
-//       projectFields.links = {};
-//       if (git) projectFields.links.git = git;
-//       if (demo) projectFields.links.demo = demo;
-
-//       fields = projectFields;
-
-//       // let project = new Project(projectFields);
-//       // console.log(project);
-
-//       console.log('projectFields', fields);
-
-//       let project = new Project(fields);
-
-//       console.log('photo', photo);
-//       //1kb = 1000
-//       //1mb = 1000000kb
-//       //name 'photo' mus match client side. use photo
-//       if (files.photo) {
-//         if (files.photo.size > 1000000) {
-//           return res.status(400).json({
-//             errors: [{ msg: 'Image could not be uploaded. File to big.' }],
-//           });
-//         }
-//         //this relates to data in schema product
-//         project.photo.data = fs.readFileSync(files.photo.path);
-//         project.photo.contentType = files.photo.type;
-//       }
-//     });
-
-//     console.log(project);
+//     let project = new Project(projectFields);
 //     await project.save();
 //     return res.json(project);
 //   } catch (err) {
 //     res.status(500).send('Server Error');
 //   }
 // };
-
-/* create projects */
-exports.create = async (req, res) => {
-  const { title, description, photo, tags, git, demo, projectType } = req.body;
-
-  //get links object
-  const projectFields = {};
-  projectFields.creator = req.user._id;
-  if (title) projectFields.title = title;
-  if (title) projectFields.description = description;
-  if (photo) projectFields.photo = photo;
-  if (projectType) projectFields.projectType = projectType;
-  if (tags) {
-    projectFields.tags = tags.split(',').map((tag) => tag.trim());
-  }
-
-  //get links object
-  projectFields.links = {};
-  if (git) projectFields.links.git = git;
-  if (demo) projectFields.links.demo = demo;
-
-  try {
-    let project = new Project(projectFields);
-    await project.save();
-    return res.json(project);
-  } catch (err) {
-    res.status(500).send('Server Error');
-  }
-};
 
 /* update projects */
 
@@ -213,6 +178,16 @@ exports.findProjectById = async (req, res, next) => {
     }
     res.status(500).send('Server Error');
   }
+};
+
+/* show project photo */
+
+exports.photo = (req, res, next) => {
+  if (req.project.photo.data) {
+    res.set('Content-Type', req.project.photo.contentType);
+    return res.send(req.project.photo.data);
+  }
+  next();
 };
 
 //TODO:

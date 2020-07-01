@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import Button from '../../common/Buttons/Button';
+import ShowImage from '../../common/ShowImage/ShowImage';
 
 const ProjectList = ({ projects }) => {
   return (
@@ -12,11 +13,12 @@ const ProjectList = ({ projects }) => {
             {/* <p>{project.creator}</p> */}
           </Button>
 
-          <img
+          {/* <img
             className='Projects-photo'
             src={project.photo}
             alt='project_img'
-          />
+          /> */}
+          <ShowImage item={project._id} url='project' />
           <span className='Projects-tech'>{project.tags}</span>
           <p className='Projects-type'>{project.projectType}</p>
           <p className='Projects-descr'>{project.description}</p>

@@ -11,8 +11,8 @@ const {
   addProjectToUser,
   findProjectById,
   remove,
+  photo,
 } = require('../controllers/project.controller');
-const fileUpload = require('../middleware/fileUpload');
 
 /* import controllers */
 
@@ -48,7 +48,6 @@ router.post(
   authCheck,
   isAdmin,
   addProjectToUser,
-  fileUpload.single('photo'),
   create
 );
 
@@ -63,7 +62,6 @@ router.patch(
   authCheck,
   isAdmin,
   findProjectById,
-  fileUpload.single('photo'),
   update
 );
 
@@ -80,6 +78,13 @@ router.delete(
   findProjectById,
   remove
 );
+
+/* 
+get /project/photo/:projectId/
+show project photo 
+public
+*/
+router.get('/project/photo/:projectId', photo);
 
 module.exports = router;
 
