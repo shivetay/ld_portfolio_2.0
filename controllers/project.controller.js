@@ -10,7 +10,7 @@ const User = require('../models/user.model');
 
 exports.read = async (req, res) => {
   try {
-    const project = await Project.find();
+    let project = await Project.find();
     return res.json(project);
   } catch (err) {
     res.status(500).send('Server Error');
@@ -182,12 +182,16 @@ exports.findProjectById = async (req, res, next) => {
 
 /* show project photo */
 
-exports.photo = (req, res, next) => {
-  if (req.project.photo.data) {
-    res.set('Content-Type', req.project.photo.contentType);
-    return res.send(req.project.photo.data);
+exports.photo = async (req, res, next) => {
+  try {
+    if (req.project.photo.data) {
+      res.set('Content-Type', req.project.photo.contentType);
+      return res.send(req.project.photo.data);
+    }
+    next();
+  } catch (err) {
+    res.status(500).send('Server Error');
   }
-  next();
 };
 
 //TODO:

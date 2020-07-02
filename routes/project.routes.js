@@ -84,7 +84,7 @@ get /project/photo/:projectId/
 show project photo 
 public
 */
-router.get('/project/photo/:projectId', photo);
+router.get('/project/photo/:projectId', findProjectById, photo);
 
 module.exports = router;
 
