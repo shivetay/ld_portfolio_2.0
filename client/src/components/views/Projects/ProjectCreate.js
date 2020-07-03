@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Button from '../../common/Buttons/Button';
+
 import { API_URL } from '../../../config';
 import { isAuthUser } from '../../../utils/utils';
 
@@ -14,19 +16,10 @@ class ProjectCreate extends Component {
       photo: '',
       tags: '',
       projectType: '',
-      links: '',
+      links: { git: '', demo: '' },
     },
-    displayType: false,
+    displayLinks: false,
     loading: false,
-  };
-
-  toggleType = () => {
-    const { toggleType } = this.state;
-    if (!toggleType) {
-      this.setState({ toggleType: true });
-    } else {
-      this.setState({ toggleType: false });
-    }
   };
 
   createProject = async (formData) => {
@@ -62,24 +55,23 @@ class ProjectCreate extends Component {
   };
   onSubmit = (e) => {
     const { formData } = this.state;
-    const sendData = new FormData();
 
-    console.log('senddata', formData.title);
-    console.log('senddata', formData.photo);
-
-    sendData.append('title', formData.title);
-    sendData.append('description', formData.description);
-    sendData.append('photo', formData.photo);
-    sendData.append('tags', formData.tags);
-    sendData.append('projectType', formData.projectType);
-    sendData.append('shortDescription', formData.shortDescription);
     e.preventDefault();
-    this.createProject(sendData);
-    console.log('send data', sendData);
+    this.createProject(formData);
+  };
+
+  toggleLinks = () => {
+    const { displayLinks } = this.state;
+    if (!displayLinks) {
+      this.setState({ displayLinks: true });
+    } else {
+      this.setState({ displayLinks: false });
+    }
   };
 
   render() {
     const {
+      displayLinks,
       formData: {
         title,
         description,
@@ -87,7 +79,7 @@ class ProjectCreate extends Component {
         photo,
         tags,
         projectType,
-        links,
+        links: { git, demo },
       },
     } = this.state;
 
@@ -148,17 +140,6 @@ class ProjectCreate extends Component {
           </div>
           <div className='form-group'>
             <input
-              type='file'
-              accept='.jpg, .png, .jpeg'
-              placeholder='Photo'
-              name='photo'
-              value={photo}
-              onChange={this.onChange}
-            />
-            <small className='form-text'>Add project preview.</small>
-          </div>
-          <div className='form-group'>
-            <input
               type='text'
               placeholder='* Tags'
               name='tags'
@@ -169,17 +150,54 @@ class ProjectCreate extends Component {
               Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
             </small>
           </div>
+          <div className='form-group'>
+            <input
+              type='file'
+              accept='.jpg, .png, .jpeg'
+              placeholder='Photo'
+              name='photo'
+              value={photo}
+              onChange={this.onChange}
+            />
+            <small className='form-text'>Add project preview.</small>
+          </div>
           <div className='my-2'>
-            <button onClick={this.toggleType} type='button' className=''>
-              Add Project Type
+            <button onClick={this.toggleLinks} type='button' className=''>
+              Add Project Links
             </button>
             <span>Optional</span>
+
+            {displayLinks && (
+              <div>
+                <div className=''>
+                  <i className=''></i>
+                  <input
+                    type='text'
+                    placeholder='Git URL'
+                    name='git'
+                    value={git}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <div className=''>
+                  <i className=''></i>
+                  <input
+                    type='text'
+                    placeholder='Demo URL'
+                    name='demo'
+                    value={demo}
+                    onChange={this.onChange}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <input type='submit' className='btn btn-primary my-1' />
-          <a className='btn btn-light my-1' href='/projects'>
+          <Button className='btn btn-light my-1' to='/projects'>
             Go Back
-          </a>
+          </Button>
         </form>
       </section>
     );

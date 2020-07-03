@@ -10,29 +10,18 @@ const ProjectList = ({ projects }) => {
         <div className='Projects__Project' key={project._id}>
           <Button to={`/projects/${project._id}`}>
             <h3 className='Projects-name'>{project.title}</h3>
-            {/* <p>{project.creator}</p> */}
           </Button>
-
-          {/* <img
-            className='Projects-photo'
-            src={project.photo}
-            alt='project_img'
-          /> */}
-          <ShowImage item={project._id} url='project' />
+          {/* <ShowImage item={project._id} url='project' /> */}
           <span className='Projects-tech'>{project.tags}</span>
           <p className='Projects-type'>{project.projectType}</p>
           <p className='Projects-descr'>{project.description}</p>
           <div className='Project-button'>
-            <button className='btn'>
-              <a className='btn-aTag' href={project.links}>
-                Demo
-              </a>
-            </button>
-            <button className='btn'>
-              <a className='btn-aTag' href={project.links}>
-                Code
-              </a>
-            </button>
+            <Button className='btn' href={project.links.demo}>
+              Demo
+            </Button>
+            <Button className='btn' href={project.links.git}>
+              Code
+            </Button>
           </div>
         </div>
       ))}
