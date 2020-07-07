@@ -17,12 +17,7 @@ const Button = ({ href, to, exact, className, children, type, onClick }) => {
   }
   if (to) {
     return (
-      <Link
-        to={to}
-        exact={exact}
-        className=''
-        // onClick={onClick}
-      >
+      <Link to={to} exact={exact} className='' onClick={onClick}>
         {children}
       </Link>
     );

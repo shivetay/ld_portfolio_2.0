@@ -11,7 +11,7 @@ const ProjectList = ({ projects }) => {
           <Button to={`/projects/${project._id}`}>
             <h3 className='Projects-name'>{project.title}</h3>
           </Button>
-          {/* <ShowImage item={project._id} url='project' /> */}
+          <ShowImage item={project._id} url='project' />
           <span className='Projects-tech'>{project.tags}</span>
           <p className='Projects-type'>{project.projectType}</p>
           <p className='Projects-descr'>{project.description}</p>

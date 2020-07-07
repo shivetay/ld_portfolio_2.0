@@ -9,14 +9,15 @@ import { isAuthUser } from '../../../utils/utils';
 class ProjectCreate extends Component {
   state = {
     formData: {
-      creator: '',
+      creator: this.props.match.params.userId,
       title: '',
       description: '',
       shortDescription: '',
       photo: '',
       tags: '',
       projectType: '',
-      links: { git: '', demo: '' },
+      git: '',
+      demo: '',
     },
     displayLinks: false,
     loading: false,
@@ -27,10 +28,12 @@ class ProjectCreate extends Component {
     const { token } = isAuthUser();
     const config = {
       headers: {
-        // 'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization: `${token}`,
       },
     };
+
     try {
       console.log('axios data', formData);
       await axios
@@ -56,8 +59,23 @@ class ProjectCreate extends Component {
   onSubmit = (e) => {
     const { formData } = this.state;
 
+    const fileToUpload = document.querySelector('#photoID');
+    const sendData = new FormData();
+
+    sendData.append('title', formData.title);
+    sendData.append('description', formData.description);
+    sendData.append('photo', fileToUpload.files[0]);
+    sendData.append('tags', formData.tags);
+    sendData.append('projectType', formData.projectType);
+    sendData.append('shortDescription', formData.shortDescription);
+    sendData.append('git', formData.git);
+    sendData.append('demo', formData.demo);
+    sendData.append('creator', formData.creator);
+
+    console.log('file', fileToUpload);
+
     e.preventDefault();
-    this.createProject(formData);
+    this.createProject(sendData);
   };
 
   toggleLinks = () => {
@@ -79,7 +97,8 @@ class ProjectCreate extends Component {
         photo,
         tags,
         projectType,
-        links: { git, demo },
+        git,
+        demo,
       },
     } = this.state;
 
@@ -152,6 +171,7 @@ class ProjectCreate extends Component {
           </div>
           <div className='form-group'>
             <input
+              id='photoID'
               type='file'
               accept='.jpg, .png, .jpeg'
               placeholder='Photo'
