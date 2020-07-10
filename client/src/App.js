@@ -12,6 +12,7 @@ import UserDashboard from './components/views/UserDashboard/UserDashboard';
 import Projects from './components/views/Projects/Projects';
 import Project from './components/views/Projects/Project';
 import ProjectCreate from './components/views/Projects/ProjectCreate';
+import ProjectUpdate from './components/views/Projects/ProjectUpdate';
 
 const App = () => {
   return (
@@ -32,6 +33,11 @@ const App = () => {
               exact
               path='/projects/create/:userId'
               component={ProjectCreate}
+            />
+            <AdminRoute
+              exact
+              path='/projects/update/:userId'
+              component={ProjectUpdate}
             />
             <PrivateRoute exact path='/users/me' component={UserDashboard} />
             <Route exact path='/projects' component={Projects} />

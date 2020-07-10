@@ -20,6 +20,9 @@ const AdminDashboard = () => {
             <Button to={`/projects/create/${_id}`} className=''>
               Create Project
             </Button>
+            <Button to={`/projects/update/${_id}`} className=''>
+              Update Project
+            </Button>
           </li>
         </ul>
       </div>
