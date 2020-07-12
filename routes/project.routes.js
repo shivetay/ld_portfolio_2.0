@@ -57,7 +57,7 @@ update project
 private 
 */
 
-router.patch(
+router.put(
   '/projects/update/:projectId',
   authCheck,
   isAdmin,

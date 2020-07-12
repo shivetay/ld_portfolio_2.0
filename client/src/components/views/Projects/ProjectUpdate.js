@@ -47,29 +47,29 @@ class ProjectUpdate extends Component {
     } catch (err) {}
   };
 
-  // createProject = async (formData) => {
-  //   this.setState({ loading: true });
-  //   const { token } = isAuthUser();
-  //   const config = {
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'multipart/form-data',
-  //       Authorization: `${token}`,
-  //     },
-  //   };
+  createProject = async (formData) => {
+    this.setState({ loading: true });
+    const { token } = isAuthUser();
+    const config = {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+        Authorization: `${token}`,
+      },
+    };
 
-  //   try {
-  //     console.log('axios data', formData);
-  //     await axios
-  //       .post(
-  //         `${API_URL}/projects/create/${this.props.match.params.userId}`,
-  //         formData,
-  //         config
-  //       )
-  //       .then((res) => res.data);
-  //     this.setState({ loading: false });
-  //   } catch (err) {}
-  // };
+    try {
+      console.log('axios data', formData);
+      await axios
+        .put(
+          `${API_URL}/projects/update/${this.props.match.params.projectId}`,
+          formData,
+          config
+        )
+        .then((res) => res.data);
+      this.setState({ loading: false });
+    } catch (err) {}
+  };
 
   onChange = (e) => {
     // setting formData in the state properly
@@ -197,7 +197,7 @@ class ProjectUpdate extends Component {
               </small>
             </div>
             <div className='form-group'>
-              <input
+              {/* <input
                 id='photoID'
                 type='file'
                 accept='.jpg, .png, .jpeg'
@@ -205,7 +205,7 @@ class ProjectUpdate extends Component {
                 name='photo'
                 value={photo}
                 onChange={this.onChange}
-              />
+              /> */}
               <small className='form-text'>Add project preview.</small>
             </div>
             <div className='my-2'>
@@ -252,7 +252,12 @@ class ProjectUpdate extends Component {
   };
 
   render() {
-    return <Fragment>{this.renderProject()}</Fragment>;
+    return (
+      <Fragment>
+        {this.renderProject()}
+        {/* <h1>Project name: {this.state.formData.title}</h1> */}
+      </Fragment>
+    );
   }
 }
 
