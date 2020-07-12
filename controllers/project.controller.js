@@ -19,7 +19,7 @@ exports.read = async (req, res) => {
 
 /* get one project */
 
-exports.getProject = async (req, res) => {
+exports.getProject = async (req, res, next) => {
   try {
     return res.json(req.project);
   } catch (err) {
@@ -29,6 +29,7 @@ exports.getProject = async (req, res) => {
     }
     res.status(500).send('Server Error');
   }
+  next();
 };
 
 /* create projects */
@@ -203,9 +204,9 @@ exports.addProjectToUser = async (req, res, next) => {
 /* find project by id */
 
 exports.findProjectById = async (req, res, next) => {
-  const _id = req.params.projectId;
+  const id = req.params.projectId;
   try {
-    let project = await Project.findById(_id);
+    let project = await Project.findById(id);
     if (!project) return res.status(400).json({ msg: 'Porject not found' });
     req.project = project;
     next();

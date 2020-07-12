@@ -62,6 +62,7 @@ router.patch(
   authCheck,
   isAdmin,
   findProjectById,
+  getProject,
   update
 );
 

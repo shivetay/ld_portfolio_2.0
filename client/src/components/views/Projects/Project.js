@@ -6,7 +6,6 @@ import { API_URL } from '../../../config';
 import Button from '../../common/Buttons/Button';
 import Spinner from '../../common/Spinner/Spinner';
 import ShowImage from '../../common/ShowImage/ShowImage';
-import { delProject } from '../../../utils/utils';
 
 class Project extends Component {
   state = {
@@ -63,9 +62,6 @@ class Project extends Component {
           </div>
           <Button to={`/projects`}>Back</Button>
           <br />
-          <Button onClick={() => delProject(_id)} to={`/projects`}>
-            Delete
-          </Button>
         </div>
       );
     }

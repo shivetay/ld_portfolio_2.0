@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 import Button from '../../common/Buttons/Button';
 import ShowImage from '../../common/ShowImage/ShowImage';
 
+import { delProject } from '../../../utils/utils';
+
 const ProjectList = ({ projects }) => {
   return (
     <Fragment>
@@ -22,6 +24,12 @@ const ProjectList = ({ projects }) => {
             <Button className='btn' href={project.links.git}>
               Code
             </Button>
+            <Button to={`/projects/update/${project._id}`} className=''>
+              Update Project
+            </Button>
+            <button onClick={() => delProject(project._id)} type='click'>
+              Delete
+            </button>
           </div>
         </div>
       ))}

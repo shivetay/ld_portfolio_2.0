@@ -36,7 +36,7 @@ const App = () => {
             />
             <AdminRoute
               exact
-              path='/projects/update/:userId'
+              path='/projects/update/:projectId'
               component={ProjectUpdate}
             />
             <PrivateRoute exact path='/users/me' component={UserDashboard} />
