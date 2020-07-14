@@ -21,6 +21,7 @@ exports.read = async (req, res) => {
 
 exports.getProject = async (req, res, next) => {
   try {
+    console.log('get by id', req.project);
     return res.json(req.project);
   } catch (err) {
     console.error(err.message);
@@ -29,6 +30,7 @@ exports.getProject = async (req, res, next) => {
     }
     res.status(500).send('Server Error');
   }
+  console.log('next');
   next();
 };
 
@@ -66,6 +68,7 @@ exports.create = (req, res) => {
       project.photo.data = fs.readFileSync(files.photo.path);
       project.photo.contentType = files.photo.type;
     }
+    console.log('save', project);
     project.save();
     return res.json(project);
   });
@@ -103,6 +106,8 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   let form = new formidable.IncomingForm();
+  console.log(form);
+
   form.keepExtensions = true;
   form.parse(req, (err, fields, files) => {
     if (err) {
@@ -111,15 +116,19 @@ exports.update = (req, res) => {
         .json({ errors: [{ msg: 'Image could not be uploaded' }] });
     }
 
-    // const { git, demo } = fields;
+    const { git, demo } = fields;
 
-    // fields.creator = req.user._id;
+    fields.creator = req.user._id;
 
-    // fields.links = {};
-    // if (git) fields.links.git = git;
-    // if (demo) fields.links.demo = demo;
+    fields.links = {};
+    if (git) fields.links.git = git;
+    if (demo) fields.links.demo = demo;
 
-    let project = req.project;
+    // let project = req.project;
+    const id = req.params.projectId;
+    let project = Project.findByIdAndUpdate(id);
+    console.log('project', project);
+    console.log('req.proj', req.project);
 
     //1kb = 1000
     //1mb = 1000000kb
@@ -134,7 +143,7 @@ exports.update = (req, res) => {
       project.photo.data = fs.readFileSync(files.photo.path);
       project.photo.contentType = files.photo.type;
     }
-    console.log('project update', project);
+    console.log('project update', fields);
     project.save(fields);
     return res.json(project);
   });
@@ -165,8 +174,6 @@ exports.update2 = async (req, res) => {
     if (project.creator._id.toString() !== req.user._id.toString()) {
       return res.status(401).json({ msg: 'Unauthorize' });
     }
-    // console.log('photo', photo);
-    console.log('project', project);
     await project.save(projectFields);
 
     return res.json(project);

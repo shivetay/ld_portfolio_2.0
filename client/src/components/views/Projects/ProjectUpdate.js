@@ -18,8 +18,6 @@ class ProjectUpdate extends Component {
       tags: '',
       projectType: '',
       links: {},
-      // git: '',
-      // demo: '',
     },
     displayLinks: false,
     loading: false,
@@ -51,19 +49,20 @@ class ProjectUpdate extends Component {
     const config = {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
         Authorization: `${token}`,
       },
     };
 
     try {
+      console.log('formdata update', formData);
       await axios
         .put(
           `${API_URL}/projects/update/${this.props.match.params.projectId}`,
           formData,
           config
         )
-        .then((res) => res.data);
+        .then((res) => console.log('res', res));
+
       this.setState({ loading: false });
     } catch (err) {
       console.log(err);
@@ -79,6 +78,7 @@ class ProjectUpdate extends Component {
       formData: newFormData,
     });
   };
+
   onSubmit = (e) => {
     const { formData } = this.state;
 
@@ -87,7 +87,7 @@ class ProjectUpdate extends Component {
 
     sendData.append('title', formData.title);
     sendData.append('description', formData.description);
-    // sendData.append('photo', fileToUpload.files[0]);
+    sendData.append('photo', fileToUpload.files[0]);
     sendData.append('tags', formData.tags);
     sendData.append('projectType', formData.projectType);
     sendData.append('shortDescription', formData.shortDescription);
@@ -95,7 +95,7 @@ class ProjectUpdate extends Component {
     sendData.append('demo', formData.demo);
     sendData.append('creator', formData.creator);
 
-    console.log('file', fileToUpload);
+    console.log('sendData', formData.tags);
 
     e.preventDefault();
     this.updateProject(sendData);
@@ -122,10 +122,9 @@ class ProjectUpdate extends Component {
         tags,
         projectType,
         links,
-        // git,
-        // demo,
       },
     } = this.state;
+    console.log('state form', this.state.formData);
     if (loading === true) {
       return <Spinner />;
     } else {
@@ -252,12 +251,7 @@ class ProjectUpdate extends Component {
   };
 
   render() {
-    return (
-      <Fragment>
-        {this.renderProject()}
-        {/* <h1>Project name: {this.state.formData.title}</h1> */}
-      </Fragment>
-    );
+    return <Fragment>{this.renderProject()}</Fragment>;
   }
 }
 

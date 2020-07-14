@@ -52,7 +52,7 @@ router.post(
 );
 
 /* 
-post api/projects/update/:projectId/
+put api/projects/update/:projectId/
 update project 
 private 
 */
@@ -61,8 +61,8 @@ router.put(
   '/projects/update/:projectId',
   authCheck,
   isAdmin,
-  findProjectById,
-  getProject,
+  // findProjectById,
+  // getProject,
   update
 );
 
@@ -90,9 +90,6 @@ router.get('/project/photo/:projectId', findProjectById, photo);
 module.exports = router;
 
 /*
-get all projects
 get procjets by user id
-create projects
 edit projects - check if all is working after front end is added
-delete projects
 */
