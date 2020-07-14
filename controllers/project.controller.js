@@ -74,34 +74,6 @@ exports.create = (req, res) => {
   });
 };
 
-// exports.create2 = async (req, res) => {
-//   const { title, description, photo, tags, git, demo, projectType } = req.body;
-
-//   //get links object
-//   const projectFields = {};
-//   projectFields.creator = req.user._id;
-//   if (title) projectFields.title = title;
-//   if (title) projectFields.description = description;
-//   if (photo) projectFields.photo = photo;
-//   if (projectType) projectFields.projectType = projectType;
-//   if (tags) {
-//     projectFields.tags = tags.split(',').map((tag) => tag.trim());
-//   }
-
-//   //get links object
-//   projectFields.links = {};
-//   if (git) projectFields.links.git = git;
-//   if (demo) projectFields.links.demo = demo;
-
-//   try {
-//     let project = new Project(projectFields);
-//     await project.save();
-//     return res.json(project);
-//   } catch (err) {
-//     res.status(500).send('Server Error');
-//   }
-// };
-
 /* update projects */
 
 exports.update = (req, res) => {
@@ -116,17 +88,17 @@ exports.update = (req, res) => {
         .json({ errors: [{ msg: 'Image could not be uploaded' }] });
     }
 
-    const { git, demo } = fields;
+    // const { git, demo } = fields;
 
-    fields.creator = req.user._id;
+    // fields.creator = req.user._id;
 
-    fields.links = {};
-    if (git) fields.links.git = git;
-    if (demo) fields.links.demo = demo;
+    // fields.links = {};
+    // if (git) fields.links.git = git;
+    // if (demo) fields.links.demo = demo;
 
-    // let project = req.project;
-    const id = req.params.projectId;
-    let project = Project.findByIdAndUpdate(id);
+    let project = req.project;
+    // const id = req.params.projectId;
+    // let project = Project.findByIdAndUpdate(id);
     console.log('project', project);
     console.log('req.proj', req.project);
 
@@ -144,42 +116,9 @@ exports.update = (req, res) => {
       project.photo.contentType = files.photo.type;
     }
     console.log('project update', fields);
-    project.save(fields);
+    project.save();
     return res.json(project);
   });
-};
-
-exports.update2 = async (req, res) => {
-  const { title, description, photo, tags, git, demo, projectType } = req.body;
-
-  //get links object
-  const projectFields = {};
-  if (title) projectFields.title = title;
-  if (title) projectFields.description = description;
-  if (photo) projectFields.photo = photo;
-  if (projectType) projectFields.projectType = projectType;
-  if (tags) {
-    projectFields.tags = tags.split(',').map((tag) => tag.trim());
-  }
-
-  //get links object
-  projectFields.links = {};
-  if (git) projectFields.links.git = git;
-  if (demo) projectFields.links.demo = demo;
-  try {
-    let project = await Project.findById(req.project._id);
-    if (!project) {
-      return res.status(404).json({ msg: 'No project found' });
-    }
-    if (project.creator._id.toString() !== req.user._id.toString()) {
-      return res.status(401).json({ msg: 'Unauthorize' });
-    }
-    await project.save(projectFields);
-
-    return res.json(project);
-  } catch (err) {
-    res.status(500).send('Server Error');
-  }
 };
 
 /* delete project */

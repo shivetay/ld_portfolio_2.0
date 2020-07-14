@@ -61,7 +61,7 @@ router.put(
   '/projects/update/:projectId',
   authCheck,
   isAdmin,
-  // findProjectById,
+  findProjectById,
   // getProject,
   update
 );
