@@ -17,8 +17,9 @@ class ProjectUpdate extends Component {
       photo: '',
       tags: '',
       projectType: '',
-      git: '',
-      demo: '',
+      links: {},
+      // git: '',
+      // demo: '',
     },
     displayLinks: false,
     loading: false,
@@ -26,15 +27,10 @@ class ProjectUpdate extends Component {
 
   componentDidMount() {
     this.ftechId();
-    console.log('id', this.props.match.params.projectId);
   }
 
   ftechId = async () => {
     this.setState({ loading: true });
-    console.log(
-      'link',
-      `${API_URL}/projects/${this.props.match.params.projectId}`
-    );
     try {
       await axios
         .get(`${API_URL}/projects/${this.props.match.params.projectId}`)
@@ -44,10 +40,12 @@ class ProjectUpdate extends Component {
             loading: false,
           })
         );
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  createProject = async (formData) => {
+  updateProject = async (formData) => {
     this.setState({ loading: true });
     const { token } = isAuthUser();
     const config = {
@@ -59,7 +57,6 @@ class ProjectUpdate extends Component {
     };
 
     try {
-      console.log('axios data', formData);
       await axios
         .put(
           `${API_URL}/projects/update/${this.props.match.params.projectId}`,
@@ -68,7 +65,9 @@ class ProjectUpdate extends Component {
         )
         .then((res) => res.data);
       this.setState({ loading: false });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   onChange = (e) => {
@@ -88,7 +87,7 @@ class ProjectUpdate extends Component {
 
     sendData.append('title', formData.title);
     sendData.append('description', formData.description);
-    sendData.append('photo', fileToUpload.files[0]);
+    // sendData.append('photo', fileToUpload.files[0]);
     sendData.append('tags', formData.tags);
     sendData.append('projectType', formData.projectType);
     sendData.append('shortDescription', formData.shortDescription);
@@ -99,7 +98,7 @@ class ProjectUpdate extends Component {
     console.log('file', fileToUpload);
 
     e.preventDefault();
-    this.createProject(sendData);
+    this.updateProject(sendData);
   };
 
   toggleLinks = () => {
@@ -122,8 +121,9 @@ class ProjectUpdate extends Component {
         photo,
         tags,
         projectType,
-        git,
-        demo,
+        links,
+        // git,
+        // demo,
       },
     } = this.state;
     if (loading === true) {
@@ -197,15 +197,15 @@ class ProjectUpdate extends Component {
               </small>
             </div>
             <div className='form-group'>
-              {/* <input
+              <input
                 id='photoID'
                 type='file'
                 accept='.jpg, .png, .jpeg'
                 placeholder='Photo'
                 name='photo'
-                value={photo}
+                // value={photo}
                 onChange={this.onChange}
-              /> */}
+              />
               <small className='form-text'>Add project preview.</small>
             </div>
             <div className='my-2'>
@@ -222,7 +222,7 @@ class ProjectUpdate extends Component {
                       type='text'
                       placeholder='Git URL'
                       name='git'
-                      value={git}
+                      value={links.git}
                       onChange={this.onChange}
                     />
                   </div>
@@ -233,7 +233,7 @@ class ProjectUpdate extends Component {
                       type='text'
                       placeholder='Demo URL'
                       name='demo'
-                      value={demo}
+                      value={links.demo}
                       onChange={this.onChange}
                     />
                   </div>

@@ -19,7 +19,7 @@ const ProjectSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    shortDescritpion: {
+    shortDescription: {
       type: String,
       trim: true,
     },

@@ -35,7 +35,6 @@ class ProjectCreate extends Component {
     };
 
     try {
-      console.log('axios data', formData);
       await axios
         .post(
           `${API_URL}/projects/create/${this.props.match.params.userId}`,
@@ -44,7 +43,9 @@ class ProjectCreate extends Component {
         )
         .then((res) => res.data);
       this.setState({ loading: false });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   onChange = (e) => {
