@@ -21,7 +21,10 @@ connectDB();
 app.use(express.json({ extended: false }));
 app.use(morgan('dev'));
 app.use(
-  cors({ origin: 'http://localhost:3000', methods: 'GET, POST, PUT, DELETE' })
+  cors({
+    origin: 'http://localhost:3000',
+    methods: 'GET, POST, PUT, PATCH, DELETE',
+  })
 );
 
 /* routes */

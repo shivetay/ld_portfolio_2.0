@@ -19,12 +19,19 @@ const ProjectSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    shortDescription: {
+      type: String,
+      trim: true,
+    },
     photo: {
       data: Buffer,
       contentType: String,
     },
     tags: {
       type: [String],
+    },
+    projectType: {
+      type: String,
     },
     links: {
       git: {

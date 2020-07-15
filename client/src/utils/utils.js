@@ -1,15 +1,27 @@
 import { API_URL } from '../config';
+import axios from 'axios';
 
 export const signOut = async (e) => {
-  console.log('klik');
   e.preventDefault();
   if (typeof window !== 'undefined') {
     localStorage.removeItem('jwt');
     return await fetch(`${API_URL}/logout`, { method: 'GET' }).then((res) => {
-      console.log('signout', res);
       return res.json();
     });
   }
+};
+
+export const delProject = async (id) => {
+  const { token } = isAuthUser();
+  const config = {
+    headers: {
+      Authorization: `${token}`,
+    },
+  };
+  try {
+    const res = await axios.delete(`${API_URL}/projects/delete/${id}`, config);
+    console.log('delte');
+  } catch (err) {}
 };
 
 export const authenticateUser = (data) => {
