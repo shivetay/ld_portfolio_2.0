@@ -116,8 +116,16 @@ exports.update = (req, res) => {
       project.photo.contentType = files.photo.type;
     }
     console.log('project update', fields);
-    project.save();
-    return res.json(project);
+    // project.save().then(() => res.json(project));
+    // return res.json(project);
+    project.save((err, result) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Project was not uploaded' }] });
+      }
+      res.json(result);
+    });
   });
 };
 

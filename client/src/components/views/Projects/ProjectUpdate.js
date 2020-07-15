@@ -54,7 +54,10 @@ class ProjectUpdate extends Component {
     };
 
     try {
-      console.log('formdata update', formData);
+      console.log(
+        'formdata update',
+        `${API_URL}/projects/update/${this.props.match.params.projectId}`
+      );
       await axios
         .put(
           `${API_URL}/projects/update/${this.props.match.params.projectId}`,
@@ -80,6 +83,7 @@ class ProjectUpdate extends Component {
   };
 
   onSubmit = (e) => {
+    e.preventDefault();
     const { formData } = this.state;
 
     const fileToUpload = document.querySelector('#photoID');
@@ -97,7 +101,6 @@ class ProjectUpdate extends Component {
 
     console.log('sendData', formData.tags);
 
-    e.preventDefault();
     this.updateProject(sendData);
   };
 
