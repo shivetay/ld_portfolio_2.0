@@ -9,8 +9,25 @@ const User = require('../models/user.model');
 /* get all projects */
 
 exports.read = async (req, res) => {
+  // get current page from req.query or use default value of 1
+  const currentPage = req.query.page || 1;
+  // return 3 posts per page
+  const perPage = 6;
+  let totalItems;
+
   try {
-    let project = await Project.find();
+    // countDocuments() gives you total count of posts
+    let project = await Project.find()
+      .countDocuments()
+      .then((count) => {
+        totalItems = count;
+        console.log(totalItems, 'total items');
+        return Project.find()
+          .skip((currentPage - 1) * perPage)
+          .limit(perPage)
+          .sort({ created: -1 });
+      });
+
     return res.json(project);
   } catch (err) {
     res.status(500).send('Server Error');
