@@ -1,0 +1,12 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.btn {
+  font-size: $font-large;
+  transition: all 0.3s;
+  padding: 0 2rem;
+}
+
+.btn:hover {
+  color: $hover-link;
+}

@@ -13,29 +13,35 @@ const Header = () => {
       return <Button to={`/login`}>Login</Button>;
     } else {
       const { user } = authData;
-      if (user.role === 2308 && localStorage.getItem('jwt')) {
+      if (!localStorage.getItem('jwt')) {
         return (
-          <Fragment>
-            <Button to={`/admin/dashboard`}>Dashboard admin</Button>
-            <Button to={`/users/me`}>Dashboard me</Button>
-            <Button to={`/`} onClick={signOut}>
-              Logout
-            </Button>
-          </Fragment>
+          <div className='Header__Nav-link'>
+            <Button to={`/login`}>Login</Button>
+          </div>
         );
       } else {
-        return (
-          <Fragment>
-            <Button to={`/users/me`}>Dashboard me</Button>
-            <Button to={`/`} onClick={signOut}>
-              Logout
-            </Button>
-          </Fragment>
-        );
+        if (user.role === 2308 && localStorage.getItem('jwt')) {
+          return (
+            <div className='Header__Nav-link'>
+              <Button to={`/admin/dashboard`}>Dashboard admin</Button>
+              <Button to={`/users/me`}>Dashboard me</Button>
+              <Button to={`/`} onClick={signOut}>
+                Logout
+              </Button>
+            </div>
+          );
+        } else {
+          return (
+            <div className='Header__Nav-link'>
+              <Button to={`/users/me`}>Dashboard me</Button>
+              <Button to={`/`} onClick={signOut}>
+                Logout
+              </Button>
+            </div>
+          );
+        }
       }
     }
-
-    // if (user.role === 2308 && localStorage.getItem('jwt'))
   };
 
   return (
@@ -46,11 +52,7 @@ const Header = () => {
           <p className='Header__Logo-paragraph'>Front-End Developer</p>
         </NavLink>
       </div>
-      {!localStorage.getItem('jwt') ? (
-        <Button to={`/login`}>Login</Button>
-      ) : (
-        logButtons()
-      )}
+      {logButtons()}
     </div>
   );
 };
