@@ -2,8 +2,13 @@
 @import '../../../styles/mixins.scss';
 
 .Projects {
+  width: 90%;
+  display: flex;
+  margin: 5rem auto;
   &__Container {
-    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
   &-bg {
     font-size: 38rem;
@@ -27,16 +32,13 @@
     }
   }
   &__Content {
+    flex: 1;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    position: absolute;
-    top: 0;
-    z-index: 99;
-    padding: 2rem;
   }
   &__Project {
-    flex: 1 0 35%;
+    flex: 1 1 33%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -46,9 +48,9 @@
     margin: 1rem;
   }
 
-  &__Project > * {
-    flex: 1 1 0;
-  }
+  // &__Project > * {
+  //   flex: 1 1 100%;
+  // }
   &-tech,
   &-descr,
   &-name {

@@ -34,7 +34,7 @@ class Projects extends Component {
   getProjects = async (page) => {
     this.setState({ loading: true });
     try {
-      await axios.get(`${API_URL}/projects?page=${page}`).then((res) =>
+      await axios.get(`${API_URL}/projects/?page=${page}`).then((res) =>
         this.setState({
           data: res.data,
           loading: false,
@@ -50,7 +50,7 @@ class Projects extends Component {
     } else {
       return (
         <section className='Projects'>
-          <div className='Project__Container'>
+          <div className='Projects__Container'>
             <ProjectList projects={data} />
           </div>
         </section>

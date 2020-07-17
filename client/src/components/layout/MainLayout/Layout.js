@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 const Layout = ({ title, description, className, children }) => {
@@ -9,7 +9,9 @@ const Layout = ({ title, description, className, children }) => {
         <p className=''>{description}</p>
       </div>
 
-      <main className={className}>{children}</main>
+      <main className={`${className}`}>
+        <Fragment>{children}</Fragment>
+      </main>
     </div>
   );
 };
