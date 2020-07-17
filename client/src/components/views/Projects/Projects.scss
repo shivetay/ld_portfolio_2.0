@@ -10,27 +10,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  &-bg {
-    font-size: 38rem;
-    color: $color-font-contrast-second;
-    opacity: 0.15;
 
-    @include respond(desktop) {
-      font-size: 38rem;
-    }
-    @include respond(desktop-small) {
-      font-size: 36rem;
-    }
-    @include respond(tab-port) {
-      font-size: 34rem;
-    }
-    @include respond(phone) {
-      display: none;
-    }
-    @include respond(xsmall) {
-      display: none;
-    }
-  }
   &__Content {
     flex: 1;
     display: flex;

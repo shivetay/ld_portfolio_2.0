@@ -20,7 +20,7 @@ const ProjectList = ({ projects, className }) => {
           />
           <span className='Projects-tech'>{project.tags}</span>
           <p className='Projects-type'>{project.projectType}</p>
-          <p className='Projects-descr'>{project.description}</p>
+          <p className='Projects-descr'>{project.shortDescription}</p>
           <div className='Projects-button'>
             <Button className={className} href={project.links.demo}>
               Demo

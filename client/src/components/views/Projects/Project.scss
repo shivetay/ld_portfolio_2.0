@@ -1,0 +1,32 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.Project {
+  display: flex;
+  flex-direction: column;
+  &__Proj {
+    display: flex;
+    width: 80vw;
+    height: 80vh;
+    margin: 3rem auto 1rem auto;
+    border: 1px solid $color-contrast-second;
+    border-radius: 5px;
+    padding: 1rem;
+
+    &-photo {
+      border-radius: 0;
+
+      @include respond(mix-phone-tab) {
+        display: none;
+      }
+
+      @include respond(phone) {
+        display: none;
+      }
+
+      @include respond(xsmall) {
+        display: none;
+      }
+    }
+  }
+}

@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { API_URL } from '../../../config';
 
+import './Project.scss';
+
 import Button from '../../common/Buttons/Button';
 import Spinner from '../../common/Spinner/Spinner';
 import ShowImage from '../../common/ShowImage/ShowImage';
@@ -36,32 +38,40 @@ class Project extends Component {
       loading,
       project: { _id, key, title, tags, description, links, projectType },
     } = this.state;
-    console.log('state project', this.state.project);
-    console.log('state project links', this.state.project.links);
     if (loading === true) {
       return <Spinner />;
     } else {
       return (
-        <div>
-          <div className='Projects__Project' key={key}>
-            <h3 className='Projects-name'>{title}</h3>
-            <ShowImage item={_id} url='project' alt={title} />
-            <span className='Projects-tech'>{tags}</span>
-            <span className='Projects-tech'>{projectType}</span>
-            <p className='Projects-descr'>{description}</p>
-            <div className='Project-button'>
-              {!loading ? (
-                <h1>Generating links...</h1>
-              ) : (
-                <Fragment>
-                  <Button href={links.demo}>Demo</Button>
-                  <Button href={links.git}>Code</Button>
-                </Fragment>
-              )}
+        <div className='Project'>
+          <div className='Project__Proj' key={key}>
+            <h3 className='Project-name'>{title}</h3>
+            <div className='Project__Proj-photo'>
+              <ShowImage
+                className='Projects-photo'
+                item={_id}
+                url='project'
+                alt={title}
+              />
+            </div>
+            <div className='Project__Proj-content'>
+              <span className='Project-tech'>{tags}</span>
+              <span className='Project-tech'>{projectType}</span>
+              <p className='Project-descr'>{description}</p>
+              <div className='Project-button'>
+                {!loading ? (
+                  <h1>Generating links...</h1>
+                ) : (
+                  <Fragment>
+                    <Button href={links.demo}>Demo</Button>
+                    <Button href={links.git}>Code</Button>
+                  </Fragment>
+                )}
+              </div>
             </div>
           </div>
-          <Button to={`/projects`}>Back</Button>
-          <br />
+          <div className='Project-button'>
+            <Button to={`/projects`}>Back</Button>
+          </div>
         </div>
       );
     }
