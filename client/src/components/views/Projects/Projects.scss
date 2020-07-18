@@ -4,7 +4,7 @@
 .Projects {
   width: 90%;
   display: flex;
-  margin: 5rem auto;
+  margin: 1rem auto;
   &__Container {
     display: flex;
     justify-content: space-between;
@@ -12,36 +12,42 @@
   }
 
   &__Content {
-    flex: 1;
+    flex: 1 0 33%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
   }
   &__Project {
-    flex: 1 1 33%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-items: center;
+    align-content: center;
     border: 1px solid $color-contrast-second;
     border-radius: 5px;
     padding: 1rem;
     margin: 1rem;
   }
 
-  // &__Project > * {
-  //   flex: 1 1 100%;
-  // }
   &-tech,
   &-descr,
   &-name {
-    margin: 1rem 0;
-    text-align: justify;
+    margin: 0.5rem 0;
   }
-  &-photo,
+
+  &-type {
+    font-size: $font-medium;
+    color: $color-font-contrast;
+    font-weight: 700;
+  }
+
   &-tech,
   &-name,
-  &-button {
+  &-button,
+  &-type,
+  &-descr {
     align-self: center;
+    text-align: center;
   }
   &-descr {
     padding: 0 5px;
