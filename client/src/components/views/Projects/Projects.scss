@@ -6,15 +6,10 @@
   display: flex;
   margin: 1rem auto;
   &__Container {
+    margin: 0.5rem 0;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  &__Content {
-    flex: 1 0 33%;
-    display: flex;
-    justify-content: space-between;
+    flex: 1 0 33.333%;
+    justify-content: center;
     flex-wrap: wrap;
   }
   &__Project {
@@ -25,8 +20,18 @@
     align-content: center;
     border: 1px solid $color-contrast-second;
     border-radius: 5px;
-    padding: 1rem;
     margin: 1rem;
+  }
+  &__Photo {
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    margin: 1rem auto;
+  }
+  &-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
   }
 
   &-tech,
@@ -49,11 +54,9 @@
     align-self: center;
     text-align: center;
   }
-  &-descr {
-    padding: 0 5px;
-  }
   &-photo {
     border-radius: 0;
+    align-content: center;
 
     @include respond(mix-phone-tab) {
       display: none;
@@ -66,5 +69,8 @@
     @include respond(xsmall) {
       display: none;
     }
+  }
+  &-descr {
+    padding: 0 5px;
   }
 }
