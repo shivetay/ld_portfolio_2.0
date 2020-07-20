@@ -47,24 +47,25 @@ class Project extends Component {
       return (
         <section className='Project' key={key}>
           <div className='Project__Container'>
-            {/* <div className='Project__Proj'  >*/}
             <div className='Project__Proj-header'>
               <h3 className='Project-name'>{title}</h3>
-              <span className='Project-tech'>{projectType}</span>
+              <p className='Project-type'>{projectType}</p>
             </div>
-            {/* </div> */}
+
             <div className='Project__Proj-container'>
               <div className='Project__Proj-photo'>
-                <div className='photo'>
+                <span>
                   <ShowImage
-                    className='Projects-photo'
+                    className='photo'
                     item={_id}
                     url='project'
                     alt={title}
                   />
-                </div>
+                </span>
                 <div className='text'>
-                  <span className='Project-tech'>{tags}</span>
+                  <p className='Project-tech'>
+                    <strong>TAGS:</strong> {tags}
+                  </p>
                 </div>
               </div>
               {/* end photo */}

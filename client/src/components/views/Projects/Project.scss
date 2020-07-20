@@ -15,15 +15,6 @@
   }
 
   &__Proj {
-    // display: flex;
-    // flex-direction: row;
-    // flex-wrap: wrap;
-
-    //
-    // padding: 1rem;
-    // &-content {
-    //   display: flex;
-    // }
     &-container {
       display: flex;
       flex-direction: row;
@@ -32,10 +23,12 @@
     &-header {
       flex: 1 0 100%;
       text-align: center;
+      margin: 0.5rem 0;
     }
     &-photo {
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
     }
   }
 
@@ -59,4 +52,22 @@
   //     display: none;
   //   }
   // }
+  &-type {
+    color: $color-font-contrast;
+    font-size: $font-small;
+    font-weight: 700;
+  }
+  &-name {
+    padding: 1.4rem 0;
+  }
+
+  &-tech {
+    text-align: center;
+    font-size: $font-small;
+  }
+  .photo {
+    border-radius: 0;
+    width: 65rem;
+    padding: 1rem;
+  }
 }

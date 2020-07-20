@@ -57,6 +57,7 @@
   &-photo {
     border-radius: 0;
     align-content: center;
+    width: 20rem;
 
     @include respond(mix-phone-tab) {
       display: none;
