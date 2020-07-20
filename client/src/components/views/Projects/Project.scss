@@ -3,30 +3,60 @@
 
 .Project {
   display: flex;
-  flex-direction: column;
-  &__Proj {
+
+  &__Container {
     display: flex;
+    flex-wrap: wrap;
     width: 80vw;
     height: 80vh;
-    margin: 3rem auto 1rem auto;
     border: 1px solid $color-contrast-second;
     border-radius: 5px;
-    padding: 1rem;
+    margin: 3rem auto 1rem auto;
+  }
 
+  &__Proj {
+    // display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+
+    //
+    // padding: 1rem;
+    // &-content {
+    //   display: flex;
+    // }
+    &-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &-header {
+      flex: 1 0 100%;
+      text-align: center;
+    }
     &-photo {
-      border-radius: 0;
-
-      @include respond(mix-phone-tab) {
-        display: none;
-      }
-
-      @include respond(phone) {
-        display: none;
-      }
-
-      @include respond(xsmall) {
-        display: none;
-      }
+      display: flex;
+      flex-direction: column;
     }
   }
+
+  // &-name {
+  //   flex: 100%;
+  //   text-align: center;
+  //   margin: 1rem auto;
+  // }
+  // &-photo {
+  //   border-radius: 0;
+
+  //   @include respond(mix-phone-tab) {
+  //     display: none;
+  //   }
+
+  //   @include respond(phone) {
+  //     display: none;
+  //   }
+
+  //   @include respond(xsmall) {
+  //     display: none;
+  //   }
+  // }
 }

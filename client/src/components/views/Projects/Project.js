@@ -42,37 +42,46 @@ class Project extends Component {
       return <Spinner />;
     } else {
       return (
-        <div className='Project'>
-          <div className='Project__Proj' key={key}>
-            <h3 className='Project-name'>{title}</h3>
-            <div className='Project__Proj-photo'>
-              <ShowImage
-                className='Projects-photo'
-                item={_id}
-                url='project'
-                alt={title}
-              />
-            </div>
-            <div className='Project__Proj-content'>
-              <span className='Project-tech'>{tags}</span>
+        <section className='Project' key={_id}>
+          <div className='Project__Container'>
+            {/* <div className='Project__Proj'  >*/}
+            <div className='Project__Proj-header'>
+              <h3 className='Project-name'>{title}</h3>
               <span className='Project-tech'>{projectType}</span>
-              <p className='Project-descr'>{description}</p>
-              <div className='Project-button'>
-                {!loading ? (
-                  <h1>Generating links...</h1>
-                ) : (
-                  <Fragment>
-                    <Button href={links.demo}>Demo</Button>
-                    <Button href={links.git}>Code</Button>
-                  </Fragment>
-                )}
+            </div>
+            {/* </div> */}
+            <div className='Project__Proj-container'>
+              <div className='Project__Proj-photo'>
+                <div className='photo'>
+                  <ShowImage
+                    className='Projects-photo'
+                    item={_id}
+                    url='project'
+                    alt={title}
+                  />
+                </div>
+                <div className='text'>
+                  <span className='Project-tech'>{tags}</span>
+                </div>
+              </div>
+              {/* end photo */}
+              <div className='Project__Proj-content'>
+                <p className='Project-descr'>{description}</p>
+                <div className='Project-button'>
+                  {!loading ? (
+                    <h1>Generating links...</h1>
+                  ) : (
+                    <Fragment>
+                      <Button href={links.demo}>Demo</Button>
+                      <Button href={links.git}>Code</Button>
+                    </Fragment>
+                  )}
+                </div>
               </div>
             </div>
+            {/* end container */}
           </div>
-          <div className='Project-button'>
-            <Button to={`/projects`}>Back</Button>
-          </div>
-        </div>
+        </section>
       );
     }
   };

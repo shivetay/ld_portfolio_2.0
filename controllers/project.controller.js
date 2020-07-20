@@ -21,7 +21,6 @@ exports.read = async (req, res) => {
       .countDocuments()
       .then((count) => {
         totalItems = count;
-        console.log(totalItems, 'total items');
         return Project.find()
           .skip((currentPage - 1) * perPage)
           .limit(perPage)
@@ -38,16 +37,13 @@ exports.read = async (req, res) => {
 
 exports.getProject = async (req, res, next) => {
   try {
-    console.log('get by id', req.project);
     return res.json(req.project);
   } catch (err) {
-    console.error(err.message);
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Porject not found' });
     }
     res.status(500).send('Server Error');
   }
-  console.log('next');
   next();
 };
 
