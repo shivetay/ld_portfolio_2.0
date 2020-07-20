@@ -4,6 +4,9 @@ import axios from 'axios';
 import { API_URL } from '../../../config';
 
 import './Project.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faTerminal } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../common/Buttons/Button';
 import Spinner from '../../common/Spinner/Spinner';
@@ -42,7 +45,7 @@ class Project extends Component {
       return <Spinner />;
     } else {
       return (
-        <section className='Project' key={_id}>
+        <section className='Project' key={key}>
           <div className='Project__Container'>
             {/* <div className='Project__Proj'  >*/}
             <div className='Project__Proj-header'>
@@ -68,14 +71,19 @@ class Project extends Component {
               <div className='Project__Proj-content'>
                 <p className='Project-descr'>{description}</p>
                 <div className='Project-button'>
-                  {!loading ? (
+                  {loading ? (
                     <h1>Generating links...</h1>
                   ) : (
                     <Fragment>
-                      <Button href={links.demo}>Demo</Button>
-                      <Button href={links.git}>Code</Button>
+                      <Button href='#'>
+                        <FontAwesomeIcon icon={faTerminal} />
+                      </Button>
+                      <Button href='#'>
+                        <FontAwesomeIcon icon={faGithub} />
+                      </Button>
                     </Fragment>
                   )}
+                  <Button to={`/projects`}>Back</Button>
                 </div>
               </div>
             </div>
