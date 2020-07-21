@@ -1,0 +1,9 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.Spinner {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 6rem auto;
+}

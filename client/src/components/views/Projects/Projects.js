@@ -62,7 +62,7 @@ class Projects extends Component {
     const { data, page } = this.state;
     return (
       <Fragment>
-        <h2 className='mt-5 mb-5'>{!data.length ? 'No more projects!' : ''}</h2>
+        <h2 className='Loader__Header'>{!data.length && 'Loading Projects'}</h2>
         {this.renderProjects()}
         {page > 1 ? (
           <button
