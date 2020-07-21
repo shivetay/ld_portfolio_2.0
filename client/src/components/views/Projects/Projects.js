@@ -74,26 +74,30 @@ class Projects extends Component {
       <Fragment>
         {this.renderPgaination()}
         {this.renderProjects()}
-        {page > 1 || !data.length ? (
-          <div className='paggination'>
-            <button className='btn' onClick={() => this.loadLess(1)}>
-              Previous ({this.state.page - 1})
-            </button>
-          </div>
-        ) : (
-          ''
-        )}
-        {data.length ? (
-          <div className='paggination'>
-            <button
-              className='btn paggination'
-              onClick={() => this.loadMore(1)}>
-              Next ({page + 1})
-            </button>
-          </div>
-        ) : (
-          ''
-        )}
+        <div className='Paggination'>
+          {page > 1 || !data.length ? (
+            <div className='Paggination__Content'>
+              <button
+                className='btn Paggination-btn'
+                onClick={() => this.loadLess(1)}>
+                Previous ({this.state.page - 1})
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
+          {data.length ? (
+            <div className='Paggination__Content'>
+              <button
+                className='btn Paggination-btn'
+                onClick={() => this.loadMore(1)}>
+                Next ({page + 1})
+              </button>
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
       </Fragment>
     );
   }

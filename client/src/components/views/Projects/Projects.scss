@@ -82,7 +82,11 @@
   }
 }
 
-.paggination {
+.Paggination {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  &-btn {
+    align-self: flex-end;
+  }
 }
