@@ -1,18 +1,22 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import './Layout.scss';
+
 const Layout = ({ title, description, className, children }) => {
   return (
-    <div>
-      <div className=''>
-        <h2>{title}</h2>
-        <p className=''>{description}</p>
-      </div>
+    <section className='Layout'>
+      <div className='Layout__Container'>
+        <div className='Layout__Header'>
+          <h2 className='Layout__Header-header'>{title}</h2>
+          <p className='Layout__Header-text'>{description}</p>
+        </div>
 
-      <main className={`${className}`}>
-        <Fragment>{children}</Fragment>
-      </main>
-    </div>
+        <main className={`Layout__Main-content ${className}`}>
+          <Fragment>{children}</Fragment>
+        </main>
+      </div>
+    </section>
   );
 };
 

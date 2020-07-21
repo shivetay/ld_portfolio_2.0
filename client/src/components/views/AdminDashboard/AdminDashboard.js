@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { isAuthUser } from '../../../utils/utils';
 
 import Layout from '../../layout/MainLayout/Layout';
 import Button from '../../common/Buttons/Button';
-import Projects from '../Projects/Projects';
+import ProjectListAdmin from '../Projects/ProjectListAdmin';
 
 const AdminDashboard = () => {
   const {
@@ -13,7 +13,7 @@ const AdminDashboard = () => {
 
   const adminLinks = () => {
     return (
-      <div className=''>
+      <Fragment>
         <h4 className=''>Admin Links</h4>
         <ul className=''>
           <li className='list-group-item'>
@@ -22,7 +22,7 @@ const AdminDashboard = () => {
             </Button>
           </li>
         </ul>
-      </div>
+      </Fragment>
     );
   };
 
@@ -31,12 +31,12 @@ const AdminDashboard = () => {
       title='Admin Dashboard'
       description={`Wlecome ${name}`}
       className=''>
-      <div className=''>
+      <Fragment>
         <div className=''>{adminLinks()}</div>
         <div className=''>
-          <Projects />
+          <ProjectListAdmin />
         </div>
-      </div>
+      </Fragment>
     </Layout>
   );
 };

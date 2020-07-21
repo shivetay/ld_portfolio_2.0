@@ -51,6 +51,10 @@ a:link {
   font-size: $font-normal;
 }
 
+li {
+  list-style-type: none;
+}
+
 strong {
   letter-spacing: 1.2px;
 }
