@@ -58,28 +58,39 @@ class Projects extends Component {
     }
   };
 
+  renderPgaination = () => {
+    const { data, loading } = this.state;
+    if (!data.length && loading === true) {
+      return <h2 className='Loader__Header'>Loading Projects</h2>;
+    } else if (!data.length) {
+      return <h2 className='Loader__Header'>No more projects</h2>;
+    } else {
+    }
+  };
+
   render() {
     const { data, page } = this.state;
     return (
       <Fragment>
-        <h2 className='Loader__Header'>{!data.length && 'Loading Projects'}</h2>
+        {this.renderPgaination()}
         {this.renderProjects()}
-        {page > 1 ? (
-          <button
-            className='btn btn-raised btn-warning mr-5 mt-5 mb-5'
-            onClick={() => this.loadLess(1)}>
-            Previous ({this.state.page - 1})
-          </button>
+        {page > 1 || !data.length ? (
+          <div className='paggination'>
+            <button className='btn' onClick={() => this.loadLess(1)}>
+              Previous ({this.state.page - 1})
+            </button>
+          </div>
         ) : (
           ''
         )}
-
         {data.length ? (
-          <button
-            className='btn btn-raised btn-success mt-5 mb-5'
-            onClick={() => this.loadMore(1)}>
-            Next ({page + 1})
-          </button>
+          <div className='paggination'>
+            <button
+              className='btn paggination'
+              onClick={() => this.loadMore(1)}>
+              Next ({page + 1})
+            </button>
+          </div>
         ) : (
           ''
         )}
