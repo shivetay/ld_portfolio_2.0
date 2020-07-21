@@ -30,28 +30,14 @@
       flex-direction: column;
       justify-content: flex-start;
     }
+    &-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-content: center;
+    }
   }
 
-  // &-name {
-  //   flex: 100%;
-  //   text-align: center;
-  //   margin: 1rem auto;
-  // }
-  // &-photo {
-  //   border-radius: 0;
-
-  //   @include respond(mix-phone-tab) {
-  //     display: none;
-  //   }
-
-  //   @include respond(phone) {
-  //     display: none;
-  //   }
-
-  //   @include respond(xsmall) {
-  //     display: none;
-  //   }
-  // }
   &-type {
     color: $color-font-contrast;
     font-size: $font-small;
@@ -65,9 +51,20 @@
     text-align: center;
     font-size: $font-small;
   }
+  &-descr {
+    margin: 2rem 4rem 0 6rem;
+    text-align: justify;
+  }
+  &-button {
+    align-self: flex-start;
+    margin-bottom: 4rem;
+  }
   .photo {
     border-radius: 0;
     width: 65rem;
     padding: 1rem;
+  }
+  strong {
+    color: $color-font-contrast;
   }
 }
