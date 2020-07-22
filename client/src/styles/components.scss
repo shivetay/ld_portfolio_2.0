@@ -15,17 +15,17 @@ nav {
 h4 {
   font-size: $header-h4;
   font-family: $font-family;
-  letter-spacing: 1.4px;
+  letter-spacing: 1px;
 }
 h3 {
   font-size: $header-h3;
   font-family: $font-family;
-  letter-spacing: 1.4px;
+  letter-spacing: 1px;
 }
 h2 {
   font-size: $header-h2;
   font-family: $font-family;
-  letter-spacing: 1.4px;
+  letter-spacing: 1px;
 }
 
 p {
@@ -107,6 +107,9 @@ button {
     margin-left: 2rem;
     display: block;
   }
+}
+button:focus {
+  background-color: transparent;
 }
 
 .btn {

@@ -78,7 +78,7 @@ class Projects extends Component {
           {page > 1 || !data.length ? (
             <div className='Paggination__Content'>
               <button
-                className='btn Paggination-btn'
+                className='button Paggination-btn'
                 onClick={() => this.loadLess(1)}>
                 Previous ({this.state.page - 1})
               </button>
@@ -89,7 +89,7 @@ class Projects extends Component {
           {data.length ? (
             <div className='Paggination__Content'>
               <button
-                className='btn Paggination-btn'
+                className='button Paggination-btn'
                 onClick={() => this.loadMore(1)}>
                 Next ({page + 1})
               </button>
