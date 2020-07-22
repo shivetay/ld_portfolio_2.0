@@ -9,7 +9,7 @@ const Button = ({ href, to, exact, className, children, type, onClick }) => {
   if (href) {
     return (
       <button>
-        <a className={`btn ${className}`} href={href}>
+        <a className={`button ${className}`} href={href}>
           {children}
         </a>
       </button>
@@ -20,7 +20,7 @@ const Button = ({ href, to, exact, className, children, type, onClick }) => {
       <Link
         to={to}
         exact={exact}
-        className={`btn ${className}`}
+        className={`button ${className}`}
         onClick={onClick}>
         {children}
       </Link>
@@ -28,7 +28,7 @@ const Button = ({ href, to, exact, className, children, type, onClick }) => {
   }
   return (
     <button
-      className={`btn ${className}`}
+      className={`button ${className}`}
       type={type}
       // onClick={onClick}
       // disabled={props.disabled}

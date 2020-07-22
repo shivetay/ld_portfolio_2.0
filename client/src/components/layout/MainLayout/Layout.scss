@@ -19,14 +19,14 @@
       margin: 1rem 0;
     }
 
-    &::after {
-      content: '';
-      top: 8rem;
-      left: 8rem;
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: $color-contrast-second;
-    }
+    // &::after {
+    //   content: '';
+    //   top: 8rem;
+    //   left: 8rem;
+    //   display: block;
+    //   width: 100%;
+    //   height: 2px;
+    //   background-color: $color-contrast-second;
+    // }
   }
 }

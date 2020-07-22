@@ -214,9 +214,8 @@ class ProjectCreate extends Component {
               </div>
             )}
           </div>
-
-          <input type='submit' className='btn btn-primary my-1' />
-          <Button className='btn btn-light my-1' to='/projects'>
+          <input type='submit' className='btn' />
+          <Button className='btn btn-light my-1' to='/admin/dashboard'>
             Go Back
           </Button>
         </form>

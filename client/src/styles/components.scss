@@ -1,28 +1,36 @@
 @import './settings.scss';
 @import './mixins.scss';
 
-.root {
-  position: relative;
-  top: 50%;
-  left: 0;
-  right: 0;
+// .root {
+//   position: relative;
+//   top: 50%;
+//   left: 0;
+//   right: 0;
+// }
+nav {
+  box-shadow: none;
+  background-color: transparent;
 }
 
 h4 {
   font-size: $header-h4;
+  font-family: $font-family;
   letter-spacing: 1.4px;
 }
 h3 {
   font-size: $header-h3;
+  font-family: $font-family;
   letter-spacing: 1.4px;
 }
 h2 {
   font-size: $header-h2;
+  font-family: $font-family;
   letter-spacing: 1.4px;
 }
 
 p {
   font-size: $font-normal;
+  font-family: $font-family;
 }
 
 .link,
@@ -32,6 +40,7 @@ p {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 1px;
+  font-family: $font-family;
 }
 
 .link,
@@ -44,6 +53,7 @@ a:visited,
 a:link {
   text-decoration: none;
   color: $color-font-main;
+  font-family: $font-family;
   cursor: pointer;
 }
 
@@ -53,14 +63,17 @@ a:visited,
 a:link {
   margin: 0;
   font-size: $font-normal;
+  font-family: $font-family;
 }
 
 li {
   list-style-type: none;
+  font-family: $font-family;
 }
 
 strong {
   letter-spacing: 1.2px;
+  font-family: $font-family;
 }
 
 img {
@@ -78,6 +91,7 @@ button {
   margin: 1rem 1.5rem 1rem 0;
   outline: none;
   font-size: $font-normal;
+  font-family: $font-family;
   transition: border 0.2s;
   background: none;
 
@@ -96,8 +110,10 @@ button {
 }
 
 .btn {
+  font-family: $font-family;
   &-span {
     font-weight: 600;
+    font-family: $font-family;
     transition: all 0.8s;
     margin: 0 1rem;
     display: inline-block;
