@@ -31,12 +31,12 @@ const AdminDashboard = () => {
       title='Admin Dashboard'
       description={`Wlecome ${name}`}
       className=''>
-      <Fragment>
-        <div className=''>{adminLinks()}</div>
-        <div className=''>
+      <div className='Admin'>
+        <div className='Admin__Links'>{adminLinks()}</div>
+        <div className='Admin__Content'>
           <ProjectListAdmin />
         </div>
-      </Fragment>
+      </div>
     </Layout>
   );
 };

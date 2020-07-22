@@ -5,7 +5,7 @@ import { API_URL } from '../../../config';
 
 import './ProjectListAdmin.scss';
 
-import ProjectList from './ProjectList';
+import ProjectTable from './ProjectTable';
 import Spinner from '../../common/Spinner/Spinner';
 
 class ProjectListAdmin extends Component {
@@ -51,7 +51,7 @@ class ProjectListAdmin extends Component {
       return (
         <section className='Projects'>
           <div className='Projects__Container'>
-            <ProjectList projects={data} />
+            <ProjectTable projects={data} />
           </div>
         </section>
       );
