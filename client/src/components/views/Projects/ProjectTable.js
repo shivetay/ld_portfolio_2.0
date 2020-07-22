@@ -2,10 +2,10 @@ import React from 'react';
 
 const ProjectTable = ({ projects }) => {
   return (
-    <div className='Project__Table'>
-      <table>
-        <thead>
-          <tr>
+    <div className='Project'>
+      <table className='Project__Table'>
+        <thead className='Project__Table-head'>
+          <tr className='Project__Table-head-row'>
             <th></th>
             <th>Title</th>
             <th>Stack</th>

@@ -1,2 +1,21 @@
 @import '../../../styles/settings.scss';
 @import '../../../styles/mixins.scss';
+
+.Project {
+  width: 100%;
+  align-self: center;
+  &__Table {
+    font-size: $font-normal;
+
+    &-head {
+      color: $color-font-contrast;
+    }
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+th {
+  border-bottom: 1px solid $color-font-contrast-second;
+}

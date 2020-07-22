@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 
 import { isAuthUser } from '../../../utils/utils';
 
+import './AdminDashboard.scss';
+
 import Layout from '../../layout/MainLayout/Layout';
 import Button from '../../common/Buttons/Button';
 import ProjectListAdmin from '../Projects/ProjectListAdmin';
@@ -14,7 +16,7 @@ const AdminDashboard = () => {
   const adminLinks = () => {
     return (
       <Fragment>
-        <h4 className=''>Admin Links</h4>
+        <h4 className='Admin__Links-header'>Admin Links</h4>
         <ul className=''>
           <li className='list-group-item'>
             <Button to={`/projects/create/${_id}`} className=''>

@@ -48,13 +48,7 @@ class ProjectListAdmin extends Component {
     if (loading === true) {
       return <Spinner />;
     } else {
-      return (
-        <section className='Projects'>
-          <div className='Projects__Container'>
-            <ProjectTable projects={data} />
-          </div>
-        </section>
-      );
+      return <ProjectTable projects={data} />;
     }
   };
 
