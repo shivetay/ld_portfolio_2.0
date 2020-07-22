@@ -34,7 +34,10 @@ const AdminDashboard = () => {
       description={`Wlecome ${name}`}
       className=''>
       <div className='Admin'>
-        <div className='Admin__Links'>{adminLinks()}</div>
+        <div className='Admin__Links-content'>
+          <div className='Admin__Links'>{adminLinks()}</div>
+        </div>
+
         <div className='Admin__Content'>
           <ProjectListAdmin />
         </div>

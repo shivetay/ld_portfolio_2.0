@@ -19,6 +19,11 @@ class ProjectListAdmin extends Component {
     this.getProjects(page);
   }
 
+  // componentDidUpdate() {
+  //   const { page } = this.state;
+  //   this.getProjects(page);
+  // }
+
   loadMore = (number) => {
     const { page } = this.state;
     this.setState({ page: page + number });

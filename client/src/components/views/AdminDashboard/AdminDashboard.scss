@@ -3,12 +3,10 @@
 
 .Admin {
   display: flex;
-  justify-content: space-between;
+  width: 100vw;
   &__Content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
   }
   &__Links {
     margin: 2rem;

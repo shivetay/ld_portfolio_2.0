@@ -21,6 +21,7 @@ export const delProject = async (id) => {
   try {
     // eslint-disable-next-line
     const res = await axios.delete(`${API_URL}/projects/delete/${id}`, config);
+    window.location.reload(false);
   } catch (err) {}
 };
 
