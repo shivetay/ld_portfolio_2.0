@@ -15,6 +15,7 @@ import Project from './components/views/Projects/Project';
 import ProjectCreate from './components/views/Projects/ProjectCreate';
 import ProjectUpdate from './components/views/Projects/ProjectUpdate';
 import Contact from './components/views/Contact/Contact';
+import Alerts from './components/common/Alerts/AlertsContainer';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <Fragment>
         <BrowserRouter>
           <MainLayout>
+            <Alerts />
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />

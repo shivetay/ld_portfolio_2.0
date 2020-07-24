@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 // import { composeWithDevTools } from 'redu-devtools-extension';
 import thunk from 'redux-thunk';
 
-// import alerts from './AlertReducer';
+import alerts from './AlertReducer';
 // import auth from './AuthReducer';
 // import profile from './ProfileReducer';
 
@@ -12,7 +12,7 @@ const initialState = {};
 // define reducers
 const reducers = {
   // auth,
-  // alerts,
+  alerts,
   // profile,
 };
 

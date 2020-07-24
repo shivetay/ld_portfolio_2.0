@@ -55,7 +55,7 @@ exports.create = (req, res) => {
     if (err) {
       return res
         .status(400)
-        .json({ errors: [{ msg: 'Image could not be uploaded' }] });
+        .json({ errors: [{ msg: 'Project was not created' }] });
     }
 
     const { git, demo } = fields;
@@ -81,9 +81,17 @@ exports.create = (req, res) => {
       project.photo.data = fs.readFileSync(files.photo.path);
       project.photo.contentType = files.photo.type;
     }
-    console.log('save', project);
-    project.save();
-    return res.json(project);
+
+    project.save((err, result) => {
+      if (err) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Project was not uploaded' }] });
+      }
+      res.json(result);
+    });
+    // project.save();
+    // return res.json(project);
   });
 };
 
