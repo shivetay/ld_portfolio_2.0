@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-// import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import Home from './components/views/Home/Home';
@@ -17,38 +18,38 @@ import Contact from './components/views/Contact/Contact';
 
 const App = () => {
   return (
-    // <Provider store={}>
-    <Fragment>
-      <BrowserRouter>
-        <MainLayout>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/logout' component={Home} />
-            <AdminRoute
-              exact
-              path='/admin/dashboard'
-              component={AdminDashboard}
-            />
-            <AdminRoute
-              exact
-              path='/projects/create/:userId'
-              component={ProjectCreate}
-            />
-            <AdminRoute
-              exact
-              path='/projects/update/:projectId'
-              component={ProjectUpdate}
-            />
-            <PrivateRoute exact path='/users/me' component={UserDashboard} />
-            <Route exact path='/projects' component={Projects} />
-            <Route exact path='/projects/:projectId' component={Project} />
-            <Route exact path='/contact' component={Contact} />
-          </Switch>
-        </MainLayout>
-      </BrowserRouter>
-    </Fragment>
-    // </Provider>
+    <Provider store={store}>
+      <Fragment>
+        <BrowserRouter>
+          <MainLayout>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/logout' component={Home} />
+              <AdminRoute
+                exact
+                path='/admin/dashboard'
+                component={AdminDashboard}
+              />
+              <AdminRoute
+                exact
+                path='/projects/create/:userId'
+                component={ProjectCreate}
+              />
+              <AdminRoute
+                exact
+                path='/projects/update/:projectId'
+                component={ProjectUpdate}
+              />
+              <PrivateRoute exact path='/users/me' component={UserDashboard} />
+              <Route exact path='/projects' component={Projects} />
+              <Route exact path='/projects/:projectId' component={Project} />
+              <Route exact path='/contact' component={Contact} />
+            </Switch>
+          </MainLayout>
+        </BrowserRouter>
+      </Fragment>
+    </Provider>
   );
 };
 
