@@ -47,7 +47,7 @@ const Contact = () => {
           </div>
           <div className='Contact__Content-rest'>
             <span className='icon-group'>
-              <a href='#'>dawidowicz_lukasz@hotmail.com</a>
+              <p>dawidowicz_lukasz@hotmail.com</p>
               <FontAwesomeIcon icon={faEnvelope} />
             </span>
             <div className='icon-group'>
