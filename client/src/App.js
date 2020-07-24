@@ -13,6 +13,7 @@ import Projects from './components/views/Projects/Projects';
 import Project from './components/views/Projects/Project';
 import ProjectCreate from './components/views/Projects/ProjectCreate';
 import ProjectUpdate from './components/views/Projects/ProjectUpdate';
+import Contact from './components/views/Contact/Contact';
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
             <PrivateRoute exact path='/users/me' component={UserDashboard} />
             <Route exact path='/projects' component={Projects} />
             <Route exact path='/projects/:projectId' component={Project} />
+            <Route exact path='/contact' component={Contact} />
           </Switch>
         </MainLayout>
       </BrowserRouter>
