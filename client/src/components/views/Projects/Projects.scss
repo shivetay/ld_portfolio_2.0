@@ -2,70 +2,62 @@
 @import '../../../styles/mixins.scss';
 
 .Projects {
+  width: 90%;
+  display: flex;
+  margin: 1rem auto;
   &__Container {
-    position: relative;
-  }
-  &-bg {
-    font-size: 38rem;
-    color: $color-font-contrast-second;
-    opacity: 0.15;
-
-    @include respond(desktop) {
-      font-size: 38rem;
-    }
-    @include respond(desktop-small) {
-      font-size: 36rem;
-    }
-    @include respond(tab-port) {
-      font-size: 34rem;
-    }
-    @include respond(phone) {
-      display: none;
-    }
-    @include respond(xsmall) {
-      display: none;
-    }
-  }
-  &__Content {
+    margin: 0.5rem 0;
     display: flex;
-    justify-content: space-between;
+    flex: 1 0 33.333%;
+    justify-content: center;
     flex-wrap: wrap;
-    position: absolute;
-    top: 0;
-    z-index: 99;
-    padding: 2rem;
   }
   &__Project {
-    flex: 1 0 35%;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    justify-items: center;
+    align-content: center;
     border: 1px solid $color-contrast-second;
     border-radius: 5px;
-    padding: 1rem;
     margin: 1rem;
   }
-
-  &__Project > * {
-    flex: 1 1 0;
+  &__Photo {
+    display: flex;
+    justify-items: center;
+    align-content: center;
+    margin: 1rem auto;
   }
+  &-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
   &-tech,
   &-descr,
   &-name {
-    margin: 1rem 0;
-    text-align: justify;
+    margin: 0.8rem 0;
   }
-  &-photo,
+
+  &-type {
+    font-size: $font-medium;
+    color: $color-font-contrast;
+    font-weight: 700;
+  }
+
   &-tech,
   &-name,
-  &-button {
-    align-self: center;
-  }
+  &-button,
+  &-type,
   &-descr {
-    padding: 0 5px;
+    align-self: center;
+    text-align: center;
   }
   &-photo {
     border-radius: 0;
+    align-content: center;
+    width: 20rem;
 
     @include respond(mix-phone-tab) {
       display: none;
@@ -78,5 +70,23 @@
     @include respond(xsmall) {
       display: none;
     }
+  }
+  &-descr {
+    padding: 0 5px;
+  }
+}
+.Loader {
+  &__Header {
+    text-align: center;
+    margin: 4rem auto;
+  }
+}
+
+.Paggination {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  &-btn {
+    align-self: flex-end;
   }
 }

@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { API_URL } from '../../../config';
 
+import './Login.scss';
+
 import { authenticateUser, isAuthUser } from '../../../utils/utils';
 import Layout from '../../layout/MainLayout/Layout';
 import Button from '../../common/Buttons/Button';
@@ -59,7 +61,7 @@ class Login extends Component {
 
   formRender = (email, password) => {
     return (
-      <Fragment>
+      <div className='Login'>
         <form onSubmit={this.onSubmit}>
           <div className='form-group'>
             <label className='text-muted'>Email</label>
@@ -82,7 +84,7 @@ class Login extends Component {
           </div>
           <Button>Login</Button>
         </form>
-      </Fragment>
+      </div>
     );
   };
 

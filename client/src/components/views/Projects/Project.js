@@ -3,6 +3,11 @@ import axios from 'axios';
 
 import { API_URL } from '../../../config';
 
+import './Project.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faTerminal } from '@fortawesome/free-solid-svg-icons';
+
 import Button from '../../common/Buttons/Button';
 import Spinner from '../../common/Spinner/Spinner';
 import ShowImage from '../../common/ShowImage/ShowImage';
@@ -36,33 +41,56 @@ class Project extends Component {
       loading,
       project: { _id, key, title, tags, description, links, projectType },
     } = this.state;
-    console.log('state project', this.state.project);
-    console.log('state project links', this.state.project.links);
     if (loading === true) {
       return <Spinner />;
     } else {
       return (
-        <div>
-          <div className='Projects__Project' key={key}>
-            <h3 className='Projects-name'>{title}</h3>
-            <ShowImage item={_id} url='project' alt={title} />
-            <span className='Projects-tech'>{tags}</span>
-            <span className='Projects-tech'>{projectType}</span>
-            <p className='Projects-descr'>{description}</p>
-            <div className='Project-button'>
-              {!loading ? (
-                <h1>Generating links...</h1>
-              ) : (
-                <Fragment>
-                  <Button href={links.demo}>Demo</Button>
-                  <Button href={links.git}>Code</Button>
-                </Fragment>
-              )}
+        <section className='Project' key={key}>
+          <div className='Project__Container'>
+            <div className='Project__Proj-header'>
+              <h3 className='Project-name'>{title}</h3>
+              <p className='Project-type'>{projectType}</p>
             </div>
+
+            <div className='Project__Proj-container'>
+              <div className='Project__Proj-photo'>
+                <span>
+                  <ShowImage
+                    className='photo'
+                    item={_id}
+                    url='project'
+                    alt={title}
+                  />
+                </span>
+                <div className='text'>
+                  <p className='Project-tech'>
+                    <strong>TAGS:</strong> {tags}
+                  </p>
+                </div>
+              </div>
+              {/* end photo */}
+              <div className='Project__Proj-content'>
+                <p className='Project-descr'>{description}</p>
+                <div className='Project-button'>
+                  {loading ? (
+                    <h1>Generating links...</h1>
+                  ) : (
+                    <Fragment>
+                      <Button href='#'>
+                        <FontAwesomeIcon icon={faTerminal} />
+                      </Button>
+                      <Button href='#'>
+                        <FontAwesomeIcon icon={faGithub} />
+                      </Button>
+                    </Fragment>
+                  )}
+                  <Button to={`/projects`}>Back</Button>
+                </div>
+              </div>
+            </div>
+            {/* end container */}
           </div>
-          <Button to={`/projects`}>Back</Button>
-          <br />
-        </div>
+        </section>
       );
     }
   };

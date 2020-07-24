@@ -1,0 +1,70 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.Project {
+  display: flex;
+
+  &__Container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80vw;
+    height: 80vh;
+    border: 1px solid $color-contrast-second;
+    border-radius: 5px;
+    margin: 3rem auto 1rem auto;
+  }
+
+  &__Proj {
+    &-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &-header {
+      flex: 1 0 100%;
+      text-align: center;
+      margin: 0.5rem 0;
+    }
+    &-photo {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    &-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-content: center;
+    }
+  }
+
+  &-type {
+    color: $color-font-contrast;
+    font-size: $font-small;
+    font-weight: 700;
+  }
+  &-name {
+    padding: 1.4rem 0;
+  }
+
+  &-tech {
+    text-align: center;
+    font-size: $font-small;
+  }
+  &-descr {
+    margin: 2rem 4rem 0 6rem;
+    text-align: justify;
+  }
+  &-button {
+    align-self: flex-start;
+    margin-bottom: 4rem;
+  }
+  .photo {
+    border-radius: 0;
+    width: 65rem;
+    padding: 1rem;
+  }
+  strong {
+    color: $color-font-contrast;
+  }
+}

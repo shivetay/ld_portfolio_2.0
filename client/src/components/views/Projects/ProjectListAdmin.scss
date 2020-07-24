@@ -1,0 +1,30 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.Project__Table {
+  margin-left: 10rem;
+  font-size: $font-normal;
+
+  &-head {
+    text-align: left;
+    color: $color-font-contrast;
+  }
+  &-title {
+    width: 30rem;
+  }
+  &-type {
+    width: 12rem;
+  }
+}
+
+table {
+  width: 100%;
+  display: table;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-bottom: 1px solid $color-font-contrast-second;
+  padding: 1rem 1rem;
+}

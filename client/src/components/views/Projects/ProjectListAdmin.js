@@ -3,12 +3,12 @@ import axios from 'axios';
 
 import { API_URL } from '../../../config';
 
-import './Projects.scss';
+import './ProjectListAdmin.scss';
 
-import ProjectList from './ProjectList';
+import ProjectTable from './ProjectTable';
 import Spinner from '../../common/Spinner/Spinner';
 
-class Projects extends Component {
+class ProjectListAdmin extends Component {
   state = {
     data: [],
     loading: false,
@@ -18,6 +18,11 @@ class Projects extends Component {
     const { page } = this.state;
     this.getProjects(page);
   }
+
+  // componentDidUpdate() {
+  //   const { page } = this.state;
+  //   this.getProjects(page);
+  // }
 
   loadMore = (number) => {
     const { page } = this.state;
@@ -48,13 +53,7 @@ class Projects extends Component {
     if (loading === true) {
       return <Spinner />;
     } else {
-      return (
-        <section className='Projects'>
-          <div className='Projects__Container'>
-            <ProjectList projects={data} />
-          </div>
-        </section>
-      );
+      return <ProjectTable projects={data} />;
     }
   };
 
@@ -78,7 +77,7 @@ class Projects extends Component {
           {page > 1 || !data.length ? (
             <div className='Paggination__Content'>
               <button
-                className='button Paggination-btn'
+                className='btn Paggination-btn'
                 onClick={() => this.loadLess(1)}>
                 Previous ({this.state.page - 1})
               </button>
@@ -89,7 +88,7 @@ class Projects extends Component {
           {data.length ? (
             <div className='Paggination__Content'>
               <button
-                className='button Paggination-btn'
+                className='btn Paggination-btn'
                 onClick={() => this.loadMore(1)}>
                 Next ({page + 1})
               </button>
@@ -103,4 +102,4 @@ class Projects extends Component {
   }
 }
 
-export default Projects;
+export default ProjectListAdmin;

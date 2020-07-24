@@ -1,0 +1,21 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
+
+.Admin {
+  display: flex;
+  width: 100vw;
+  &__Content {
+    display: flex;
+    flex-direction: column;
+  }
+  &__Links {
+    margin: 2rem;
+    padding: 1rem;
+    border: 1px solid $color-font-contrast-second;
+    border-radius: 5px;
+    &-header {
+      padding: 1rem;
+      color: $color-font-contrast-second;
+    }
+  }
+}

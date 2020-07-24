@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { isAuthUser } from '../../../utils/utils';
 
+import './AdminDashboard.scss';
+
 import Layout from '../../layout/MainLayout/Layout';
 import Button from '../../common/Buttons/Button';
-import Projects from '../Projects/Projects';
+import ProjectListAdmin from '../Projects/ProjectListAdmin';
 
 const AdminDashboard = () => {
   const {
@@ -13,8 +15,8 @@ const AdminDashboard = () => {
 
   const adminLinks = () => {
     return (
-      <div className=''>
-        <h4 className=''>Admin Links</h4>
+      <Fragment>
+        <h4 className='Admin__Links-header'>Admin Links</h4>
         <ul className=''>
           <li className='list-group-item'>
             <Button to={`/projects/create/${_id}`} className=''>
@@ -22,7 +24,7 @@ const AdminDashboard = () => {
             </Button>
           </li>
         </ul>
-      </div>
+      </Fragment>
     );
   };
 
@@ -31,10 +33,13 @@ const AdminDashboard = () => {
       title='Admin Dashboard'
       description={`Wlecome ${name}`}
       className=''>
-      <div className=''>
-        <div className=''>{adminLinks()}</div>
-        <div className=''>
-          <Projects />
+      <div className='Admin'>
+        <div className='Admin__Links-content'>
+          <div className='Admin__Links'>{adminLinks()}</div>
+        </div>
+
+        <div className='Admin__Content'>
+          <ProjectListAdmin />
         </div>
       </div>
     </Layout>
