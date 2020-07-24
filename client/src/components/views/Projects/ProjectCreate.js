@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import Button from '../../common/Buttons/Button';
 
+import './ProjectCreate.scss';
+
 import { API_URL } from '../../../config';
 import { isAuthUser } from '../../../utils/utils';
 
@@ -104,7 +106,7 @@ class ProjectCreate extends Component {
     } = this.state;
 
     return (
-      <section className=''>
+      <section className='Create'>
         <h1 className=''>Create Project</h1>
         <p className=''>
           <i className='fas fa-user'></i> Add project information
@@ -114,7 +116,7 @@ class ProjectCreate extends Component {
           encType='multipart/form-data'
           className='form'
           onSubmit={(e) => this.onSubmit(e)}>
-          <div className=''>
+          <div className='input-field'>
             <select
               name='projectType'
               value={projectType}
@@ -128,7 +130,7 @@ class ProjectCreate extends Component {
             </select>
             <small className='form-text'>Select a project type.</small>
           </div>
-          <div className='form-group'>
+          <div className='input-field'>
             <input
               type='text'
               placeholder='Title'
@@ -138,27 +140,34 @@ class ProjectCreate extends Component {
             />
             <small className='form-text'>Add project title.</small>
           </div>
-          <div className='form-group'>
-            <input
+          <div className='input-field'>
+            <textarea
+              className='materialize-textarea'
               type='text'
               placeholder='Description'
               name='description'
+              maxlength='560'
+              data-length='560'
               value={description}
               onChange={this.onChange}
             />
-            <small className='form-text'>Add project description</small>
+            <small className='form-text'>Add project description max 560</small>
           </div>
-          <div className='form-group'>
-            <input
+          <div className='input-field'>
+            <textarea
+              className='materialize-textarea'
               type='text'
               placeholder='Short description'
               name='shortDescription'
+              maxlength='20'
+              data-length='20'
               value={shortDescription}
-              onChange={this.onChange}
-            />
-            <small className='form-text'>Add project short description</small>
+              onChange={this.onChange}></textarea>
+            <small className='form-text'>
+              Add project short description max 50
+            </small>
           </div>
-          <div className='form-group'>
+          <div className='input-field'>
             <input
               type='text'
               placeholder='* Tags'
@@ -170,27 +179,30 @@ class ProjectCreate extends Component {
               Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
             </small>
           </div>
-          <div className='form-group'>
-            <input
-              id='photoID'
-              type='file'
-              accept='.jpg, .png, .jpeg'
-              placeholder='Photo'
-              name='photo'
-              value={photo}
-              onChange={this.onChange}
-            />
-            <small className='form-text'>Add project preview.</small>
+          <div className='file-field input-field'>
+            <div className='btn'>
+              <span>Add Photo</span>
+              <input
+                id='photoID'
+                type='file'
+                accept='.jpg, .png, .jpeg'
+                placeholder='Photo'
+                name='photo'
+                value={photo}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className='file-path-wrapper'>
+              <input type='text' className='file-path' />
+            </div>
           </div>
           <div className='my-2'>
-            <button onClick={this.toggleLinks} type='button' className=''>
+            <button onClick={this.toggleLinks} type='button' className='button'>
               Add Project Links
             </button>
-            <span>Optional</span>
-
             {displayLinks && (
               <div>
-                <div className=''>
+                <div className='input-field'>
                   <i className=''></i>
                   <input
                     type='text'
@@ -201,7 +213,7 @@ class ProjectCreate extends Component {
                   />
                 </div>
 
-                <div className=''>
+                <div className='input-field'>
                   <i className=''></i>
                   <input
                     type='text'
@@ -215,7 +227,7 @@ class ProjectCreate extends Component {
             )}
           </div>
           <input type='submit' className='btn' />
-          <Button className='btn btn-light my-1' to='/admin/dashboard'>
+          <Button className='button' to='/admin/dashboard'>
             Go Back
           </Button>
         </form>
