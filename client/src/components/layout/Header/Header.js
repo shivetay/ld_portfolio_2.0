@@ -13,7 +13,10 @@ const Header = () => {
       return <Button to={`/login`}>Login</Button>;
     } else {
       const { user } = authData;
-      if (!localStorage.getItem('jwt')) {
+      if (
+        !localStorage.getItem('jwt') ||
+        localStorage.getItem('jwt') === undefined
+      ) {
         return (
           <div className='Header__Nav-link'>
             <Button to={`/login`}>Login</Button>

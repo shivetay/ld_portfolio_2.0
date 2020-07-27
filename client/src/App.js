@@ -5,7 +5,7 @@ import store from './redux/store';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import Home from './components/views/Home/Home';
-import Login from './components/features/Login/Login';
+import Login from './components/features/Login/LoginContainer';
 import AdminRoute from './components/features/PrivateRoutes/AdminRoute';
 import AdminDashboard from './components/views/AdminDashboard/AdminDashboard';
 import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
