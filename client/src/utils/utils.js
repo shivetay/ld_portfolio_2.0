@@ -46,3 +46,13 @@ export const isAuthUser = () => {
     console.log(err);
   }
 };
+
+export const authHeader = (token) => {
+  // return authorization header with jwt token
+  console.log(token, 'token');
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = token;
+  } else {
+    delete axios.defaults.headers.common['Authorization'];
+  }
+};

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -16,8 +16,13 @@ import ProjectCreate from './components/views/Projects/ProjectCreate';
 import ProjectUpdate from './components/views/Projects/ProjectUpdate';
 import Contact from './components/views/Contact/Contact';
 import Alerts from './components/common/Alerts/AlertsContainer';
+import { loadUser } from './redux/AuthReducer';
 
 const App = () => {
+  // useEffect(() => {
+  //   store.dispatch(loadUser());
+  // }, []);
+
   return (
     <Provider store={store}>
       <Fragment>

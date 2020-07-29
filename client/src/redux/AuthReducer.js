@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { authenticateUser } from '../utils/utils';
+import { authenticateUser, isAuthUser, authHeader } from '../utils/utils';
 
 import { API_URL } from '../config';
 import { setAlert } from './AlertReducer';
@@ -39,11 +39,12 @@ export const userLoadSuccess = (payload) => ({
 //load user
 export const loadUser = () => {
   return async (dispatch) => {
-    if (localStorage.token) {
-      authenticateUser();
+    if (localStorage.jwt) {
+      authHeader(localStorage.jwt);
     }
     try {
       const res = await axios.get(`${API_URL}/users/me`);
+      console.log(userLoadSuccess(res.data));
       dispatch(userLoadSuccess(res.data));
     } catch (err) {
       dispatch(userAuthError({ name: 'AUTH_ERROR' }));
@@ -62,13 +63,12 @@ export const loginUser = (user) => {
     console.log(user);
     try {
       const res = await axios.post(`${API_URL}/login`, user, config);
-      console.log('res 1', res);
-      console.log('res.data 1', res.data);
+      console.log('res.data', res.data);
       authenticateUser(res.data.token);
-      console.log('res.data 1', authenticateUser(res.data));
       dispatch(loginSuccesAction(res.data));
-      console.log(res.data);
-      dispatch(loadUser());
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      console.log(loadUser());
+      // dispatch(loadUser());
     } catch (err) {
       // const errors = err.response.data.errors;
       // if (errors) {
@@ -79,8 +79,6 @@ export const loginUser = (user) => {
     }
   };
 };
-
-console.log(loginUser);
 
 /* initial state */
 
@@ -97,7 +95,6 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      localStorage.setItem('jwt', authenticateUser(action.payload.token));
       return {
         ...state,
         ...action.payload,

@@ -6,6 +6,7 @@ import Login from './Login';
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuthenticated,
+  user: state.auth.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

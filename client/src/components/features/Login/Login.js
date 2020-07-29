@@ -22,6 +22,7 @@ class Login extends Component {
   static propTypes = {
     logUser: PropTypes.func,
     isAuth: PropTypes.bool,
+    user: PropTypes.object,
   };
 
   // signIn = async (user) => {
@@ -91,8 +92,8 @@ class Login extends Component {
 
   redirectUser = () => {
     // const { userRedirect, logIn } = this.state;
-    const { isAuth } = this.props;
-    const { user } = isAuthUser();
+    const { isAuth, user } = this.props;
+    user = isAuthUser();
     if (isAuth === true) {
       if (localStorage.getItem('jwt')) {
         if (user.role === 2308) {
