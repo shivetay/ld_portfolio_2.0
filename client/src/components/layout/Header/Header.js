@@ -1,18 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Button from '../../common/Buttons/Button';
 import { isAuthUser, signOut } from '../../../utils/utils';
 
 import './Header.scss';
 
-const Header = () => {
+const Header = ({ user, isAuth }) => {
   const logButtons = () => {
+    console.log(localStorage.getItem('user.role'), 'user local');
     const authData = isAuthUser();
     if (authData === false) {
       return <Button to={`/login`}>Login</Button>;
     } else {
-      const { user } = authData;
+      // user.role = authData;
       if (
         !localStorage.getItem('jwt') ||
         localStorage.getItem('jwt') === undefined
@@ -23,7 +25,10 @@ const Header = () => {
           </div>
         );
       } else {
-        if (user.role === 2308 && localStorage.getItem('jwt')) {
+        if (
+          localStorage.getItem('user.role') === 2308 &&
+          localStorage.getItem('jwt')
+        ) {
           return (
             <div className='Header__Nav-link'>
               <Button to={`/admin/dashboard`}>Dashboard admin</Button>
@@ -58,6 +63,11 @@ const Header = () => {
       {logButtons()}
     </div>
   );
+};
+
+Header.propTypes = {
+  isAuth: PropTypes.bool,
+  user: PropTypes.object,
 };
 
 export default Header;

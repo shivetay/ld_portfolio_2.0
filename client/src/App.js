@@ -16,13 +16,8 @@ import ProjectCreate from './components/views/Projects/ProjectCreate';
 import ProjectUpdate from './components/views/Projects/ProjectUpdate';
 import Contact from './components/views/Contact/Contact';
 import Alerts from './components/common/Alerts/AlertsContainer';
-import { loadUser } from './redux/AuthReducer';
 
 const App = () => {
-  // useEffect(() => {
-  //   store.dispatch(loadUser());
-  // }, []);
-
   return (
     <Provider store={store}>
       <Fragment>

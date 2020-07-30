@@ -39,12 +39,16 @@ export const userLoadSuccess = (payload) => ({
 //load user
 export const loadUser = () => {
   return async (dispatch) => {
-    if (localStorage.jwt) {
-      authHeader(localStorage.jwt);
+    if (localStorage.getItem('jwt')) {
+      isAuthUser();
     }
+    const config = {
+      headers: {
+        Authorization: localStorage.token,
+      },
+    };
     try {
-      const res = await axios.get(`${API_URL}/users/me`);
-      console.log(userLoadSuccess(res.data));
+      const res = await axios.get(`${API_URL}/users/me`, config);
       dispatch(userLoadSuccess(res.data));
     } catch (err) {
       dispatch(userAuthError({ name: 'AUTH_ERROR' }));
@@ -63,12 +67,10 @@ export const loginUser = (user) => {
     console.log(user);
     try {
       const res = await axios.post(`${API_URL}/login`, user, config);
-      console.log('res.data', res.data);
       authenticateUser(res.data.token);
       dispatch(loginSuccesAction(res.data));
       localStorage.setItem('user', JSON.stringify(res.data.user));
-      console.log(loadUser());
-      // dispatch(loadUser());
+      dispatch(loadUser());
     } catch (err) {
       // const errors = err.response.data.errors;
       // if (errors) {
