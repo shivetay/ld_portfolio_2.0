@@ -64,8 +64,6 @@ export const loginUser = (user) => {
         'Content-Type': 'application/json',
       },
     };
-    // const user = JSON.stringify({ email, password });
-    console.log(user);
     try {
       const res = await axios.post(`${API_URL}/login`, user, config);
       authenticateUser(res.data.token);
