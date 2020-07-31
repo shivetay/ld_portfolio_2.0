@@ -91,7 +91,6 @@ class Login extends Component {
   };
 
   redirectUser = () => {
-    // const { userRedirect, logIn } = this.state;
     const { isAuth, user } = this.props;
     user = isAuthUser();
     if (isAuth === true) {

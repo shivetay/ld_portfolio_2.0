@@ -13,7 +13,6 @@ const Header = (user, isAuth) => {
     if (authData === false) {
       return <Button to={`/login`}>Login</Button>;
     } else {
-      // user.role = authData;
       if (
         !localStorage.getItem('jwt') ||
         localStorage.getItem('jwt') === undefined
@@ -24,8 +23,13 @@ const Header = (user, isAuth) => {
           </div>
         );
       } else {
-        if (localStorage.getItem('user') && localStorage.getItem('jwt')) {
+        if (
+          localStorage.getItem('user') &&
+          localStorage.getItem('jwt') &&
+          isAuth
+        ) {
           if (user.role === 2308) {
+            console.log(user.role, 'user role admin');
             return (
               <div className='Header__Nav-link'>
                 <Button to={`/admin/dashboard`}>Dashboard admin</Button>
@@ -42,6 +46,7 @@ const Header = (user, isAuth) => {
                 <Button to={`/`} onClick={signOut}>
                   Logout
                 </Button>
+                {console.log(user.role, 'user role')}
               </div>
             );
           }

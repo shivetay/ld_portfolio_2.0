@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isAuthUser } from '../../../utils/utils';
+import PropTypes from 'prop-types';
 
-const AdminRoute = ({ component: Component, ...rest }) => (
+// import { isAuthUser } from '../../../utils/utils';
+
+const AdminRoute = ({ component: Component, user, isAuth, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      localStorage.user.role === 2308 ? (
+      user.role === 2308 && isAuth ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -16,5 +18,10 @@ const AdminRoute = ({ component: Component, ...rest }) => (
     }
   />
 );
+
+AdminRoute.propTypes = {
+  isAuth: PropTypes.bool,
+  user: PropTypes.object,
+};
 
 export default AdminRoute;
