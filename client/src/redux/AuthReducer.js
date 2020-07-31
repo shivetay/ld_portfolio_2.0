@@ -39,14 +39,15 @@ export const userLoadSuccess = (payload) => ({
 //load user
 export const loadUser = () => {
   return async (dispatch) => {
+    let config;
     if (localStorage.getItem('jwt')) {
-      isAuthUser();
+      config = {
+        headers: {
+          Authorization: isAuthUser(),
+        },
+      };
     }
-    const config = {
-      headers: {
-        Authorization: localStorage.token,
-      },
-    };
+    console.log('header', config);
     try {
       const res = await axios.get(`${API_URL}/users/me`, config);
       dispatch(userLoadSuccess(res.data));
