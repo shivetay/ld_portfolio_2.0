@@ -7,9 +7,8 @@ import { isAuthUser, signOut } from '../../../utils/utils';
 
 import './Header.scss';
 
-const Header = ({ user, isAuth }) => {
+const Header = (user, isAuth) => {
   const logButtons = () => {
-    console.log(localStorage.getItem('user.role'), 'user local');
     const authData = isAuthUser();
     if (authData === false) {
       return <Button to={`/login`}>Login</Button>;
@@ -25,28 +24,27 @@ const Header = ({ user, isAuth }) => {
           </div>
         );
       } else {
-        if (
-          localStorage.getItem('user.role') === 2308 &&
-          localStorage.getItem('jwt')
-        ) {
-          return (
-            <div className='Header__Nav-link'>
-              <Button to={`/admin/dashboard`}>Dashboard admin</Button>
-              <Button to={`/users/me`}>Dashboard me</Button>
-              <Button to={`/`} onClick={signOut}>
-                Logout
-              </Button>
-            </div>
-          );
-        } else {
-          return (
-            <div className='Header__Nav-link'>
-              <Button to={`/users/me`}>Dashboard me</Button>
-              <Button to={`/`} onClick={signOut}>
-                Logout
-              </Button>
-            </div>
-          );
+        if (localStorage.getItem('user') && localStorage.getItem('jwt')) {
+          if (user.role === 2308) {
+            return (
+              <div className='Header__Nav-link'>
+                <Button to={`/admin/dashboard`}>Dashboard admin</Button>
+                <Button to={`/users/me`}>Dashboard me</Button>
+                <Button to={`/`} onClick={signOut}>
+                  Logout
+                </Button>
+              </div>
+            );
+          } else {
+            return (
+              <div className='Header__Nav-link'>
+                <Button to={`/users/me`}>Dashboard me</Button>
+                <Button to={`/`} onClick={signOut}>
+                  Logout
+                </Button>
+              </div>
+            );
+          }
         }
       }
     }

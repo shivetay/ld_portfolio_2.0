@@ -105,6 +105,7 @@ export default function reducer(state = initialState, action) {
     case AUTH_ERROR:
     case LOGIN_FAIL:
       localStorage.removeItem('jwt');
+      localStorage.removeItem('user');
       return {
         ...state,
         token: null,

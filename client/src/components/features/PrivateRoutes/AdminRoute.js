@@ -6,7 +6,7 @@ const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      isAuthUser().user.role === 2308 ? (
+      localStorage.user.role === 2308 ? (
         <Component {...props} />
       ) : (
         <Redirect
