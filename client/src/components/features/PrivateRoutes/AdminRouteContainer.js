@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 
-import { loginUser } from '../../../redux/AuthReducer';
-
 import AdminRoute from './AdminRoute';
 
 const mapStateToProps = (state) => ({
@@ -9,4 +7,4 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-export default connect(mapStateToProps)(AdminRoute);
+export default connect(mapStateToProps, null)(AdminRoute);

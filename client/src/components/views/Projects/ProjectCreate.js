@@ -27,7 +27,8 @@ class ProjectCreate extends Component {
 
   createProject = async (formData) => {
     this.setState({ loading: true });
-    const { token } = isAuthUser();
+    // localStorage.getItem('token') = isAuthUser();
+    const { token } = localStorage.getItem('jwt');
     const config = {
       headers: {
         Accept: 'application/json',

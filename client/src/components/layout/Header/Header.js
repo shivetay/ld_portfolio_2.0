@@ -7,15 +7,19 @@ import { isAuthUser, signOut } from '../../../utils/utils';
 
 import './Header.scss';
 
-const Header = (user, isAuth) => {
+const Header = ({ auth: { loading } }) => {
   const logButtons = () => {
     const authData = isAuthUser();
-    if (authData === false) {
+    console.log(authData, 'auth data');
+
+    // console.log(isAuth, 'isAuth one');
+    if (!authData) {
       return <Button to={`/login`}>Login</Button>;
     } else {
       if (
         !localStorage.getItem('jwt') ||
-        localStorage.getItem('jwt') === undefined
+        localStorage.getItem('jwt') === undefined ||
+        loading
       ) {
         return (
           <div className='Header__Nav-link'>
@@ -23,13 +27,9 @@ const Header = (user, isAuth) => {
           </div>
         );
       } else {
-        if (
-          localStorage.getItem('user') &&
-          localStorage.getItem('jwt') &&
-          isAuth
-        ) {
-          if (user.role === 2308) {
-            console.log(user.role, 'user role admin');
+        if (localStorage.getItem('user') && localStorage.getItem('jwt')) {
+          if (localStorage.getItem('user') === 2308) {
+            // console.log(user, 'user role admin');
             return (
               <div className='Header__Nav-link'>
                 <Button to={`/admin/dashboard`}>Dashboard admin</Button>
@@ -46,7 +46,7 @@ const Header = (user, isAuth) => {
                 <Button to={`/`} onClick={signOut}>
                   Logout
                 </Button>
-                {console.log(user.role, 'user role')}
+                {/* {console.log(user, 'user role')} */}
               </div>
             );
           }
@@ -70,7 +70,8 @@ const Header = (user, isAuth) => {
 
 Header.propTypes = {
   isAuth: PropTypes.bool,
-  user: PropTypes.object,
+  user: PropTypes.number,
+  auth: PropTypes.any,
 };
 
 export default Header;

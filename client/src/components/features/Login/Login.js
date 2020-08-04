@@ -25,25 +25,6 @@ class Login extends Component {
     user: PropTypes.object,
   };
 
-  // signIn = async (user) => {
-  //   const config = {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   };
-  //   try {
-  //     await axios
-  //       .post(`${API_URL}/login`, user, config)
-  //       .then((res) => authenticateUser(res.data));
-  //     this.setState({
-  //       formData: { email: '', password: '' },
-  //       userRedirect: true,
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   onChange = (e) => {
     const { formData } = this.state;
     //assign form data to new variable
@@ -92,7 +73,7 @@ class Login extends Component {
 
   redirectUser = () => {
     const { isAuth, user } = this.props;
-    user = isAuthUser();
+    localStorage.user = isAuthUser();
     if (isAuth === true) {
       if (localStorage.getItem('jwt')) {
         if (user.role === 2308) {
@@ -110,10 +91,9 @@ class Login extends Component {
     const { email, password } = this.state.formData;
     return (
       <Layout title='Login Form' description='Login to your account'>
-        {/* {!localStorage.getItem('jwt')
+        {!localStorage.getItem('jwt')
           ? this.formRender(email, password)
-          : this.redirectUser()} */}
-        {this.formRender(email, password)}
+          : this.redirectUser()}
       </Layout>
     );
   }

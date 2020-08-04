@@ -7,7 +7,7 @@ import MainLayout from './components/layout/MainLayout/MainLayout';
 import Home from './components/views/Home/Home';
 import Login from './components/features/Login/LoginContainer';
 import AdminRoute from './components/features/PrivateRoutes/AdminRouteContainer';
-import AdminDashboard from './components/views/AdminDashboard/AdminDashboard';
+import AdminDashboard from './components/views/AdminDashboard/AdminDashboardContainer';
 import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
 import UserDashboard from './components/views/UserDashboard/UserDashboard';
 import Projects from './components/views/Projects/Projects';
