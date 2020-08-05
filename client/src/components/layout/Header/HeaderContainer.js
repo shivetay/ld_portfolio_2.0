@@ -1,11 +1,15 @@
 import { connect } from 'react-redux';
 
+import { logoutUser } from '../../../redux/AuthReducer';
+
 import Header from './Header';
 
 const mapStateToProps = (state) => ({
-  // isAuth: state.auth.isAuthenticated,
-  // user: state.auth.user.role,
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+  logOut: () => dispatch(logoutUser()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

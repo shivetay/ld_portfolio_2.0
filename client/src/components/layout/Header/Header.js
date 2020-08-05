@@ -7,7 +7,7 @@ import { isAuthUser, signOut } from '../../../utils/utils';
 
 import './Header.scss';
 
-const Header = ({ auth: { user, loading } }) => {
+const Header = ({ auth: { user, loading }, logOut }) => {
   const logButtons = () => {
     const authData = isAuthUser();
     if (!authData) {
@@ -26,12 +26,11 @@ const Header = ({ auth: { user, loading } }) => {
       } else {
         if (localStorage.getItem('user') && localStorage.getItem('jwt')) {
           if (user.role === 2308) {
-            console.log(user, 'user role admin');
             return (
               <div className='Header__Nav-link'>
                 <Button to={`/admin/dashboard`}>Dashboard admin</Button>
                 <Button to={`/users/me`}>Dashboard me</Button>
-                <Button to={`/`} onClick={signOut}>
+                <Button to={`/`} onClick={logOut}>
                   Logout
                 </Button>
               </div>
@@ -40,10 +39,9 @@ const Header = ({ auth: { user, loading } }) => {
             return (
               <div className='Header__Nav-link'>
                 <Button to={`/users/me`}>Dashboard me</Button>
-                <Button to={`/`} onClick={signOut}>
+                <Button to={`/`} onClick={logOut}>
                   Logout
                 </Button>
-                {console.log(user, 'user role')}
               </div>
             );
           }
@@ -66,8 +64,7 @@ const Header = ({ auth: { user, loading } }) => {
 };
 
 Header.propTypes = {
-  isAuth: PropTypes.bool,
-  user: PropTypes.number,
+  logOut: PropTypes.func,
   auth: PropTypes.any,
 };
 

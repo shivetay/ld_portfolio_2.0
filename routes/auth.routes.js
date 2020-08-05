@@ -33,6 +33,6 @@ logout user
 private 
 */
 
-router.get('/logout', authCheck, logoutUser);
+router.get('/logout', logoutUser);
 
 module.exports = router;

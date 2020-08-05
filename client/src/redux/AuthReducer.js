@@ -14,6 +14,7 @@ export const AUTH_ERROR = createActionName('AUTH_ERROR');
 export const USER_LOADED = createActionName('USER_LOADED');
 export const LOGIN_SUCCESS = createActionName('LOGIN_SUCCESS');
 export const LOGIN_FAIL = createActionName('LOGIN_FAIL');
+export const LOGOUT = createActionName('LOGOUT');
 
 /* action creators */
 
@@ -33,6 +34,10 @@ export const userLoadSuccess = (payload) => ({
   payload,
   type: USER_LOADED,
 });
+export const logoutAction = (payload) => ({
+  payload,
+  type: LOGOUT,
+});
 
 /* action THUNKs*/
 
@@ -47,7 +52,6 @@ export const loadUser = () => {
         },
       };
     }
-    console.log('header', config);
     try {
       const res = await axios.get(`${API_URL}/users/me`, config);
       dispatch(userLoadSuccess(res.data));
@@ -57,6 +61,7 @@ export const loadUser = () => {
   };
 };
 
+// login user
 export const loginUser = (user) => {
   return async (dispatch) => {
     const config = {
@@ -78,6 +83,24 @@ export const loginUser = (user) => {
       dispatch(loginFailAction({ name: 'LOGIN_FAIL' }));
       console.log(err);
     }
+  };
+};
+
+// logout & profile clear
+
+export const logoutUser = (history) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`${API_URL}/logout`);
+      history.push('/');
+      dispatch(logoutAction({ name: 'LOGOUT' }));
+    } catch (err) {}
+    // dispatch(logoutAction({ name: 'LOGOUT' }));
+    console.log('error');
+    // const errors = err.response.data.errors;
+    // if (errors) {
+    //   errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    // }
   };
 };
 
@@ -104,6 +127,7 @@ export default function reducer(state = initialState, action) {
       };
     case AUTH_ERROR:
     case LOGIN_FAIL:
+    case LOGOUT:
       localStorage.removeItem('jwt');
       localStorage.removeItem('user');
       return {
