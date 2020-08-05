@@ -7,12 +7,9 @@ import { isAuthUser, signOut } from '../../../utils/utils';
 
 import './Header.scss';
 
-const Header = ({ auth: { loading } }) => {
+const Header = ({ auth: { user, loading } }) => {
   const logButtons = () => {
     const authData = isAuthUser();
-    console.log(authData, 'auth data');
-
-    // console.log(isAuth, 'isAuth one');
     if (!authData) {
       return <Button to={`/login`}>Login</Button>;
     } else {
@@ -28,8 +25,8 @@ const Header = ({ auth: { loading } }) => {
         );
       } else {
         if (localStorage.getItem('user') && localStorage.getItem('jwt')) {
-          if (localStorage.getItem('user') === 2308) {
-            // console.log(user, 'user role admin');
+          if (user.role === 2308) {
+            console.log(user, 'user role admin');
             return (
               <div className='Header__Nav-link'>
                 <Button to={`/admin/dashboard`}>Dashboard admin</Button>
@@ -46,7 +43,7 @@ const Header = ({ auth: { loading } }) => {
                 <Button to={`/`} onClick={signOut}>
                   Logout
                 </Button>
-                {/* {console.log(user, 'user role')} */}
+                {console.log(user, 'user role')}
               </div>
             );
           }

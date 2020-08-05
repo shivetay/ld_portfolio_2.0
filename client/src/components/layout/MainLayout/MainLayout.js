@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import Header from '../Header/Header';
+import Header from '../Header/HeaderContainer';
 import Footer from '../Footer/Footer';
 
 const MainLayout = ({ children }) => {
