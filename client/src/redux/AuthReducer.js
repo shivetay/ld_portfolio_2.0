@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { authenticateUser, isAuthUser, authHeader } from '../utils/utils';
+import { authenticateUser, isAuthUser } from '../utils/utils';
 
 import { API_URL } from '../config';
 import { setAlert } from './AlertReducer';
@@ -76,10 +76,10 @@ export const loginUser = (user) => {
       localStorage.setItem('user', JSON.stringify(res.data.user));
       dispatch(loadUser());
     } catch (err) {
-      // const errors = err.response.data.errors;
-      // if (errors) {
-      //   errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
-      // }
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
       dispatch(loginFailAction({ name: 'LOGIN_FAIL' }));
       console.log(err);
     }
@@ -90,13 +90,20 @@ export const loginUser = (user) => {
 
 export const logoutUser = (history) => {
   return async (dispatch) => {
+    const config = {
+      headers: {
+        Authorization: isAuthUser(),
+      },
+    };
     try {
-      await axios.post(`${API_URL}/logout`);
-      history.push('/');
+      await axios.get(`${API_URL}/logout`, config);
       dispatch(logoutAction({ name: 'LOGOUT' }));
-    } catch (err) {}
+      history.push('/');
+    } catch (err) {
+      console.log('error');
+    }
     // dispatch(logoutAction({ name: 'LOGOUT' }));
-    console.log('error');
+
     // const errors = err.response.data.errors;
     // if (errors) {
     //   errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
