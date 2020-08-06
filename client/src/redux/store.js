@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 
 import alerts from './AlertReducer';
 import auth from './AuthReducer';
-// import profile from './ProfileReducer';
+import project from './ProjectReducer';
 
 // initial state
 const initialState = {};
@@ -13,7 +13,7 @@ const initialState = {};
 const reducers = {
   auth,
   alerts,
-  // profile,
+  project,
 };
 
 // add blank reducers for initial state properties without reducers
