@@ -12,7 +12,7 @@ import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
 import UserDashboard from './components/views/UserDashboard/UserDashboard';
 import Projects from './components/views/Projects/Projects';
 import Project from './components/views/Projects/Project';
-import ProjectCreate from './components/views/Projects/ProjectCreate';
+import ProjectCreate from './components/views/Projects/ProjectCreateContainer';
 import ProjectUpdate from './components/views/Projects/ProjectUpdate';
 import Contact from './components/views/Contact/Contact';
 import Alerts from './components/common/Alerts/AlertsContainer';

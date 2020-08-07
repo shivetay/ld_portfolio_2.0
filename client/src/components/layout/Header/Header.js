@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Button from '../../common/Buttons/Button';
-import { isAuthUser, signOut } from '../../../utils/utils';
+import { isAuthUser } from '../../../utils/utils';
 
 import './Header.scss';
 

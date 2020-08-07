@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { isAuthUser } from '../../../utils/utils';
-
 import './AdminDashboard.scss';
 
 import Layout from '../../layout/MainLayout/Layout';

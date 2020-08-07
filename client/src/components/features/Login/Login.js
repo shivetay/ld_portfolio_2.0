@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 import './Login.scss';
 
-import { authenticateUser, isAuthUser } from '../../../utils/utils';
+import { isAuthUser } from '../../../utils/utils';
 import Layout from '../../layout/MainLayout/Layout';
 import Button from '../../common/Buttons/Button';
 

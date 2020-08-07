@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+// import axios from 'axios';
 
 import Button from '../../common/Buttons/Button';
 
 import './ProjectCreate.scss';
 
-import { API_URL } from '../../../config';
 import { isAuthUser } from '../../../utils/utils';
 
 class ProjectCreate extends Component {
@@ -22,34 +22,38 @@ class ProjectCreate extends Component {
       demo: '',
     },
     displayLinks: false,
-    loading: false,
   };
 
-  createProject = async (formData) => {
-    this.setState({ loading: true });
-    // localStorage.getItem('token') = isAuthUser();
-    const { token } = localStorage.getItem('jwt');
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-        Authorization: `${token}`,
-      },
-    };
-
-    try {
-      await axios
-        .post(
-          `${API_URL}/projects/create/${this.props.match.params.userId}`,
-          formData,
-          config
-        )
-        .then((res) => res.data);
-      this.setState({ loading: false });
-    } catch (err) {
-      console.log(err);
-    }
+  static propTypes = {
+    newProject: PropTypes.func,
+    history: PropTypes.any,
+    isAuth: PropTypes.bool,
   };
+
+  // createProject = async (formData) => {
+  //   this.setState({ loading: true });
+  //   const { token } = localStorage.getItem('jwt');
+  //   const config = {
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'multipart/form-data',
+  //       Authorization: `${token}`,
+  //     },
+  //   };
+
+  //   try {
+  //     await axios
+  //       .post(
+  //         `${API_URL}/projects/create/${this.props.match.params.userId}`,
+  //         formData,
+  //         config
+  //       )
+  //       .then((res) => res.data);
+  //     this.setState({ loading: false });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   onChange = (e) => {
     // setting formData in the state properly
@@ -62,6 +66,7 @@ class ProjectCreate extends Component {
   };
   onSubmit = (e) => {
     const { formData } = this.state;
+    const { newProject, isAuth } = this.props;
 
     const fileToUpload = document.querySelector('#photoID');
     const sendData = new FormData();
@@ -76,10 +81,11 @@ class ProjectCreate extends Component {
     sendData.append('demo', formData.demo);
     sendData.append('creator', formData.creator);
 
-    console.log('file', fileToUpload);
-
     e.preventDefault();
-    this.createProject(sendData);
+    if (!isAuth) {
+      console.log('auth err');
+    }
+    newProject(sendData);
   };
 
   toggleLinks = () => {
@@ -92,6 +98,7 @@ class ProjectCreate extends Component {
   };
 
   render() {
+    localStorage.user = isAuthUser();
     const {
       displayLinks,
       formData: {
@@ -147,7 +154,7 @@ class ProjectCreate extends Component {
               type='text'
               placeholder='Description'
               name='description'
-              maxlength='560'
+              maxLength='560'
               data-length='560'
               value={description}
               onChange={this.onChange}
@@ -160,7 +167,7 @@ class ProjectCreate extends Component {
               type='text'
               placeholder='Short description'
               name='shortDescription'
-              maxlength='20'
+              maxLength='20'
               data-length='20'
               value={shortDescription}
               onChange={this.onChange}></textarea>
