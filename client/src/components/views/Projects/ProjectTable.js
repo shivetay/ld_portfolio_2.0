@@ -1,12 +1,14 @@
+/* admin list project component */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faPenSquare } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../common/Buttons/Button';
-import { delProject } from '../../../utils/utils';
 
-const ProjectTable = ({ projects }) => {
+const ProjectTable = ({ projects, delProject }) => {
   return (
     // <div className='Project'>
     <table className='Project__Table'>
@@ -30,6 +32,9 @@ const ProjectTable = ({ projects }) => {
               <Button onClick={() => delProject(project._id)}>
                 <FontAwesomeIcon icon={faTimes} />
               </Button>
+              {/* <Button>
+                <FontAwesomeIcon icon={faTimes} />
+              </Button> */}
             </td>
             <td className='Project__Table-links'>
               <Button to={`/projects/update/${project._id}`}>
@@ -42,6 +47,13 @@ const ProjectTable = ({ projects }) => {
     </table>
     // </div>
   );
+};
+
+ProjectTable.propTypes = {
+  getProj: PropTypes.func,
+  delProject: PropTypes.func,
+  projects: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 export default ProjectTable;

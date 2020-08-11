@@ -5,7 +5,7 @@ import './AdminDashboard.scss';
 
 import Layout from '../../layout/MainLayout/Layout';
 import Button from '../../common/Buttons/Button';
-import ProjectListAdmin from '../Projects/ProjectListAdmin';
+import ProjectListAdmin from '../Projects/ProjectListAdminContainer';
 
 const AdminDashboard = ({ user: { _id, name } }) => {
   const adminLinks = () => {
@@ -23,7 +23,6 @@ const AdminDashboard = ({ user: { _id, name } }) => {
     );
   };
 
-  // to={`/projects/create/${_id}`}
   return (
     <Layout
       title='Admin Dashboard'

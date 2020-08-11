@@ -10,17 +10,26 @@ const reducerName = 'project';
 const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
-
+export const GET_PROJECTS = createActionName('GET_PROJECTS');
+export const GET_PROJECTS_FAILED = createActionName('GET_PROJECTS_FAILED');
 export const CREATE_PROJECT = createActionName('CREATE_PROJECT');
 export const CREATE_SUCCESS = createActionName('CREATE_SUCCESS');
 export const CREATE_FAILED = createActionName('CREATE_FAILED');
 export const UPDATE_PROJECT = createActionName('UPDATE_PROJECT');
-export const PROJECT_UPDATE_SUCCESS = createActionName(
-  'PROJECT_UPDATE_SUCCESS'
-);
+export const UPDATE_SUCCESS = createActionName('UPDATE_SUCCESS');
+export const DELETE_PROJECT = createActionName('DELETE_PROJECT');
+export const DELETE_FAILED = createActionName('DELETE_FAILED');
 
 /* action creators */
 
+export const getAllProjectsAction = (payload) => ({
+  payload,
+  type: GET_PROJECTS,
+});
+export const getAllProjectsFailedAction = (payload) => ({
+  payload,
+  type: GET_PROJECTS_FAILED,
+});
 export const createProjectAction = (payload) => ({
   payload,
   type: CREATE_PROJECT,
@@ -33,8 +42,29 @@ export const createSuccess = (payload) => ({
   payload,
   type: CREATE_SUCCESS,
 });
+export const projectDeleteAction = (payload) => ({
+  payload,
+  type: DELETE_PROJECT,
+});
+export const projectDeleteFailed = (payload) => ({
+  payload,
+  type: DELETE_FAILED,
+});
 
 /* action THUNKs*/
+
+//get all projects
+export const getAllProjects = (page) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get(`${API_URL}/projects/?page=${page}`);
+      dispatch(getAllProjectsAction(res.data));
+    } catch (err) {
+      dispatch(getAllProjectsFailedAction({ name: 'GET_PROJECTS_FAILED' }));
+    }
+  };
+};
+
 //create new project
 
 export const createNewProject = (formData, history, id) => {
@@ -62,9 +92,30 @@ export const createNewProject = (formData, history, id) => {
   };
 };
 
+// delete project
+export const deleteProject = (id) => {
+  return async (dispatch) => {
+    const config = {
+      headers: {
+        Authorization: isAuthUser(),
+      },
+    };
+    try {
+      console.log('del');
+      // eslint-disable-next-line
+      const res = await axios.delete(
+        `${API_URL}/projects/delete/${id}`,
+        config
+      );
+      dispatch(projectDeleteAction(res.data));
+    } catch (err) {
+      dispatch(projectDeleteFailed({ name: 'DELETE_FAILED' }));
+    }
+  };
+};
+
 /* initial state */
 const initialState = {
-  //store token in localstorage
   loading: true,
   project: null,
   projects: [],
@@ -73,6 +124,14 @@ const initialState = {
 /* reducer */
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case GET_PROJECTS:
+      return {
+        ...state,
+        loading: false,
+        project: null,
+        projects: action.payload,
+      };
+
     case CREATE_PROJECT:
       return {
         ...state,
@@ -80,10 +139,17 @@ export default function reducer(state = initialState, action) {
         project: action.payload,
       };
     case CREATE_FAILED:
+    case DELETE_PROJECT:
       return {
         ...state,
         loading: true,
         project: null,
+      };
+    case GET_PROJECTS_FAILED:
+      return {
+        ...state,
+        loading: true,
+        projects: [],
       };
     default:
       return state;
