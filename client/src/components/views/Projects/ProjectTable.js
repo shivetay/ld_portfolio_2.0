@@ -32,6 +32,7 @@ const ProjectTable = ({ projects, delProject }) => {
               <Button onClick={() => delProject(project._id)}>
                 <FontAwesomeIcon icon={faTimes} />
               </Button>
+              {console.log(project._id, 'id delete')}
               {/* <Button>
                 <FontAwesomeIcon icon={faTimes} />
               </Button> */}
