@@ -11,7 +11,7 @@ import { isAuthUser } from '../../../utils/utils';
 class ProjectCreate extends Component {
   state = {
     formData: {
-      creator: this.props.match.params.userId,
+      creator: '',
       title: '',
       description: '',
       shortDescription: '',
@@ -28,6 +28,7 @@ class ProjectCreate extends Component {
     newProject: PropTypes.func,
     history: PropTypes.any,
     isAuth: PropTypes.bool,
+    user: PropTypes.object,
   };
 
   // createProject = async (formData) => {
@@ -64,12 +65,14 @@ class ProjectCreate extends Component {
       formData: newFormData,
     });
   };
+
   onSubmit = (e) => {
     const { formData } = this.state;
-    const { newProject, isAuth } = this.props;
+    const { newProject, user, history, isAuth } = this.props;
 
     const fileToUpload = document.querySelector('#photoID');
     const sendData = new FormData();
+    const creatorProject = user._id;
 
     sendData.append('title', formData.title);
     sendData.append('description', formData.description);
@@ -79,13 +82,15 @@ class ProjectCreate extends Component {
     sendData.append('shortDescription', formData.shortDescription);
     sendData.append('git', formData.git);
     sendData.append('demo', formData.demo);
-    sendData.append('creator', formData.creator);
+    sendData.append('creator', user._id);
 
-    e.preventDefault();
     if (!isAuth) {
       console.log('auth err');
     }
-    newProject(sendData);
+
+    e.preventDefault();
+    newProject(sendData, history, creatorProject);
+    console.log('user', creatorProject);
   };
 
   toggleLinks = () => {

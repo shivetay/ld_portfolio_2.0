@@ -36,27 +36,27 @@ export const createSuccess = (payload) => ({
 
 /* action THUNKs*/
 //create new project
-export const createNewProject = (formData, history) => {
+
+export const createNewProject = (formData, history, id) => {
   return async (dispatch) => {
+    const config = {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+        Authorization: isAuthUser(),
+      },
+    };
     try {
-      const config = {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'multipart/form-data',
-          Authorization: isAuthUser(),
-        },
-      };
       const res = await axios.post(
-        `${API_URL}/projects/create/${this.props.match.params.userId}`,
+        `${API_URL}/projects/create/${id}`,
         formData,
         config
       );
-      // authenticateUser(res.data.token);
       dispatch(createProjectAction(res.data));
-      dispatch(createSuccess({ name: 'CREATE_SUCCESS' }));
       history.push('/admin/dashboard');
+      dispatch(createSuccess({ name: CREATE_SUCCESS }));
     } catch (err) {
-      console.log('err');
+      console.log('reducer error');
       dispatch(createProjectActionFailed({ name: 'CREATE_FAILED' }));
     }
   };
@@ -78,6 +78,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         loading: false,
         project: action.payload,
+      };
+    case CREATE_FAILED:
+      return {
+        ...state,
+        loading: true,
+        project: null,
       };
     default:
       return state;

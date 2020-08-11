@@ -23,6 +23,7 @@ const AdminDashboard = ({ user: { _id, name } }) => {
     );
   };
 
+  // to={`/projects/create/${_id}`}
   return (
     <Layout
       title='Admin Dashboard'
