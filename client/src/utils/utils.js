@@ -1,30 +1,3 @@
-import { API_URL } from '../config';
-import axios from 'axios';
-
-// export const signOut = async (e) => {
-//   e.preventDefault();
-//   if (typeof window !== 'undefined') {
-//     localStorage.removeItem('jwt');
-//     return await fetch(`${API_URL}/logout`, { method: 'GET' }).then((res) => {
-//       return res.json();
-//     });
-//   }
-// };
-
-// export const delProject = async (id) => {
-//   const { token } = isAuthUser();
-//   const config = {
-//     headers: {
-//       Authorization: `${token}`,
-//     },
-//   };
-//   try {
-//     // eslint-disable-next-line
-//     const res = await axios.delete(`${API_URL}/projects/delete/${id}`, config);
-//     window.location.reload(false);
-//   } catch (err) {}
-// };
-
 export const authenticateUser = (data) => {
   if (typeof window !== 'undefined') {
     localStorage.setItem('jwt', JSON.stringify(data));

@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProj: (page) => dispatch(getAllProjects(page)),
-  // delProject: (id) => dispatch(deleteProject(id)),
+  delProject: (id) => dispatch(deleteProject(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectListAdmin);

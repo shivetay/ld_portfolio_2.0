@@ -15,6 +15,7 @@ class ProjectListAdmin extends Component {
 
   static propTypes = {
     getProj: PropTypes.func,
+    delProject: PropTypes.func,
     projects: PropTypes.array,
     loading: PropTypes.bool,
   };
