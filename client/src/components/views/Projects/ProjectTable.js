@@ -29,9 +29,12 @@ const ProjectTable = ({ projects, delProject }) => {
             <td className='Project__Table-type'>{project.projectType}</td>
             <td>{project.creator}</td>
             <td className='Project__Table-links'>
-              <Button onClick={() => delProject(project._id)}>
+              {/* <Button onClick={() => delProject(project._id)}>
                 <FontAwesomeIcon icon={faTimes} />
-              </Button>
+              </Button> */}
+              <button onClick={() => delProject(project._id)}>
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
             </td>
             <td className='Project__Table-links'>
               <Button to={`/projects/update/${project._id}`}>

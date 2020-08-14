@@ -21,7 +21,8 @@ const Button = ({ href, to, exact, className, children, type, onClick }) => {
         to={to}
         exact={exact}
         className={`button ${className}`}
-        onClick={onClick}>
+        // onClick={onClick}
+      >
         {children}
       </Link>
     );

@@ -10,7 +10,7 @@ import AdminRoute from './components/features/PrivateRoutes/AdminRouteContainer'
 import AdminDashboard from './components/views/AdminDashboard/AdminDashboardContainer';
 import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
 import UserDashboard from './components/views/UserDashboard/UserDashboard';
-import Projects from './components/views/Projects/Projects';
+import Projects from './components/views/Projects/ProjectsContainer';
 import Project from './components/views/Projects/Project';
 import ProjectCreate from './components/views/Projects/ProjectCreateContainer';
 import ProjectUpdate from './components/views/Projects/ProjectUpdate';

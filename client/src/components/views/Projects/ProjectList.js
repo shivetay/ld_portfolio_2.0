@@ -1,3 +1,4 @@
+/* projecs for public Projects.js */
 import React, { Fragment } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

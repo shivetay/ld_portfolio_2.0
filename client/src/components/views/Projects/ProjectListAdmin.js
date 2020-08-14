@@ -8,8 +8,6 @@ import Spinner from '../../common/Spinner/Spinner';
 
 class ProjectListAdmin extends Component {
   state = {
-    data: [],
-    loading: false,
     page: 1,
   };
 

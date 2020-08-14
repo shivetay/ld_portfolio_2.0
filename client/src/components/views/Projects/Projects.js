@@ -1,6 +1,7 @@
 /* display for publick projects */
 
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { API_URL } from '../../../config';
@@ -12,48 +13,55 @@ import Spinner from '../../common/Spinner/Spinner';
 
 class Projects extends Component {
   state = {
-    data: [],
-    loading: false,
     page: 1,
   };
+  static propTypes = {
+    getProj: PropTypes.func,
+    projects: PropTypes.array,
+    loading: PropTypes.bool,
+  };
+
   componentDidMount() {
     const { page } = this.state;
-    this.getProjects(page);
+    const { getProj } = this.props;
+    getProj(page);
   }
 
   loadMore = (number) => {
     const { page } = this.state;
+    const { getProj } = this.props;
     this.setState({ page: page + number });
-    this.getProjects(page + number);
+    getProj(page + number);
   };
 
   loadLess = (number) => {
     const { page } = this.state;
+    const { getProj } = this.props;
     this.setState({ page: page - number });
-    this.getProjects(page - number);
+    getProj(page - number);
   };
 
-  getProjects = async (page) => {
-    this.setState({ loading: true });
-    try {
-      await axios.get(`${API_URL}/projects/?page=${page}`).then((res) =>
-        this.setState({
-          data: res.data,
-          loading: false,
-        })
-      );
-    } catch (err) {}
-  };
+  // getProjects = async (page) => {
+  //   this.setState({ loading: true });
+  //   try {
+  //     await axios.get(`${API_URL}/projects/?page=${page}`).then((res) =>
+  //       this.setState({
+  //         data: res.data,
+  //         loading: false,
+  //       })
+  //     );
+  //   } catch (err) {}
+  // };
 
   renderProjects = () => {
-    const { loading, data } = this.state;
+    const { projects, loading } = this.props;
     if (loading === true) {
       return <Spinner />;
     } else {
       return (
         <section className='Projects'>
           <div className='Projects__Container'>
-            <ProjectList projects={data} />
+            <ProjectList projects={projects} />
           </div>
         </section>
       );
@@ -61,23 +69,24 @@ class Projects extends Component {
   };
 
   renderPgaination = () => {
-    const { data, loading } = this.state;
-    if (!data.length && loading === true) {
+    const { projects, loading } = this.props;
+    if (!projects.length && loading === true) {
       return <h2 className='Loader__Header'>Loading Projects</h2>;
-    } else if (!data.length) {
+    } else if (!projects.length) {
       return <h2 className='Loader__Header'>No more projects</h2>;
     } else {
     }
   };
 
   render() {
-    const { data, page } = this.state;
+    const { page } = this.state;
+    const { projects } = this.props;
     return (
       <Fragment>
         {this.renderPgaination()}
         {this.renderProjects()}
         <div className='Paggination'>
-          {page > 1 || !data.length ? (
+          {page > 1 || !projects.length ? (
             <div className='Paggination__Content'>
               <button
                 className='button Paggination-btn'
@@ -88,7 +97,7 @@ class Projects extends Component {
           ) : (
             ''
           )}
-          {data.length ? (
+          {projects.length ? (
             <div className='Paggination__Content'>
               <button
                 className='button Paggination-btn'
