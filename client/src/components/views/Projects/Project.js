@@ -1,9 +1,7 @@
-/* single project for projects publick */
+/* single project */
 
 import React, { Component, Fragment } from 'react';
-import axios from 'axios';
-
-import { API_URL } from '../../../config';
+import PropTypes from 'prop-types';
 
 import './Project.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,34 +13,25 @@ import Spinner from '../../common/Spinner/Spinner';
 import ShowImage from '../../common/ShowImage/ShowImage';
 
 class Project extends Component {
-  state = {
-    project: [],
-    loading: false,
+  static propTypes = {
+    project: PropTypes.object,
+    projects: PropTypes.array,
+    loading: PropTypes.bool,
+    getOneProj: PropTypes.func,
   };
-
   componentDidMount() {
-    this.ftechId();
+    const {
+      getOneProj,
+      projects: { _id },
+    } = this.props;
+    getOneProj(_id);
   }
-
-  ftechId = async () => {
-    this.setState({ loading: true });
-    try {
-      await axios
-        .get(`${API_URL}/projects/${this.props.match.params.projectId}`)
-        .then((res) =>
-          this.setState({
-            project: res.data,
-            loading: false,
-          })
-        );
-    } catch (err) {}
-  };
 
   renderProject = () => {
     const {
       loading,
       project: { _id, key, title, tags, description, links, projectType },
-    } = this.state;
+    } = this.props;
     if (loading === true) {
       return <Spinner />;
     } else {

@@ -11,7 +11,7 @@ import AdminDashboard from './components/views/AdminDashboard/AdminDashboardCont
 import PrivateRoute from './components/features/PrivateRoutes/PrivateRoute';
 import UserDashboard from './components/views/UserDashboard/UserDashboard';
 import Projects from './components/views/Projects/ProjectsContainer';
-import Project from './components/views/Projects/Project';
+import Project from './components/views/Projects/ProjectContainer';
 import ProjectCreate from './components/views/Projects/ProjectCreateContainer';
 import ProjectUpdate from './components/views/Projects/ProjectUpdate';
 import Contact from './components/views/Contact/Contact';

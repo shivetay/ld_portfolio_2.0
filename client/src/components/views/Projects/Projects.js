@@ -2,13 +2,10 @@
 
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-
-import { API_URL } from '../../../config';
 
 import './Projects.scss';
 
-import ProjectList from './ProjectList';
+import ProjectList from './ProjectListContainer';
 import Spinner from '../../common/Spinner/Spinner';
 
 class Projects extends Component {
@@ -40,18 +37,6 @@ class Projects extends Component {
     this.setState({ page: page - number });
     getProj(page - number);
   };
-
-  // getProjects = async (page) => {
-  //   this.setState({ loading: true });
-  //   try {
-  //     await axios.get(`${API_URL}/projects/?page=${page}`).then((res) =>
-  //       this.setState({
-  //         data: res.data,
-  //         loading: false,
-  //       })
-  //     );
-  //   } catch (err) {}
-  // };
 
   renderProjects = () => {
     const { projects, loading } = this.props;

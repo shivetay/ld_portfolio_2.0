@@ -10,6 +10,7 @@ const reducerName = 'project';
 const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
+export const GET_PROJECT = createActionName('GET_PROJECT');
 export const GET_PROJECTS = createActionName('GET_PROJECTS');
 export const GET_PROJECTS_FAILED = createActionName('GET_PROJECTS_FAILED');
 export const CREATE_PROJECT = createActionName('CREATE_PROJECT');
@@ -21,6 +22,11 @@ export const DELETE_PROJECT = createActionName('DELETE_PROJECT');
 export const DELETE_FAILED = createActionName('DELETE_FAILED');
 
 /* action creators */
+
+export const getOneProejctAction = (payload) => ({
+  payload,
+  type: GET_PROJECT,
+});
 
 export const getAllProjectsAction = (payload) => ({
   payload,
@@ -52,6 +58,16 @@ export const projectDeleteFailed = (payload) => ({
 });
 
 /* action THUNKs*/
+
+//get one prject
+export const getProject = (id) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios(`${API_URL}/projects/${id}`);
+      dispatch(getOneProejctAction(res.data));
+    } catch (err) {}
+  };
+};
 
 //get all projects
 export const getAllProjects = (page) => {
@@ -101,12 +117,12 @@ export const deleteProject = (id) => {
       },
     };
     try {
-      console.log('del');
       const res = await axios.delete(
         `${API_URL}/projects/delete/${id}`,
         config
       );
       dispatch(projectDeleteAction(res.data));
+      dispatch(getAllProjects());
     } catch (err) {
       dispatch(projectDeleteFailed({ name: 'DELETE_FAILED' }));
     }
@@ -123,11 +139,16 @@ const initialState = {
 /* reducer */
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case GET_PROJECT:
+      return {
+        ...state,
+        loading: false,
+        project: action.payload,
+      };
     case GET_PROJECTS:
       return {
         ...state,
         loading: false,
-        project: null,
         projects: action.payload,
       };
 

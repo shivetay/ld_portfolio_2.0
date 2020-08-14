@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { deleteProject, getAllProjects } from '../../../redux/ProjectReducer';
+import { getAllProjects } from '../../../redux/ProjectReducer';
 
 import Projects from './Projects';
 

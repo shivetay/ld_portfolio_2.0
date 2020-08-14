@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './ProjectListAdmin.scss';
 
-import ProjectTable from './ProjectTable';
+import ProjectTable from './ProjectTableContainer';
 import Spinner from '../../common/Spinner/Spinner';
 
 class ProjectListAdmin extends Component {

@@ -1,5 +1,6 @@
 /* projecs for public Projects.js */
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -8,12 +9,17 @@ import { faTerminal } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../common/Buttons/Button';
 import ShowImage from '../../common/ShowImage/ShowImage';
 
-const ProjectList = ({ projects, className }) => {
+const ProjectList = ({ projects, className, getOneProj }) => {
   return (
     <Fragment>
       {projects.map((project) => (
         <div className='Projects__Project' key={project._id}>
-          <Button to={`/projects/${project._id}`}>
+          {/* <Button to={`/projects/${project._id}`}>
+            <h3 className='Projects-name'>{project.title}</h3>
+          </Button> */}
+          <Button
+            to={`/projects/${project._id}`}
+            onClick={getOneProj(project._id)}>
             <h3 className='Projects-name'>{project.title}</h3>
           </Button>
           <div className='Projects__Photo'>
@@ -38,6 +44,10 @@ const ProjectList = ({ projects, className }) => {
       ))}
     </Fragment>
   );
+};
+
+ProjectList.propTypes = {
+  getOneProj: PropTypes.func,
 };
 
 export default ProjectList;

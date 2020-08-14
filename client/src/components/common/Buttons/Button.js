@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// import { isAuthUser, signOut } from '../../../utils/utils';
-
 import './Button.scss';
 
 const Button = ({ href, to, exact, className, children, type, onClick }) => {
@@ -31,7 +29,7 @@ const Button = ({ href, to, exact, className, children, type, onClick }) => {
     <button
       className={`button ${className}`}
       type={type}
-      // onClick={onClick}
+      onClick={onClick}
       // disabled={props.disabled}
     >
       {children}
