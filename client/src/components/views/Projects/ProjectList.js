@@ -19,8 +19,10 @@ const ProjectList = ({ projects, className, getOneProj }) => {
           </Button> */}
           <Button
             to={`/projects/${project._id}`}
-            onClick={getOneProj(project._id)}>
+            // onClick={() => getOneProj(project._id)}
+          >
             <h3 className='Projects-name'>{project.title}</h3>
+            <p>{project._id}</p>
           </Button>
           <div className='Projects__Photo'>
             <ShowImage

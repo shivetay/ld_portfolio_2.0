@@ -19,62 +19,78 @@ class Project extends Component {
     loading: PropTypes.bool,
     getOneProj: PropTypes.func,
   };
+
   componentDidMount() {
-    const {
-      getOneProj,
-      projects: { _id },
-    } = this.props;
-    getOneProj(_id);
+    const { getOneProj, projects } = this.props;
+
+    for (let project of projects) {
+      if (project._id === this.props.match.params.projectId) {
+        console.log('proj id', project._id);
+        getOneProj(project._id);
+      }
+    }
   }
 
+  componentDidUpdate() {
+    const { getOneProj, projects } = this.props;
+
+    for (let project of projects) {
+      if (project._id === this.props.match.params.projectId) {
+        console.log('proj id', project._id);
+        getOneProj(project._id);
+      }
+    }
+  }
+
+  renderLinks = () => {
+    const { loading, project } = this.props;
+    return loading ? (
+      <h1>Generating links...</h1>
+    ) : (
+      <Fragment>
+        <Button href={project.links.demo}>
+          <FontAwesomeIcon icon={faTerminal} />
+        </Button>
+        <Button href={project.links.git}>
+          <FontAwesomeIcon icon={faGithub} />
+        </Button>
+      </Fragment>
+    );
+  };
+
   renderProject = () => {
-    const {
-      loading,
-      project: { _id, key, title, tags, description, links, projectType },
-    } = this.props;
-    if (loading === true) {
+    const { loading, project } = this.props;
+    if (loading === true || !project) {
       return <Spinner />;
     } else {
       return (
-        <section className='Project' key={key}>
+        <section className='Project' key={project.key}>
           <div className='Project__Container'>
             <div className='Project__Proj-header'>
-              <h3 className='Project-name'>{title}</h3>
-              <p className='Project-type'>{projectType}</p>
+              <h3 className='Project-name'>{project.title}</h3>
+              <p className='Project-type'>{project.projectType}</p>
             </div>
-
             <div className='Project__Proj-container'>
               <div className='Project__Proj-photo'>
                 <span>
                   <ShowImage
                     className='photo'
-                    item={_id}
+                    item={project._id}
                     url='project'
-                    alt={title}
+                    alt={project.title}
                   />
                 </span>
                 <div className='text'>
                   <p className='Project-tech'>
-                    <strong>TAGS:</strong> {tags}
+                    <strong>TAGS:</strong> {project.tags}
                   </p>
                 </div>
               </div>
               {/* end photo */}
               <div className='Project__Proj-content'>
-                <p className='Project-descr'>{description}</p>
+                <p className='Project-descr'>{project.description}</p>
                 <div className='Project-button'>
-                  {loading ? (
-                    <h1>Generating links...</h1>
-                  ) : (
-                    <Fragment>
-                      <Button href='#'>
-                        <FontAwesomeIcon icon={faTerminal} />
-                      </Button>
-                      <Button href='#'>
-                        <FontAwesomeIcon icon={faGithub} />
-                      </Button>
-                    </Fragment>
-                  )}
+                  {this.renderLinks()}
                   <Button to={`/projects`}>Back</Button>
                 </div>
               </div>

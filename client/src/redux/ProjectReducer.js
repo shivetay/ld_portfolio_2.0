@@ -11,6 +11,7 @@ const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
 export const GET_PROJECT = createActionName('GET_PROJECT');
+export const LOAD_SUCCESS = createActionName('LOAD_SUCCESS');
 export const GET_PROJECTS = createActionName('GET_PROJECTS');
 export const GET_PROJECTS_FAILED = createActionName('GET_PROJECTS_FAILED');
 export const CREATE_PROJECT = createActionName('CREATE_PROJECT');
@@ -23,11 +24,14 @@ export const DELETE_FAILED = createActionName('DELETE_FAILED');
 
 /* action creators */
 
-export const getOneProejctAction = (payload) => ({
+export const getOneProjectAction = (payload) => ({
   payload,
   type: GET_PROJECT,
 });
-
+export const loadSuccess = (payload) => ({
+  payload,
+  type: LOAD_SUCCESS,
+});
 export const getAllProjectsAction = (payload) => ({
   payload,
   type: GET_PROJECTS,
@@ -64,8 +68,11 @@ export const getProject = (id) => {
   return async (dispatch) => {
     try {
       const res = await axios(`${API_URL}/projects/${id}`);
-      dispatch(getOneProejctAction(res.data));
-    } catch (err) {}
+      dispatch(getOneProjectAction(res.data));
+      dispatch(loadSuccess({ name: 'LOAD_SUCCESS' }));
+    } catch (err) {
+      dispatch(getAllProjectsFailedAction({ name: 'GET_PROJECTS_FAILED' }));
+    }
   };
 };
 
@@ -142,7 +149,7 @@ export default function reducer(state = initialState, action) {
     case GET_PROJECT:
       return {
         ...state,
-        loading: false,
+        loading: true,
         project: action.payload,
       };
     case GET_PROJECTS:
@@ -158,6 +165,12 @@ export default function reducer(state = initialState, action) {
         loading: false,
         project: action.payload,
       };
+    case LOAD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
     case CREATE_FAILED:
     case DELETE_PROJECT:
       return {
