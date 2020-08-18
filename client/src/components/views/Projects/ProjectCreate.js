@@ -31,31 +31,6 @@ class ProjectCreate extends Component {
     user: PropTypes.object,
   };
 
-  // createProject = async (formData) => {
-  //   this.setState({ loading: true });
-  //   const { token } = localStorage.getItem('jwt');
-  //   const config = {
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'multipart/form-data',
-  //       Authorization: `${token}`,
-  //     },
-  //   };
-
-  //   try {
-  //     await axios
-  //       .post(
-  //         `${API_URL}/projects/create/${this.props.match.params.userId}`,
-  //         formData,
-  //         config
-  //       )
-  //       .then((res) => res.data);
-  //     this.setState({ loading: false });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   onChange = (e) => {
     // setting formData in the state properly
     const { formData } = this.state;
@@ -84,13 +59,8 @@ class ProjectCreate extends Component {
     sendData.append('demo', formData.demo);
     sendData.append('creator', user._id);
 
-    if (!isAuth) {
-      console.log('auth err');
-    }
-
     e.preventDefault();
     newProject(sendData, history, creatorProject);
-    console.log('user', creatorProject);
   };
 
   toggleLinks = () => {
@@ -131,6 +101,7 @@ class ProjectCreate extends Component {
           onSubmit={(e) => this.onSubmit(e)}>
           <div className='input-field'>
             <select
+              class='browser-default'
               name='projectType'
               value={projectType}
               onChange={this.onChange}>

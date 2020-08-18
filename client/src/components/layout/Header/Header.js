@@ -24,7 +24,7 @@ const Header = ({ auth: { user, loading }, logOut }) => {
           </div>
         );
       } else {
-        if (localStorage.getItem('user') && localStorage.getItem('jwt')) {
+        if (localStorage.getItem('jwt')) {
           if (user.role === 2308) {
             return (
               <div className='Header__Nav-link'>

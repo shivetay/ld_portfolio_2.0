@@ -11,6 +11,7 @@ const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
 export const AUTH_ERROR = createActionName('AUTH_ERROR');
+export const ERROR_PROFILE = createActionName('ERROR_PROFILE');
 export const USER_LOADED = createActionName('USER_LOADED');
 export const LOGIN_SUCCESS = createActionName('LOGIN_SUCCESS');
 export const LOGIN_FAIL = createActionName('LOGIN_FAIL');
@@ -29,6 +30,10 @@ export const loginFailAction = (payload) => ({
 export const userAuthError = (payload) => ({
   payload,
   type: AUTH_ERROR,
+});
+export const getProfileError = (payload) => ({
+  payload,
+  type: ERROR_PROFILE,
 });
 export const userLoadSuccess = (payload) => ({
   payload,
@@ -75,6 +80,7 @@ export const loginUser = (user) => {
       dispatch(loginSuccesAction(res.data));
       localStorage.setItem('user', JSON.stringify(res.data.user));
       dispatch(loadUser());
+      dispatch(setAlert('User Loged in', ''));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -99,15 +105,20 @@ export const logoutUser = (history) => {
       await axios.get(`${API_URL}/logout`, config);
       dispatch(logoutAction({ name: 'LOGOUT' }));
       history.push('/');
+      dispatch(setAlert('User Loged in', ''));
     } catch (err) {
-      console.log('error');
+      // const errors = err.response.data.errors;
+      // if (errors) {
+      //   errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      // }
+      // dispatch(
+      //   getProfileError({
+      //     msg: err.response.statusText,
+      //     status: err.response.status,
+      //   })
+      // );
+      console.log(err);
     }
-    // dispatch(logoutAction({ name: 'LOGOUT' }));
-
-    // const errors = err.response.data.errors;
-    // if (errors) {
-    //   errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
-    // }
   };
 };
 
@@ -119,6 +130,7 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
+  error: {},
 };
 
 /* reducer */
@@ -143,6 +155,12 @@ export default function reducer(state = initialState, action) {
         isAuthenticated: null,
         loading: false,
         user: null,
+      };
+    case ERROR_PROFILE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
       };
     //user loading
     case USER_LOADED:

@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
   project: state.project.project,
   projects: state.project.projects,
   loading: state.project.loading,
+  user: state.auth.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -15,23 +15,13 @@ import ShowImage from '../../common/ShowImage/ShowImage';
 class Project extends Component {
   static propTypes = {
     project: PropTypes.object,
+    user: PropTypes.object,
     projects: PropTypes.array,
     loading: PropTypes.bool,
     getOneProj: PropTypes.func,
   };
 
   componentDidMount() {
-    const { getOneProj, projects } = this.props;
-
-    for (let project of projects) {
-      if (project._id === this.props.match.params.projectId) {
-        console.log('proj id', project._id);
-        getOneProj(project._id);
-      }
-    }
-  }
-
-  componentDidUpdate() {
     const { getOneProj, projects } = this.props;
 
     for (let project of projects) {
@@ -56,6 +46,16 @@ class Project extends Component {
         </Button>
       </Fragment>
     );
+  };
+
+  renderbuttons = () => {
+    const { user } = this.props;
+
+    if (!user) {
+      return <Button to={`/projects`}>Back</Button>;
+    } else {
+      return <Button to={`/admin/dashboard`}>Back</Button>;
+    }
   };
 
   renderProject = () => {
@@ -91,7 +91,7 @@ class Project extends Component {
                 <p className='Project-descr'>{project.description}</p>
                 <div className='Project-button'>
                   {this.renderLinks()}
-                  <Button to={`/projects`}>Back</Button>
+                  {this.renderbuttons()}
                 </div>
               </div>
             </div>
