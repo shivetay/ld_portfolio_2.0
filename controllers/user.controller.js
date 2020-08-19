@@ -28,6 +28,7 @@ exports.read = async (req, res) => {
     if (!user) return res.status(400).json({ msg: 'User not found' });
     res.json(user);
   } catch (err) {
+    console.error(err.message);
     res.status(500).send('Server Error');
   }
 };

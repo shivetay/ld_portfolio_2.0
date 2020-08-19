@@ -120,8 +120,6 @@ exports.update = (req, res) => {
     let project = req.project;
     // const id = req.params.projectId;
     // let project = Project.findByIdAndUpdate(id);
-    console.log('project', project);
-    console.log('req.proj', req.project);
 
     //1kb = 1000
     //1mb = 1000000kb
