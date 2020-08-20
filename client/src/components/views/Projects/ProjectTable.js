@@ -1,12 +1,14 @@
+/* admin list project component */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faPenSquare } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../../common/Buttons/Button';
-import { delProject } from '../../../utils/utils';
 
-const ProjectTable = ({ projects }) => {
+const ProjectTable = ({ projects, delProject }) => {
   return (
     // <div className='Project'>
     <table className='Project__Table'>
@@ -42,6 +44,13 @@ const ProjectTable = ({ projects }) => {
     </table>
     // </div>
   );
+};
+
+ProjectTable.propTypes = {
+  getProj: PropTypes.func,
+  delProject: PropTypes.func,
+  projects: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 export default ProjectTable;

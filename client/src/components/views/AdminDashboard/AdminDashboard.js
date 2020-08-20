@@ -1,18 +1,13 @@
 import React, { Fragment } from 'react';
-
-import { isAuthUser } from '../../../utils/utils';
+import PropTypes from 'prop-types';
 
 import './AdminDashboard.scss';
 
 import Layout from '../../layout/MainLayout/Layout';
 import Button from '../../common/Buttons/Button';
-import ProjectListAdmin from '../Projects/ProjectListAdmin';
+import ProjectListAdmin from '../Projects/ProjectListAdminContainer';
 
-const AdminDashboard = () => {
-  const {
-    user: { _id, name },
-  } = isAuthUser();
-
+const AdminDashboard = ({ user: { _id, name } }) => {
   const adminLinks = () => {
     return (
       <Fragment>
@@ -44,6 +39,11 @@ const AdminDashboard = () => {
       </div>
     </Layout>
   );
+};
+
+AdminDashboard.propTypes = {
+  isAuth: PropTypes.bool,
+  user: PropTypes.object,
 };
 
 export default AdminDashboard;

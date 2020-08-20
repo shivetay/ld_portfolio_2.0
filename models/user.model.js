@@ -46,7 +46,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 /* Virtual fields */
-// tasks
+// projects
 UserSchema.virtual('projects', {
   ref: 'project',
   localField: '_id',

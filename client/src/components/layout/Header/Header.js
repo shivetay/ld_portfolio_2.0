@@ -1,44 +1,50 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Button from '../../common/Buttons/Button';
-import { isAuthUser, signOut } from '../../../utils/utils';
+import { isAuthUser } from '../../../utils/utils';
 
 import './Header.scss';
 
-const Header = () => {
+const Header = ({ auth: { user, loading }, logOut }) => {
   const logButtons = () => {
     const authData = isAuthUser();
-    if (authData === false) {
+    if (!authData) {
       return <Button to={`/login`}>Login</Button>;
     } else {
-      const { user } = authData;
-      if (!localStorage.getItem('jwt')) {
+      if (
+        !localStorage.getItem('jwt') ||
+        localStorage.getItem('jwt') === undefined ||
+        loading
+      ) {
         return (
           <div className='Header__Nav-link'>
             <Button to={`/login`}>Login</Button>
           </div>
         );
       } else {
-        if (user.role === 2308 && localStorage.getItem('jwt')) {
-          return (
-            <div className='Header__Nav-link'>
-              <Button to={`/admin/dashboard`}>Dashboard admin</Button>
-              <Button to={`/users/me`}>Dashboard me</Button>
-              <Button to={`/`} onClick={signOut}>
-                Logout
-              </Button>
-            </div>
-          );
-        } else {
-          return (
-            <div className='Header__Nav-link'>
-              <Button to={`/users/me`}>Dashboard me</Button>
-              <Button to={`/`} onClick={signOut}>
-                Logout
-              </Button>
-            </div>
-          );
+        if (localStorage.getItem('jwt')) {
+          if (user.role === 2308) {
+            return (
+              <div className='Header__Nav-link'>
+                <Button to={`/admin/dashboard`}>Dashboard admin</Button>
+                <Button to={`/users/me`}>Dashboard me</Button>
+                <Button to={`/`} onClick={logOut}>
+                  Logout
+                </Button>
+              </div>
+            );
+          } else {
+            return (
+              <div className='Header__Nav-link'>
+                <Button to={`/users/me`}>Dashboard me</Button>
+                <Button to={`/`} onClick={logOut}>
+                  Logout
+                </Button>
+              </div>
+            );
+          }
         }
       }
     }
@@ -55,6 +61,11 @@ const Header = () => {
       {logButtons()}
     </div>
   );
+};
+
+Header.propTypes = {
+  logOut: PropTypes.func,
+  auth: PropTypes.any,
 };
 
 export default Header;

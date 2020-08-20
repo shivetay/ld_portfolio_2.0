@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import Button from '../../common/Buttons/Button';
 
 import './ProjectCreate.scss';
 
-import { API_URL } from '../../../config';
 import { isAuthUser } from '../../../utils/utils';
 
 class ProjectCreate extends Component {
   state = {
     formData: {
-      creator: this.props.match.params.userId,
+      creator: '',
       title: '',
       description: '',
       shortDescription: '',
@@ -22,32 +21,13 @@ class ProjectCreate extends Component {
       demo: '',
     },
     displayLinks: false,
-    loading: false,
   };
 
-  createProject = async (formData) => {
-    this.setState({ loading: true });
-    const { token } = isAuthUser();
-    const config = {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-        Authorization: `${token}`,
-      },
-    };
-
-    try {
-      await axios
-        .post(
-          `${API_URL}/projects/create/${this.props.match.params.userId}`,
-          formData,
-          config
-        )
-        .then((res) => res.data);
-      this.setState({ loading: false });
-    } catch (err) {
-      console.log(err);
-    }
+  static propTypes = {
+    newProject: PropTypes.func,
+    history: PropTypes.any,
+    isAuth: PropTypes.bool,
+    user: PropTypes.object,
   };
 
   onChange = (e) => {
@@ -59,11 +39,14 @@ class ProjectCreate extends Component {
       formData: newFormData,
     });
   };
+
   onSubmit = (e) => {
     const { formData } = this.state;
+    const { newProject, user, history } = this.props;
 
     const fileToUpload = document.querySelector('#photoID');
     const sendData = new FormData();
+    const creatorProject = user._id;
 
     sendData.append('title', formData.title);
     sendData.append('description', formData.description);
@@ -73,12 +56,10 @@ class ProjectCreate extends Component {
     sendData.append('shortDescription', formData.shortDescription);
     sendData.append('git', formData.git);
     sendData.append('demo', formData.demo);
-    sendData.append('creator', formData.creator);
-
-    console.log('file', fileToUpload);
+    sendData.append('creator', user._id);
 
     e.preventDefault();
-    this.createProject(sendData);
+    newProject(sendData, history, creatorProject);
   };
 
   toggleLinks = () => {
@@ -91,6 +72,7 @@ class ProjectCreate extends Component {
   };
 
   render() {
+    localStorage.user = isAuthUser();
     const {
       displayLinks,
       formData: {
@@ -118,6 +100,7 @@ class ProjectCreate extends Component {
           onSubmit={(e) => this.onSubmit(e)}>
           <div className='input-field'>
             <select
+              className='browser-default'
               name='projectType'
               value={projectType}
               onChange={this.onChange}>
@@ -146,7 +129,7 @@ class ProjectCreate extends Component {
               type='text'
               placeholder='Description'
               name='description'
-              maxlength='560'
+              maxLength='560'
               data-length='560'
               value={description}
               onChange={this.onChange}
@@ -159,7 +142,7 @@ class ProjectCreate extends Component {
               type='text'
               placeholder='Short description'
               name='shortDescription'
-              maxlength='20'
+              maxLength='20'
               data-length='20'
               value={shortDescription}
               onChange={this.onChange}></textarea>
