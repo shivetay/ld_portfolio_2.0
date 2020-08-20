@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
 
 import Button from '../../common/Buttons/Button';
 
@@ -43,7 +42,7 @@ class ProjectCreate extends Component {
 
   onSubmit = (e) => {
     const { formData } = this.state;
-    const { newProject, user, history, isAuth } = this.props;
+    const { newProject, user, history } = this.props;
 
     const fileToUpload = document.querySelector('#photoID');
     const sendData = new FormData();
@@ -101,7 +100,7 @@ class ProjectCreate extends Component {
           onSubmit={(e) => this.onSubmit(e)}>
           <div className='input-field'>
             <select
-              class='browser-default'
+              className='browser-default'
               name='projectType'
               value={projectType}
               onChange={this.onChange}>

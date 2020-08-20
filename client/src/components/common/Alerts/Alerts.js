@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './Alerts.scss';
+
 const Alerts = ({ alerts }) =>
   alerts !== null &&
   alerts.length > 0 &&

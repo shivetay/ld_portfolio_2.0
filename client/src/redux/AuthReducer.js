@@ -80,18 +80,14 @@ export const loginUser = (user) => {
       dispatch(loginSuccesAction(res.data));
       localStorage.setItem('user', JSON.stringify(res.data.user));
       dispatch(loadUser());
-      dispatch(setAlert('User Loged in', ''));
+      dispatch(setAlert('User Loged in', 'success'));
     } catch (err) {
-      console.log('err', err.message);
       dispatch(setAlert(err.msg));
       const errors = err.response.data.errors;
-      console.log('err', err.errors);
-      console.log('errors', errors);
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
       }
       dispatch(loginFailAction({ name: 'LOGIN_FAIL' }));
-      console.log(err);
     }
   };
 };
@@ -107,7 +103,7 @@ export const logoutUser = () => {
     };
     try {
       await axios.get(`${API_URL}/logout`, config);
-      dispatch(setAlert('User loged out', ''));
+      dispatch(setAlert('User loged out', 'success'));
       dispatch(logoutAction({ name: 'LOGOUT' }));
     } catch (err) {
       // const errors = err.response.data.errors;

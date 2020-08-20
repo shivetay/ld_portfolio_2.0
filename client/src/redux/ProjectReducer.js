@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { isAuthUser, authenticateUser } from '../utils/utils';
+import { isAuthUser } from '../utils/utils';
 
 import { API_URL } from '../config';
 import { setAlert } from './AlertReducer';
@@ -105,11 +105,12 @@ export const createNewProject = (formData, history, id) => {
         formData,
         config
       );
+      dispatch(setAlert('Proejct created', 'success'));
       dispatch(createProjectAction(res.data));
       history.push('/admin/dashboard');
       dispatch(createSuccess({ name: CREATE_SUCCESS }));
     } catch (err) {
-      console.log('reducer error');
+      dispatch(setAlert(err.message, 'danger'));
       dispatch(createProjectActionFailed({ name: 'CREATE_FAILED' }));
     }
   };
@@ -128,9 +129,11 @@ export const deleteProject = (id) => {
         `${API_URL}/projects/delete/${id}`,
         config
       );
+      dispatch(setAlert('Proejct deleted', 'success'));
       dispatch(projectDeleteAction(res.data));
       dispatch(getAllProjects());
     } catch (err) {
+      dispatch(setAlert(err.message, 'danger'));
       dispatch(projectDeleteFailed({ name: 'DELETE_FAILED' }));
     }
   };
