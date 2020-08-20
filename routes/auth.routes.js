@@ -10,6 +10,8 @@ const {
 } = require('../controllers/auth.controller');
 const { authCheck } = require('../middleware/auth');
 
+const { userValidation } = require('../middleware/validation');
+
 /* ------------- Routes ------------ */
 /* 
 POST api/register

@@ -82,7 +82,11 @@ export const loginUser = (user) => {
       dispatch(loadUser());
       dispatch(setAlert('User Loged in', ''));
     } catch (err) {
+      console.log('err', err.message);
+      dispatch(setAlert(err.msg));
       const errors = err.response.data.errors;
+      console.log('err', err.errors);
+      console.log('errors', errors);
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
       }

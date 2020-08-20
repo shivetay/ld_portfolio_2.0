@@ -54,6 +54,16 @@ exports.loginUser = async (req, res) => {
 
     return res.json({ token, user });
   } catch (err) {
+    let user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({
+        errors: [
+          {
+            msg: 'Invalid credentials',
+          },
+        ],
+      });
+    }
     res.status(500).send('Server error');
   }
 };
