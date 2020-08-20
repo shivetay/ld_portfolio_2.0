@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const morgan = require('morgan');
+const path = require('path');
 
 /* Routes imports */
 
@@ -31,6 +32,16 @@ app.use(
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', projectRoutes);
+
+//serv static in prod
+if (process.env.NODE_ENV === 'production') {
+  //set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'clietn', 'build', 'index.html'));
+  });
+}
 
 app.use((req, res) => {
   res.status(404).send({ message: '404 not found...' });
