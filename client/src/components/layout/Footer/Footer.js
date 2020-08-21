@@ -4,7 +4,7 @@ import './Footer.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faDiceFive } from '@fortawesome/free-solid-svg-icons';
+import { faDiceFive, faCode } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
   return (
@@ -27,6 +27,12 @@ const Footer = () => {
           rel='noopener noreferrer'
           href='https://www.fiverr.com/shivetay?public_mode=true'>
           <FontAwesomeIcon icon={faDiceFive} />
+        </a>
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href='https://github.com/shivetay/ld_portfolio_2.0'>
+          <FontAwesomeIcon icon={faCode} />
         </a>
       </div>
       <div className='Footer__Text'>

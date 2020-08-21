@@ -33,6 +33,21 @@
     @include respond(xsmall) {
       font-size: $font-small;
     }
+    &-paragraph {
+      @include respond(tab-port) {
+        margin: 2rem;
+      }
+      @include respond(phone) {
+        display: inline-block;
+        margin: 2rem;
+        font-size: $font-small;
+      }
+      @include respond(xsmall) {
+        display: inline-block;
+        margin: 4rem;
+        font-size: $font-small;
+      }
+    }
     &-img {
       height: 20rem;
       width: 20rem;
@@ -61,6 +76,7 @@
     }
 
     @include respond(phone) {
+      text-align: center;
     }
     @include respond(xsmall) {
     }
