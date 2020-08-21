@@ -4,4 +4,4 @@ This is new version of my portfolio. Main chnage beside UI design is server side
 
 ## Home
 
-[Łukasz Dawidowicz portfolio](www.lukaszdawidowicz.pl)
+[Łukasz Dawidowicz portfolio 2.0 work in progres](https://stark-springs-84581.herokuapp.com/)
