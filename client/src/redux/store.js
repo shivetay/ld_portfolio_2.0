@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { composeWithDevTools } from 'redu-devtools-extension';
+// import { composeWithDevTools } from 'redu-devtools-extension';
 import thunk from 'redux-thunk';
 
 import alerts from './AlertReducer';
@@ -26,15 +26,17 @@ Object.keys(initialState).forEach((item) => {
 // combine reducers
 const combinedReducers = combineReducers(reducers);
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 //create store
 const store = createStore(
   combinedReducers,
   initialState,
-  composeWithDevTools(applyMiddleware(thunk))
   // compose(
   //   applyMiddleware(thunk),
   //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   // )
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 export default store;
