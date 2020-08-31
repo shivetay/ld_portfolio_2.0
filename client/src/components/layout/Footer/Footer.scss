@@ -10,13 +10,6 @@
     flex-direction: column;
     position: relative;
 
-    @include respond(phone) {
-      flex-direction: row;
-    }
-
-    @include respond(xsmall) {
-      flex-direction: row;
-    }
     a {
       width: 0;
       padding: 0.5rem 0;
