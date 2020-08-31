@@ -9,24 +9,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    @include respond(phone) {
-    }
-    @include respond(xsmall) {
-    }
   }
 
   &__Content {
     text-align: justify;
     font-size: $font-normal;
     line-height: 1.4;
-
-    @include respond(desktop) {
-    }
-    @include respond(desktop-small) {
-    }
-    @include respond(tab-port) {
-    }
     @include respond(phone) {
       font-size: $font-small;
     }
@@ -67,28 +55,23 @@
     }
     &-nav {
       align-self: flex-end;
+
+      @include respond(phone) {
+        margin-left: 2rem;
+        text-align: flex-start;
+      }
+      @include respond(xsmall) {
+        margin-left: 4rem;
+        text-align: flex-end;
+      }
     }
   }
   &__Nav {
     font-size: $font-normal;
+    text-align: center;
 
-    @include respond(tab-port) {
-    }
-
-    @include respond(phone) {
-      text-align: center;
-    }
-    @include respond(xsmall) {
-    }
     &-link {
       transition: all 0.3s;
-      @include respond(tab-port) {
-      }
-
-      @include respond(phone) {
-      }
-      @include respond(xsmall) {
-      }
     }
     &-link:hover {
       color: $hover-link;

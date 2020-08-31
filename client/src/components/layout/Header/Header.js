@@ -11,7 +11,11 @@ const Header = ({ auth: { user, loading }, logOut }) => {
   const logButtons = () => {
     const authData = isAuthUser();
     if (!authData) {
-      return <Button to={`/login`}>Login</Button>;
+      return (
+        <Button className='Header__Nav-button' to={`/login`}>
+          Login
+        </Button>
+      );
     } else {
       if (
         !localStorage.getItem('jwt') ||
@@ -20,7 +24,9 @@ const Header = ({ auth: { user, loading }, logOut }) => {
       ) {
         return (
           <div className='Header__Nav-link'>
-            <Button to={`/login`}>Login</Button>
+            <Button className='Header__Nav-button' to={`/login`}>
+              Login
+            </Button>
           </div>
         );
       } else {
@@ -28,9 +34,16 @@ const Header = ({ auth: { user, loading }, logOut }) => {
           if (user.role === 2308) {
             return (
               <div className='Header__Nav-link'>
-                <Button to={`/admin/dashboard`}>Dashboard admin</Button>
-                <Button to={`/users/me`}>Dashboard me</Button>
-                <Button to={`/`} onClick={logOut}>
+                <Button className='Header__Nav-button' to={`/admin/dashboard`}>
+                  Dashboard admin
+                </Button>
+                <Button className='Header__Nav-button' to={`/users/me`}>
+                  Dashboard me
+                </Button>
+                <Button
+                  className='Header__Nav-button'
+                  to={`/`}
+                  onClick={logOut}>
                   Logout
                 </Button>
               </div>
@@ -38,8 +51,13 @@ const Header = ({ auth: { user, loading }, logOut }) => {
           } else {
             return (
               <div className='Header__Nav-link'>
-                <Button to={`/users/me`}>Dashboard me</Button>
-                <Button to={`/`} onClick={logOut}>
+                <Button className='Header__Nav-button' to={`/users/me`}>
+                  Dashboard me
+                </Button>
+                <Button
+                  className='Header__Nav-button'
+                  to={`/`}
+                  onClick={logOut}>
                   Logout
                 </Button>
               </div>
@@ -58,7 +76,7 @@ const Header = ({ auth: { user, loading }, logOut }) => {
           <p className='Header__Logo-paragraph'>Front-End Developer</p>
         </NavLink>
       </div>
-      {logButtons()}
+      <div className='Header__Buttons'>{logButtons()}</div>
     </div>
   );
 };

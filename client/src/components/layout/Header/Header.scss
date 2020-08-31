@@ -7,6 +7,15 @@
   align-items: center;
   height: 10vh;
 
+  @include respond(phone) {
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  @include respond(xsmall) {
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+
   // border-bottom: 1px solid $color-white;
   &__Logo {
     display: flex;
@@ -32,11 +41,11 @@
         font-size: $font-small;
       }
       @include respond(phone) {
-        align-self: flex-start;
+        align-self: center;
         font-size: $font-small;
       }
       @include respond(xsmall) {
-        align-self: flex-start;
+        align-self: center;
         font-size: $font-small;
       }
     }
@@ -91,8 +100,19 @@
         font-size: $font-small;
       }
     }
+
     &-link:hover {
       color: $hover-link;
+    }
+  }
+  &__Buttons {
+    @include respond(phone) {
+      margin: 2rem 0;
+      // padding: 1rem 0;
+    }
+    @include respond(xsmall) {
+      margin: 2rem 0;
+      // padding: 1rem 0;
     }
   }
 }
