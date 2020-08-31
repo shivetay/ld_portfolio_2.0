@@ -101,8 +101,9 @@ export const logoutUser = () => {
         Authorization: isAuthUser(),
       },
     };
+    console.log('logout header', config);
     try {
-      await axios.get(`${API_URL}/logout`, config);
+      await axios.post(`${API_URL}/logout`, config);
       dispatch(setAlert('User loged out', 'success'));
       dispatch(logoutAction({ name: 'LOGOUT' }));
     } catch (err) {

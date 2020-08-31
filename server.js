@@ -1,7 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
-// const morgan = require('morgan');
+const morgan = require('morgan');
 const path = require('path');
 
 /* Routes imports */
@@ -20,7 +20,7 @@ connectDB();
 
 /* Init midleware */
 app.use(express.json({ extended: false }));
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(
   cors({
     origin: 'http://localhost:3000',

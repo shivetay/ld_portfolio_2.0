@@ -70,7 +70,7 @@ UserSchema.methods.getAuthToken = async function () {
   const token = jwt.sign(
     { _id: user._id.toString(), role: user.role },
     config.get('jwtSecret'),
-    { expiresIn: 360000 } //change to production
+    { expiresIn: 3600 } //change to production
   ); //jwt expcts string toString will convert objId to string
 
   user.tokens = user.tokens.concat({ token });

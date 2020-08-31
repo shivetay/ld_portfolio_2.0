@@ -28,6 +28,7 @@ exports.authCheck = async (req, res, next) => {
       throw new Error();
     }
     req.token = token;
+    console.log('token auth.js', token);
     req.user = user;
     next();
   } catch (err) {

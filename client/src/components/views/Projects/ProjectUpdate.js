@@ -121,6 +121,7 @@ class ProjectUpdate extends Component {
         title,
         description,
         shortDescription,
+        // eslint-disable-next-line
         photo,
         tags,
         projectType,
