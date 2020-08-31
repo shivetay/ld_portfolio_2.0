@@ -117,6 +117,7 @@ class ProjectCreate extends Component {
             <input
               type='text'
               placeholder='Title'
+              maxLength='18'
               name='title'
               value={title}
               onChange={this.onChange}

@@ -16,7 +16,7 @@ const Home = () => {
             alt='photo_lukasz_dawidowicz'
             className='Home__Content-img'
           />
-          <p>
+          <p className='Home__Content-paragraph'>
             Hi, I am Łukasz and I am an{' '}
             <span className='Home__Content-span'>
               aspiring Front end Developer.{' '}

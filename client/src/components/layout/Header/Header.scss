@@ -50,23 +50,30 @@
     width: 12rem;
     height: 2px;
     background-color: $color-contrast-second;
+
+    @include respond(tab-port) {
+      width: 0;
+    }
+    @include respond(phone) {
+      width: 0;
+    }
+    @include respond(xsmall) {
+      width: 0;
+    }
   }
   &__Nav {
     font-size: $font-normal;
     margin-right: 2rem;
+
     @include respond(tab-port) {
-      margin-right: 0.5rem;
+      font-size: $font-small;
     }
 
     @include respond(phone) {
-      display: flex;
-      flex-wrap: wrap;
-      margin-right: 0.5rem;
+      font-size: $font-small;
     }
     @include respond(xsmall) {
-      margin-right: 0.5rem;
-      display: flex;
-      flex-wrap: wrap;
+      font-size: $font-small;
     }
     &-link {
       margin: 0 3rem;
@@ -76,12 +83,12 @@
       }
 
       @include respond(phone) {
-        margin: 0 1rem;
-        flex: 100%;
+        margin: 0;
+        font-size: $font-small;
       }
       @include respond(xsmall) {
-        margin: 0 1rem;
-        flex: 100%;
+        margin: 0;
+        font-size: $font-small;
       }
     }
     &-link:hover {
