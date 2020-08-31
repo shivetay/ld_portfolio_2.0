@@ -19,6 +19,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.5.0",
+    "redux-devtools-extension": "^2.13.8",
     "formidable": "^1.2.2",
     "jsonwebtoken": "^8.5.1",
     "mongo-sanitize": "^1.1.0",
