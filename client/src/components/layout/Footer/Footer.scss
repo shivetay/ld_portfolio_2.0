@@ -1,4 +1,5 @@
 @import '../../../styles/settings.scss';
+@import '../../../styles/mixins.scss';
 
 .Footer {
   position: fixed;
@@ -8,6 +9,14 @@
     display: flex;
     flex-direction: column;
     position: relative;
+
+    @include respond(phone) {
+      flex-direction: row;
+    }
+
+    @include respond(xsmall) {
+      flex-direction: row;
+    }
     a {
       width: 0;
       padding: 0.5rem 0;
@@ -26,6 +35,16 @@
       width: 2px;
       height: 4rem;
       background-color: $color-contrast-second;
+
+      @include respond(phone) {
+        width: 0;
+        height: 0;
+      }
+
+      @include respond(xsmall) {
+        width: 0;
+        height: 0;
+      }
     }
   }
   &__Text {
@@ -36,5 +55,13 @@
     font-size: $font-medium;
     text-transform: lowercase;
     color: $color-font-contrast;
+
+    @include respond(phone) {
+      display: none;
+    }
+
+    @include respond(xsmall) {
+      display: none;
+    }
   }
 }

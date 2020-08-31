@@ -2,7 +2,6 @@
 @import '../../../styles/mixins.scss';
 
 .Projects {
-  width: 90%;
   display: flex;
   margin: 1rem auto;
   &__Container {
@@ -11,6 +10,15 @@
     flex: 1 0 33.333%;
     justify-content: center;
     flex-wrap: wrap;
+
+    @include respond(mix-phone-tab) {
+      flex: 1 0 50%;
+    }
+
+    @include respond(phone) {
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
   }
   &__Project {
     display: flex;
@@ -58,18 +66,6 @@
     border-radius: 0;
     align-content: center;
     width: 20rem;
-
-    @include respond(mix-phone-tab) {
-      display: none;
-    }
-
-    @include respond(phone) {
-      display: none;
-    }
-
-    @include respond(xsmall) {
-      display: none;
-    }
   }
   &-descr {
     padding: 0 5px;

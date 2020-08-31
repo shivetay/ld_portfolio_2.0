@@ -11,7 +11,9 @@ import Spinner from '../../common/Spinner/Spinner';
 class Projects extends Component {
   state = {
     page: 1,
+    isDesktop: false,
   };
+
   static propTypes = {
     getProj: PropTypes.func,
     projects: PropTypes.array,
