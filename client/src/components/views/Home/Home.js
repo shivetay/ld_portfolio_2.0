@@ -26,9 +26,9 @@ const Home = () => {
               HTML, CSS, JavaScript, React, Node.js, Express and MongoDB.{' '}
             </span>{' '}
             As an ambitious person I do not take anything for granted. I am
-            fully aware of my strengths and limitations and with full
-            commitment.
-            {/* and hard work I can easily fit into any team work style. I am not
+            fully aware of my strengths and limitations, and with full
+            commitment and hard work I can easily fit into any team work style.
+            {/*I am not
             afraid to take responsibilities for my actions. As a team player I
             am always trying to provide any help that I can for my team mates,
             as We are working in one team for common goal. */}
