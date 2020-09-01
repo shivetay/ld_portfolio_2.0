@@ -28,11 +28,10 @@ exports.authCheck = async (req, res, next) => {
       throw new Error();
     }
     req.token = token;
-    console.log('token auth.js', token);
     req.user = user;
     next();
   } catch (err) {
-    res.status(401).json({ msg: 'Please authenticate' });
+    res.status(401).json({ msg: 'Please authenticate - logout' });
   }
 };
 

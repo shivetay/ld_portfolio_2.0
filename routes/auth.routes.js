@@ -30,7 +30,7 @@ private
 router.post('/login', loginUser);
 
 /* 
-GET api/logout
+post api/logout
 logout user 
 private 
 */

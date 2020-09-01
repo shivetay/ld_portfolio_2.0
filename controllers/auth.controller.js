@@ -71,7 +71,9 @@ exports.loginUser = async (req, res) => {
 /* User logout */
 
 exports.logoutUser = async (req, res) => {
+  console.log('req user baceknd', req.user.tokens);
   try {
+    console.log('req user baceknd', req.user.tokens);
     req.user.tokens = req.user.tokens.filter((token) => {
       return token.token !== req.token;
     });
