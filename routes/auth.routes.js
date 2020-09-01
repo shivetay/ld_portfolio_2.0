@@ -35,6 +35,6 @@ logout user
 private 
 */
 
-router.post('/logout', authCheck, logoutUser);
+router.get('/logout', authCheck, logoutUser);
 
 module.exports = router;

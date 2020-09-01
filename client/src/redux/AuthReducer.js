@@ -94,7 +94,7 @@ export const loginUser = (user) => {
 
 // logout & profile clear
 
-export const outUser = (history) => {
+export const outUser = () => {
   return async (dispatch) => {
     const config = {
       headers: {
@@ -103,23 +103,15 @@ export const outUser = (history) => {
     };
     console.log('logout header', config);
     try {
-      const res = await axios.post(`${API_URL}/logout`, config);
+      const res = await axios.get(`${API_URL}/logout`, config);
       console.log('res', res);
       dispatch(setAlert('User loged out', 'success'));
       dispatch(logoutAction(res.data));
-      history.push('/');
       console.log('res.data', res.data);
     } catch (err) {
-      // const errors = err.response.data.errors;
       if (err) {
         dispatch(setAlert(err.message, 'danger'));
       }
-      // dispatch(
-      //   getProfileError({
-      //     msg: err.response.statusText,
-      //     status: err.response.status,
-      //   })
-      // );
       console.log(err.message);
     }
   };
