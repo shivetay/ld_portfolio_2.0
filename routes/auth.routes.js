@@ -30,11 +30,11 @@ private
 router.post('/login', loginUser);
 
 /* 
-GET api/logout
+post api/logout
 logout user 
 private 
 */
 
-router.post('/logout', authCheck, logoutUser);
+router.get('/logout', authCheck, logoutUser);
 
 module.exports = router;

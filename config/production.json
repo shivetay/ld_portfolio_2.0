@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://shivetay:tool1123@cluster0-h60yd.mongodb.net/PortfolioDB",
+  "jwtSecret": "jkhutur%oiujh_asdw1234nsyDjsnhweyD",
+  "passwordSALT": "jdfuiweDSoiurer#$%09sdfnjk!23hnjds684MNM,jdsfiwJsdf__njk;asdfbi!23-=0987",
+  "roleSecret": 2308
+}

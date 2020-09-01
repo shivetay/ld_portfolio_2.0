@@ -129,7 +129,7 @@ export const deleteProject = (id) => {
         `${API_URL}/projects/delete/${id}`,
         config
       );
-      dispatch(setAlert('Proejct deleted', 'success'));
+      dispatch(setAlert('Project deleted', 'success'));
       dispatch(projectDeleteAction(res.data));
       dispatch(getAllProjects());
     } catch (err) {

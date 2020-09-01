@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { logoutUser } from '../../../redux/AuthReducer';
+import { outUser } from '../../../redux/AuthReducer';
 
 import Header from './Header';
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  logOut: () => dispatch(logoutUser()),
+  logOut: () => dispatch(outUser()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

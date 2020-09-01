@@ -10,7 +10,6 @@ import Button from '../../common/Buttons/Button';
 
 const ProjectTable = ({ projects, delProject }) => {
   return (
-    // <div className='Project'>
     <table className='Project__Table'>
       <thead className='Project__Table-head'>
         <tr className='Project__Table-head-row'>
@@ -42,7 +41,6 @@ const ProjectTable = ({ projects, delProject }) => {
         ))}
       </tbody>
     </table>
-    // </div>
   );
 };
 

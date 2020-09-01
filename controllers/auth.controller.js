@@ -70,14 +70,25 @@ exports.loginUser = async (req, res) => {
 
 /* User logout */
 
+// exports.logoutUser = async (req, res) => {
+//   try {
+//     req.user.tokens = req.user.tokens.filter((token) => {
+//       return token.token !== req.token;
+//     });
+//     await req.user.save();
+//     res.status(200).send('User logout');
+//   } catch (err) {
+//     res.status(500).send('Server error');
+//   }
+// };
+
+/* User logout all */
 exports.logoutUser = async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter((token) => {
-      return token.token !== req.token;
-    });
+    req.user.tokens = [];
     await req.user.save();
-    res.status(200).send('User logout');
+    res.status(200).send('User Logout');
   } catch (err) {
-    res.status(500).send('Server error');
+    res.status(500).send('Server Error');
   }
 };
