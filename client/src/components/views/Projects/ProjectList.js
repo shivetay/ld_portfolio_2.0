@@ -14,7 +14,7 @@ const ProjectList = ({ projects, className }) => {
     <Fragment>
       {projects.map((project) => (
         <div className='Projects__Project' key={project._id}>
-          <Button to={`/projects/${project._id}`}>
+          <Button target='_blank' to={`/projects/${project._id}`}>
             <h3 className='Projects-name'>{project.title}</h3>
           </Button>
           <div className='Projects__Photo'>
